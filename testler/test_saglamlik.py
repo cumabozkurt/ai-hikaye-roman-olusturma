@@ -132,3 +132,35 @@ def test_hata_iletisi_turkce() -> None:
     assert ta.hata_iletisi(ValueError("en az bir gün verin")) == "en az bir gün verin"
     assert "tarih" in ta.hata_iletisi(ValueError("time data '2026-13-40' does not match format"))
     assert "beklenmeyen" in ta.hata_iletisi(KeyError("x"))
+
+
+def _yardim(yol: Path, *alt: str) -> str:
+    return calistir(yol, *alt, "--help").stdout
+
+
+def test_butun_secenekler_turkce_yardimli() -> None:
+    """Her betiğin her seçeneği (alt komutlar dahil) --help çıktısında bir açıklama taşımalı."""
+    from conftest import BECERILER, KOK, PAYLASILAN
+    adaylar = {p.name: p for p in [*PAYLASILAN.glob("*.py"), *BECERILER.glob("*/betikler/*.py"), *(KOK / "betikler").glob("*.py")]}
+    eksik: list[str] = []
+    for ad, yol in sorted(adaylar.items()):
+        if ad in {"turkce_argparse.py", "turkce_kaliplar.py", "dosya_oku.py"}:
+            continue
+        metinler = [("", _yardim(yol))]
+        i = 0
+        while i < len(metinler):
+            yolu, metin = metinler[i]
+            alt = re.findall(r"^  \{([^}]+)\}", metin, re.M)
+            if alt and len(yolu.split()) < 2 and not (yolu and yolu.split()[-1] in alt[0].split(",")):
+                for a in alt[0].split(","):
+                    metinler.append((f"{yolu} {a}".strip(), _yardim(yol, *f"{yolu} {a}".split())))
+            i += 1
+        for yolu, metin in metinler:
+            assert "usage:" not in metin and "options:" not in metin, f"{ad} {yolu}: İngilizce argparse başlığı"
+            satirlar = metin.split("\n")
+            for j, satir in enumerate(satirlar):
+                if re.match(r"^  --[-\w]+(?: [A-Z_]+(?: \[[A-Z_ .]+\])?)?\s*$", satir):
+                    sonraki = satirlar[j + 1] if j + 1 < len(satirlar) else ""
+                    if not sonraki.startswith("    "):
+                        eksik.append(f"{ad} {yolu} {satir.strip()}")
+    assert not eksik, "Yardım metni eksik seçenekler:\n" + "\n".join(eksik)

@@ -65,6 +65,75 @@ argparse._ = cevir  # type: ignore[attr-defined]
 argparse.ngettext = _ngettext  # type: ignore[attr-defined]
 
 
+# Yardım metni verilmemiş ortak seçenekler için tutarlı Türkçe açıklamalar.
+ORTAK_YARDIM: dict[str, str] = {
+    "json": "sonucu JSON olarak yaz",
+    "proje": "kitap ya da öykü klasörü (ör. saatcinin-kizi)",
+    "cikti": "çıktı dosyası ya da klasörü",
+    "kok": "çalışma kökü (çözümleme ya da çalışma alanı klasörü)",
+    "girdi": "girdi dosyası (çoğunlukla JSON)",
+    "dosya": "okunacak metin dosyası",
+    "calisma-alani": "yazım çalışma alanının kök klasörü",
+    "bolum": "bölüm numarası (1'den başlar)",
+    "kitap": "kitap klasörü (çalışma alanına göre)",
+    "yazar": "yazar adı (künyede ve kapakta görünür)",
+    "port": "tarayıcı hata ayıklama bağlantı noktası (varsayılan 9222)",
+    "kutuphane": "ilham kütüphanesi klasörü",
+    "sekme": "sekme kimliği (sekmeler komutunun çıktısından)",
+    "not": "ek istek ya da not",
+    "denetle": "yazmadan yalnızca denetle",
+    "bekle": "sayfa yüklenmesi için beklenecek saniye",
+    "baslik": "kitap başlığı",
+    "azami": "okunacak en çok karakter",
+    "adres": "açılacak sayfa adresi (http ya da https)",
+    "yz-ozeti-yok": "yapay zekâ kalıbı özetini ekleme",
+    "yeniden": "var olan çıktı dosyalarının üzerine yaz",
+    "alt": "bölüm uzunluğu alt sınırı (kelime)",
+    "ust": "bölüm uzunluğu üst sınırı (kelime)",
+    "tur-adi": "özel tercih türünün adı",
+    "tum-diller": "yalnızca Türkçe değil, bütün dillerdeki öyküleri say",
+    "tarayici": "Chrome/Chromium/Edge yürütülebilir dosyasının yolu",
+    "tampon": "yayına başlamadan önce hazır tutulacak bölüm sayısı",
+    "tam": "örnek bölümler yerine tam metni pakete koy",
+    "sozlesme": "bölüm planının sözleşme alanlarını göster",
+    "sinir": "gösterilecek en çok kayıt",
+    "saat": "yayın saati (SS:DD, ör. 20:00)",
+    "profil": "ayrı tarayıcı profili klasörü",
+    "plan": "bölüm planı dosyası",
+    "metin": "bölüm metni dosyası",
+    "kuru": "hiçbir şey yazmadan yapılacakları göster",
+    "kaynak": "kaynak metin dosyası (TXT ya da Markdown)",
+    "is-akisi": "iş akışı adı (ör. gunluk-yazim)",
+    "icindekiler": "içindekiler görünümünü üret",
+    "gecmis": "geçmiş birimleri de göster",
+    "etiket": "süzülecek etiket",
+    "docx": "Word (.docx) çıktısı da üret (pandoc gerekir)",
+    "birim": "gösterilecek plan birimi (ör. L1-02)",
+    "baslangic": "ilk yayın tarihi (YYYY-AA-GG)",
+    "aralik-ozeti": "plan komutunun verdiği aralık özeti (SHA-256)",
+    "hedef": "hedef uzunluk (kelime, ör. 2200)",
+    "hiz": "seslendirme hızı (dakikada kelime)",
+    "dosyalar": "denetlenecek metin dosyaları",
+    "yol": "dosya ya da klasör yolu",
+    "klasor": "öykü klasörü",
+}
+
+_ozgun_ekle = argparse._ActionsContainer.add_argument  # type: ignore[attr-defined]
+
+
+def _yardimli_ekle(self, *args, **kw):  # type: ignore[no-untyped-def]
+    if kw.get("help") is None:
+        ad = next((a[2:] for a in args if isinstance(a, str) and a.startswith("--")), None)
+        if ad is None and args and isinstance(args[0], str) and not args[0].startswith("-"):
+            ad = args[0]
+        if ad in ORTAK_YARDIM:
+            kw["help"] = ORTAK_YARDIM[ad]
+    return _ozgun_ekle(self, *args, **kw)
+
+
+argparse._ActionsContainer.add_argument = _yardimli_ekle  # type: ignore[attr-defined]
+
+
 JSON_ILETILERI: dict[str, str] = {
     "Expecting value": "değer bekleniyordu",
     "Expecting property name enclosed in double quotes": "çift tırnak içinde alan adı bekleniyordu",

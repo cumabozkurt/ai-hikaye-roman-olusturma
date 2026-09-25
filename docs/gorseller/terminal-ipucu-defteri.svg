@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="921" height="304" viewBox="0 0 921 304" role="img" aria-label="İpucu defteri: ekilen ipuçları ve çözüm planı">
+<rect width="921" height="304" rx="10" fill="#0d1117"/>
+<rect width="921" height="32" rx="10" fill="#161b22"/><rect y="22" width="921" height="10" fill="#161b22"/>
+<circle cx="20" cy="16" r="6" fill="#ff5f56"/><circle cx="40" cy="16" r="6" fill="#ffbd2e"/><circle cx="60" cy="16" r="6" fill="#27c93f"/>
+<text x="460" y="21" text-anchor="middle" fill="#8b949e" font-family="'Segoe UI', Arial, sans-serif" font-size="13">İpucu defteri: ekilen ipuçları ve çözüm planı</text>
+<g font-family="'DejaVu Sans Mono', 'Cascadia Mono', Menlo, Consolas, monospace" font-size="14">
+<text x="24" y="60" fill="#79c0ff" xml:space="preserve">$ python3 betikler/ipucu_defteri.py rapor --proje saatcinin-kizi</text>
+<text x="24" y="79" fill="#e6edf3" xml:space="preserve">İpucu defteri: 4 ipucu, 4 açık · yazılan son bölüm 2 / planlanan 60</text>
+<text x="24" y="98" fill="#e6edf3" xml:space="preserve"></text>
+<text x="24" y="117" fill="#e6edf3" xml:space="preserve">No    Önem    Durum         Ekildi Son anılma  Çözüm  Kalan  Özet</text>
+<text x="24" y="136" fill="#e6edf3" xml:space="preserve">F001  yüksek  ekili              1          2     18     16  Bütün saatler 03.14&#x27;te durmuştu</text>
+<text x="24" y="155" fill="#e6edf3" xml:space="preserve">F002  orta    ekili              1          —     25     23  Kerem&#x27;in gelme nedeni tam söylenmedi</text>
+<text x="24" y="174" fill="#e6edf3" xml:space="preserve">F003  yüksek  ekili              2          2     20     18  Cep saatinin gizli kapağında &#x27;14.03.1987 —</text>
+<text x="24" y="193" fill="#e6edf3" xml:space="preserve">    N.&#x27; yazıyor</text>
+<text x="24" y="212" fill="#e6edf3" xml:space="preserve">F004  orta    ekili              2          2      6      4  Çekmece kilidinde taze çizikler: biri gece</text>
+<text x="24" y="231" fill="#e6edf3" xml:space="preserve">    dükkâna girmeye çalıştı</text>
+<text x="24" y="250" fill="#e6edf3" xml:space="preserve"></text>
+<text x="24" y="269" fill="#e6edf3" xml:space="preserve">Sorun yok.</text>
+</g>
+</svg>

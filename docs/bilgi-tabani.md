@@ -14,7 +14,7 @@ Her becerinin `kaynaklar/` klasörü yalnızca gerektiğinde okunur; bağlamı b
 | `uslup-karari.md` | Kitabın üslup dosyası (`kurgu/ton.md`) nasıl kurulur |
 | `yazar-hafizasi.md` | Kanıta dayalı yazar tercihleri ve kayıt kuralları |
 | `platformlar-turkiye.md` | Türkiye'de çevrim içi yayın, kitap satış listeleri, e-kitap ve sesli kitap, yayınevi, sözleşme ve telif, dergi ve yarışma, uyarlama |
-| `tur-kartlari/` | 12 tür kartı: romantik, genç kurgu, fantastik, polisiye, tarihî, psikolojik gerilim, bilimkurgu/distopya, korku/doğaüstü, aile dramı, mizah, edebî kurgu, kısa öykü |
+| `tur-kartlari/` | 14 tür kartı: romantik, genç kurgu, fantastik, polisiye, tarihî, Osmanlı dönemi, erken Cumhuriyet, psikolojik gerilim, bilimkurgu/distopya, korku/doğaüstü, aile dramı, mizah, edebî kurgu, kısa öykü |
 
 ## Beceriye özgü kaynaklar
 
@@ -34,4 +34,24 @@ Her becerinin `kaynaklar/` klasörü yalnızca gerektiğinde okunur; bağlamı b
 | `yayinevi-dosyasi` | dosya hazırlığı: ön yazı, sinopsis, örnek bölüm, biyografi |
 | `uyarlama-sinopsis` | uyarlama biçimleri: logline, sinopsis, karakter dosyası, tretman, sezon yayı |
 | `sesli-kitap-hazirla` | seslendirme, süre, telaffuz ve platform rehberi |
-| `e-kitap-derle` | EPUB ve HTML okuma kopyası rehberi, teslim listesi |
+| `e-kitap-derle` | EPUB, DOCX, ODT, baskı HTML'i ve PDF rehberi, teslim listesi |
+| `roman-planla` | proje yapısı, bölüm planı şablonu, tür kartları (yapı yöntemi seçimi için) |
+| `kurgu-ansiklopedisi` | proje yapısı, tür kartları (dönem denetimi için Osmanlı ve erken Cumhuriyet kartları) |
+| `bolum-dongusu` | proje yapısı, Türkçe yapay zekâ kalıpları (mekanik puanın bir bileşeni) |
+| `yazim-panosu` | proje yapısı |
+
+## Kitap klasöründeki yapılandırılmış bilgi (2.0)
+
+Betiklerin okuduğu ve yazdığı dosyalar; ayrıntılı ağaç için `proje-yapisi.md`.
+
+| Dosya | Yazan | Okuyan |
+|---|---|---|
+| `kurgu/karakterler/`, `mekanlar/`, `nesneler/`, `gruplar/`, `dunya/` | yazar, `kurgu_ansiklopedisi.py olustur` | `dogrula`, `tutarlilik`, `dagilim`, `baglam`, `bilgi_ara.py` |
+| `kurgu/sozluk.md`, `kurgu/zaman-cizelgesi.md`, `kurgu/iliskiler.md` | yazar | `kurgu_ansiklopedisi.py`, `grafik` |
+| `plan/yapi-*.md`, `plan/kar-tanesi.md`, `plan/sahneler.md` | `kurgu_plani.py baslat/sahneler`, yazar | `kurgu_plani.py denetle/pano`, çalışma masası |
+| `kurgu/ses-izi.json` | `ses_izi.py cikar` | `ses_izi.py karsilastir`, `revizyon_dongusu.py olc` |
+| `.hikaye/anliklar/` | `anlik_goruntu.py al`, `revizyon_dongusu.py kabul` | `listele`, `fark`, `geri-yukle`, `dogrula` |
+| `.hikaye/istatistik.json` | `yazim_istatistik.py hedef/kaydet` | `pano`, çalışma masası |
+| `.hikaye/dongu/bolum-NNN/` | `revizyon_dongusu.py kaydet` | `durum`, `brief`, `kabul`, çalışma masası |
+| `.hikaye/turnuvalar/` | `turnuva.py` | `siralama`, `listele` |
+| `takip/_takip-durumu.json` | `takip_kaydet.py` | `ipucu_defteri.py`, `proje_durumu.py`, `sureklilik_denetle.py` |

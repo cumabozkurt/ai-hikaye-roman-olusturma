@@ -13,7 +13,7 @@ Kurulum güvenlidir: `CLAUDE.md`/`AGENTS.md` içinde yalnızca `<!-- ai-hikaye:b
 ## Claude Code
 
 - Eklenti: `/plugin marketplace add cumabozkurt/ai-hikaye-roman-olusturma` ve `/plugin install ai-hikaye-roman-olusturma@ai-hikaye-roman-olusturma`. Beceriler `/ai-hikaye-roman-olusturma:<beceri>` biçiminde çağrılır.
-- `/hikaye-kurulum` şunları yazar: `CLAUDE.md` bloğu, `.claude/agents/*.md` (7 ajan), `.claude/rules/hikaye-yazim.md`, `.claude/settings.local.json` içinde `SessionStart`, `PreToolUse`, `PostToolUse`, `PreCompact`, `SessionEnd` kancaları.
+- `/hikaye-kurulum` şunları yazar: `CLAUDE.md` bloğu, `.claude/agents/*.md` (8 ajan), `.claude/rules/hikaye-yazim.md`, `.claude/settings.local.json` içinde `SessionStart`, `PreToolUse`, `PostToolUse`, `PreCompact`, `SessionEnd` kancaları.
 - Engelleme `PreToolUse` çıktısındaki `permissionDecision: "deny"` ile yapılır; gerekçe modele iletilir.
 
 ## OpenAI Codex

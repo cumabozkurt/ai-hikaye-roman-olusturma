@@ -240,7 +240,7 @@ def test_degerlendirme_paketi_gecerli_ve_her_beceriyi_kapsiyor() -> None:
 
 def test_tur_kartlarinda_oz_denetim_sorulari() -> None:
     kartlar = [p for p in (KOK / "paylasilan" / "kaynaklar" / "tur-kartlari").glob("*.md") if p.name != "README.md"]
-    assert len(kartlar) == 12
+    assert len(kartlar) == 14
     for kart in kartlar:
         metin = kart.read_text(encoding="utf-8")
         assert "## Öz denetim soruları" in metin, kart.name

@@ -50,3 +50,32 @@ jobs:
         run: python betikler/turkce_uyum_denetle.py
       - name: Testler
         run: python -m pytest -q
+
+  cikti-dogrulama:
+    name: Çıktı doğrulama · EPUBCheck + LibreOffice
+    runs-on: ubuntu-latest
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
+      HIKAYE_DOGRULAMA_ZORUNLU: "1"
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "21"
+      - name: Bağımlılıklar
+        run: |
+          python -m pip install --upgrade pip pytest
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends libreoffice-writer
+      - name: EPUBCheck 5.1.0
+        run: |
+          curl -fsSL -o /tmp/epubcheck.zip https://github.com/w3c/epubcheck/releases/download/v5.1.0/epubcheck-5.1.0.zip
+          unzip -q /tmp/epubcheck.zip -d /tmp
+          echo "EPUBCHECK_JAR=/tmp/epubcheck-5.1.0/epubcheck.jar" >> "$GITHUB_ENV"
+      - name: Dışa ve içe aktarma testleri (atlanmadan)
+        run: python -m pytest -q -rs testler/test_v2_disa_ve_ice_aktarim.py testler/test_v2_uctan_uca.py

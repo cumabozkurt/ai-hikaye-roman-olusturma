@@ -1,0 +1,162 @@
+{
+  "$aciklama": "paylasilan/ altındaki tek doğru kaynak dosyaların hangi becerilere kopyalanacağı. 'betikler' dosyalarının import bağımlılıkları otomatik eklenir. Düzenledikten sonra: python betikler/paylasilanlari_esitle.py",
+  "betikler": {
+    "hikaye": [
+      "yazar_hafizasi.py",
+      "metin_olcum.py"
+    ],
+    "hikaye-ice-aktar": [
+      "takip_kaydet.py",
+      "metin_olcum.py",
+      "plan_denetle.py",
+      "plan_gorunumu.py"
+    ],
+    "hikaye-kurulum": [
+      "turkce_kaliplar.py",
+      "ai_kalip_denetle.py",
+      "bozulma_denetle.py",
+      "metin_olcum.py"
+    ],
+    "kapak-tasarla": [],
+    "metin-incele": [
+      "ai_kalip_denetle.py",
+      "bozulma_denetle.py",
+      "yazim_denetle.py",
+      "sureklilik_denetle.py",
+      "takip_kaydet.py",
+      "metin_olcum.py",
+      "yazar_hafizasi.py"
+    ],
+    "oyku-cozumle": [
+      "metin_olcum.py"
+    ],
+    "oyku-tara": [
+      "liste_tara.py"
+    ],
+    "oyku-yaz": [
+      "ai_kalip_denetle.py",
+      "bozulma_denetle.py",
+      "metin_olcum.py",
+      "noktalama_duzelt.py",
+      "yazim_denetle.py",
+      "yazar_hafizasi.py",
+      "plan_denetle.py"
+    ],
+    "roman-cozumle": [
+      "metin_olcum.py"
+    ],
+    "roman-tara": [
+      "liste_tara.py"
+    ],
+    "roman-yaz": [
+      "hikayectl.py",
+      "yazar_istemi_olustur.py",
+      "plan_gorunumu.py",
+      "sureklilik_denetle.py",
+      "yazim_denetle.py",
+      "noktalama_duzelt.py",
+      "yazar_hafizasi.py"
+    ],
+    "sesli-kitap-hazirla": [
+      "metin_olcum.py"
+    ],
+    "sureklilik-denetle": [
+      "sureklilik_denetle.py",
+      "takip_kaydet.py"
+    ],
+    "tarayici-cdp": [],
+    "uyarlama-sinopsis": [
+      "metin_olcum.py"
+    ],
+    "wattpad-bolum-planla": [
+      "metin_olcum.py"
+    ],
+    "yayinevi-dosyasi": [
+      "metin_olcum.py",
+      "yazim_denetle.py"
+    ],
+    "yazim-denetle": [
+      "yazim_denetle.py",
+      "noktalama_duzelt.py",
+      "ai_kalip_denetle.py"
+    ],
+    "yz-tadi-gider": [
+      "ai_kalip_denetle.py",
+      "bozulma_denetle.py",
+      "noktalama_duzelt.py",
+      "yazim_denetle.py",
+      "yazar_hafizasi.py"
+    ]
+  },
+  "kaynaklar": {
+    "yz-tadi.md": [
+      "roman-yaz",
+      "oyku-yaz",
+      "yz-tadi-gider",
+      "metin-incele",
+      "hikaye-kurulum",
+      "yazim-denetle"
+    ],
+    "tdk-yazim-rehberi.md": [
+      "roman-yaz",
+      "oyku-yaz",
+      "yz-tadi-gider",
+      "metin-incele",
+      "hikaye-kurulum",
+      "yazim-denetle",
+      "yayinevi-dosyasi"
+    ],
+    "tur-kartlari": [
+      "roman-yaz",
+      "oyku-yaz",
+      "metin-incele",
+      "hikaye-kurulum",
+      "roman-tara",
+      "oyku-tara"
+    ],
+    "yazar-hafizasi.md": [
+      "hikaye",
+      "roman-yaz",
+      "oyku-yaz",
+      "yz-tadi-gider",
+      "metin-incele"
+    ],
+    "takip-protokolu.md": [
+      "roman-yaz",
+      "hikaye-ice-aktar",
+      "metin-incele",
+      "sureklilik-denetle",
+      "hikaye-kurulum"
+    ],
+    "bolum-plani-sablonu.md": [
+      "roman-yaz",
+      "hikaye-ice-aktar",
+      "wattpad-bolum-planla",
+      "hikaye-kurulum"
+    ],
+    "platformlar-turkiye.md": [
+      "roman-tara",
+      "oyku-tara",
+      "wattpad-bolum-planla",
+      "yayinevi-dosyasi",
+      "metin-incele",
+      "hikaye",
+      "uyarlama-sinopsis"
+    ],
+    "uslup-karari.md": [
+      "roman-yaz",
+      "oyku-yaz",
+      "yz-tadi-gider",
+      "metin-incele",
+      "hikaye-kurulum"
+    ],
+    "proje-yapisi.md": [
+      "hikaye",
+      "roman-yaz",
+      "oyku-yaz",
+      "hikaye-ice-aktar",
+      "hikaye-kurulum",
+      "sureklilik-denetle"
+    ]
+  }
+}

@@ -1,0 +1,61 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "startup|resume|clear|compact",
+        "hooks": [
+          {
+            "type": "process",
+            "command": "python3",
+            "args": [
+              "${ZCODE_PLUGIN_ROOT}/skills/hikaye-kurulum/varliklar/kancalar/hikaye_kanca.py",
+              "oturum-basla",
+              "--ev",
+              "zcode",
+              "--eklenti"
+            ],
+            "timeoutMs": 15000
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash|Write|Edit|ApplyPatch",
+        "hooks": [
+          {
+            "type": "process",
+            "command": "python3",
+            "args": [
+              "${ZCODE_PLUGIN_ROOT}/skills/hikaye-kurulum/varliklar/kancalar/hikaye_kanca.py",
+              "yazi-oncesi",
+              "--ev",
+              "zcode",
+              "--eklenti"
+            ],
+            "timeoutMs": 15000
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit|ApplyPatch",
+        "hooks": [
+          {
+            "type": "process",
+            "command": "python3",
+            "args": [
+              "${ZCODE_PLUGIN_ROOT}/skills/hikaye-kurulum/varliklar/kancalar/hikaye_kanca.py",
+              "yazi-sonrasi",
+              "--ev",
+              "zcode",
+              "--eklenti"
+            ],
+            "timeoutMs": 15000
+          }
+        ]
+      }
+    ]
+  }
+}

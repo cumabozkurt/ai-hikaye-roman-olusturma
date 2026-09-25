@@ -1,0 +1,13 @@
+{
+  "name": "ai-hikaye-roman-olusturma-zcode",
+  "description": "AI Hikaye & Roman Oluşturma için ZCode eklenti pazar yeri",
+  "version": 1,
+  "plugins": [
+    {
+      "name": "ai-hikaye-roman-olusturma",
+      "source": "./",
+      "version": "1.0.0",
+      "description": "19 Türkçe yazım becerisi, komutlar ve ZCode yazım kancaları."
+    }
+  ]
+}

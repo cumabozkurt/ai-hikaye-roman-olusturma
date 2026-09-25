@@ -1,0 +1,20 @@
+{
+  "name": "ai-hikaye-roman-olusturma",
+  "interface": {
+    "displayName": "AI Hikaye & Roman Oluşturma"
+  },
+  "plugins": [
+    {
+      "name": "ai-hikaye-roman-olusturma",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "ai-hikaye-roman-olusturma",
+  "version": "1.0.0",
+  "description": "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı.",
+  "author": {
+    "name": "Cuma Bozkurt",
+    "url": "https://github.com/cumabozkurt"
+  },
+  "homepage": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma",
+  "repository": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma",
+  "license": "MIT",
+  "keywords": [
+    "turkce",
+    "roman-yazimi",
+    "oyku",
+    "wattpad",
+    "yazarlik",
+    "agent-skills",
+    "claude-code",
+    "codex",
+    "opencode",
+    "tdk"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "AI Hikaye & Roman Oluşturma",
+        "shortDescription": "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı.",
+        "longDescription": "19 Türkçe beceri, 7 ajan ve kancalarla fikirden yayına roman ve öykü yazımı: Wattpad ve Türkiye kitap pazarı taraması, roman/öykü çözümleme, bölüm bölüm yazım, 100+ bölümlük süreklilik takibi, TDK yazım denetimi, yapay zekâ tadı giderme, kapak, Wattpad yayın takvimi, yayınevi dosyası, uyarlama sinopsisi ve sesli kitap hazırlığı.",
+        "developerName": "Cuma Bozkurt",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "websiteURL": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma",
+        "defaultPrompt": [
+          "Polisiye bir roman yazmak istiyorum, nereden başlayalım?",
+          "Bu bölümdeki yapay zekâ tadını gider.",
+          "Romanımın 1-40. bölümlerinde tutarlılık hatası var mı?"
+        ],
+        "brandColor": "#B5651D"
+      }
+    }
+  }
+}

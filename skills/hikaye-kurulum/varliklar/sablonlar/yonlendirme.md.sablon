@@ -1,0 +1,36 @@
+# AI Hikaye & Roman Oluşturma — yazım projesi kuralları
+
+Bu çalışma alanında Türkçe roman ve öykü yazım becerileri kuruludur ({{EV_ADI}}).
+Beceriyi çağırma: {{CAGIRMA}}. Bir beceriyi yürütmeden önce `SKILL.md` dosyasını oku;
+kaynak dosyalarını yalnızca beceri söylediğinde yükle.
+
+## Yönlendirme
+
+| İstek | Beceri |
+|---|---|
+| Ne yapacağı belirsiz ("roman yazmak istiyorum") | `hikaye` |
+| Uzun roman planı / bölüm yazımı / devam | `roman-yaz` |
+| Kısa öykü | `oyku-yaz` |
+| Roman ya da öykü çözümleme | `roman-cozumle` / `oyku-cozumle` |
+| Pazar ve liste taraması (Wattpad TR, Kitapyurdu, D&R…) | `roman-tara` / `oyku-tara` |
+| Yapay zekâ tadını giderme | `yz-tadi-gider` |
+| Çok bakışlı inceleme | `metin-incele` |
+| TDK yazım denetimi | `yazim-denetle` |
+| Süreklilik denetimi | `sureklilik-denetle` |
+| Wattpad bölüm ve yayın takvimi | `wattpad-bolum-planla` |
+| Yayınevine dosya hazırlama | `yayinevi-dosyasi` |
+| Dizi/film uyarlama sinopsisi | `uyarlama-sinopsis` |
+| Sesli kitap metni | `sesli-kitap-hazirla` |
+| Var olan kitabı içe aktarma | `hikaye-ice-aktar` |
+| Kapak | `kapak-tasarla` |
+| Kurulum / güncelleme | `hikaye-kurulum` |
+| Oturum açık tarayıcıyla veri toplama | `tarayici-cdp` |
+
+## Yazım güvenlik kuralları
+
+- Bütün kitap dosyaları, geçici bölüm parçaları ve takip işlemleri bu çalışma alanının içinde kalır.
+- Uzun roman bölümü yazmadan önce `plan/bolum-plani_NNN.md` (içinde `Hedef uzunluk:` satırı) bulunmalıdır; kanca bunu denetler.
+- `takip/` altındaki görünümler elle düzenlenmez; değişiklik yalnızca `takip_kaydet.py` / `hikayectl.py bolum kaydet` ile yapılır.
+- Bağlam sıkıştırıldıktan sonra devam etmeden önce etkin kitabın `takip/baglam.md` dosyasını ve varsa `.hikaye/devir-notu.md` dosyasını oku.
+- Yazara giden raporlar Türkçe ve hikâye dilindedir: betik, alan ve durum kodu adlarını değil, olanı anlat.
+- Uzman ajanlar: {{AJANLAR}}

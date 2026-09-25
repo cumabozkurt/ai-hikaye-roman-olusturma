@@ -1,0 +1,42 @@
+name: Hata bildirimi
+description: Bir beceri, betik, kanca ya da kurulum beklendiği gibi çalışmıyor.
+title: "[Hata] "
+labels: ["hata"]
+body:
+  - type: dropdown
+    id: ortam
+    attributes:
+      label: Ortam (ev sahibi)
+      options: [Claude Code, OpenAI Codex, OpenCode, Google Antigravity, ZCode, OpenClaw, Reasonix, Diğer]
+    validations:
+      required: true
+  - type: input
+    id: surum
+    attributes:
+      label: Paket sürümü ve Python sürümü
+      placeholder: "ör. 1.0.0 · Python 3.13 · Windows 11"
+    validations:
+      required: true
+  - type: input
+    id: beceri
+    attributes:
+      label: İlgili beceri ya da betik
+      placeholder: "ör. roman-yaz · hikayectl.py bolum kaydet"
+  - type: textarea
+    id: adimlar
+    attributes:
+      label: Yeniden üretme adımları
+      description: Hangi komutu ya da isteği verdiniz? Mümkünse kısa bir örnek dosya ekleyin.
+    validations:
+      required: true
+  - type: textarea
+    id: beklenen
+    attributes:
+      label: Beklenen ve gerçekleşen davranış
+    validations:
+      required: true
+  - type: textarea
+    id: cikti
+    attributes:
+      label: Hata çıktısı
+      render: text

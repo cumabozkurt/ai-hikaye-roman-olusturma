@@ -1,0 +1,31 @@
+{
+  "sema_surumu": 1,
+  "kip": "ekle",
+  "bolum": 1,
+  "bolum_basligi": "Durmuş Saatler",
+  "beklenen_revizyon": 0,
+  "degisim": {
+    "sonuc": "Defne dükkânı açtı; bütün saatler 03.14'te durmuştu. Kerem 1987 fotoğrafını gösterdi ve fotoğraftaki ikinci adamın öldürüldüğünü söyledi.",
+    "karakter_degisimleri": [{"ad": "Defne Aras", "degisim": "Dükkânı satma kararı sarsıldı; cep saatini Kerem'e gösterdi"}],
+    "ipucu_degisimleri": [
+      {"islem": "ekle", "id": "F001", "ozet": "Bütün saatler 03.14'te durmuştu", "onem": "yüksek", "durum": "ekili", "ekildigi_bolum": 1, "planlanan_cozum_bolumu": 18},
+      {"islem": "ekle", "id": "F002", "ozet": "Kerem'in gelme nedeni tam söylenmedi", "onem": "orta", "durum": "ekili", "ekildigi_bolum": 1, "planlanan_cozum_bolumu": 25}
+    ],
+    "zaman_olaylari": [
+      {"islem": "ekle", "id": "E002", "nesnel_olgu": "Tahsin Yalın öldürüldü; cebinden Nuri Aras adı yazılı bir kâğıt çıktı", "okur_bilgisi": "Kerem'in anlattığı kadarıyla biliniyor", "hikaye_zamani": "1. bölümden bir gece önce", "karakterler": ["Tahsin Yalın", "Kerem Yalın"], "aciga_cikma": "kısmen", "acilma_bolumu": 1, "anahtar_kelimeler": ["Tahsin"]}
+    ],
+    "sonraki_bolum_sozleri": ["Cep saatinin içinde ne var?", "Kerem kim?"],
+    "emekliye_ayrilan_baglam": [],
+    "emekliye_ayrilan_karakterler": []
+  },
+  "baglam": {
+    "konum": {"cilt": "1. Cilt — Durmuş Saatler", "cilt_baslangic_bolumu": 1, "hikaye_zamani": "Kasım, kırkıncı gün, öğlen", "sahne": "Saatçi dükkânı, vitrin önü"},
+    "kalici_kisitlar": ["Kerem'in iç sesi birinci ciltte verilmez", "Kırmızı defter 20. bölümden önce adıyla anılmaz"],
+    "aktif_karakterler": ["Defne Aras", "Kerem Yalın"],
+    "sureklilik_riskleri": ["Duvardaki saatlerin sayısı 32; adlı olanlar Kara Kuzu, Paşa, Tombul"]
+  },
+  "karakter_anliklari": {
+    "Defne Aras": {"kimlik": "27 yaşında saatçi, Nuri Usta'nın torunu", "durum": "Şaşkın ve temkinli; dükkânı satma kararı sarsıldı", "hedef": "Fotoğrafın anlamını öğrenmek", "konum": "Dükkân", "yasam_durumu": "hayatta", "bildikleri": ["Dedesi her mart ortasında dükkânı bir gün kapatırdı", "Fotoğraftaki adam dün öldürüldü"]},
+    "Kerem Yalın": {"kimlik": "31 yaşında, Nuri Usta'yı uzaktan tanıdığını söyleyen adam", "durum": "Kararlı, bilgi saklıyor", "hedef": "Cep saatini incelemek", "konum": "Dükkân", "yasam_durumu": "hayatta", "iliskiler": ["Defne: yabancı"]}
+  }
+}

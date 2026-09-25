@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Çalışma Masası · {{BASLIK}}</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 960px; padding: 0 1rem; color: #222; background: #faf8f4; }
+  h1 { font-size: 1.6rem; } h2 { margin-top: 2rem; border-bottom: 1px solid #ddd; }
+  .kart { background: #fff; border: 1px solid #e5e0d8; border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; }
+  .aktif { border-color: #b5651d; } table { border-collapse: collapse; width: 100%; } td, th { text-align: left; padding: .3rem .5rem; border-bottom: 1px solid #eee; }
+  .etiket { font-size: .8rem; background: #f0e6d8; border-radius: 4px; padding: 0 .4rem; }
+</style>
+</head>
+<body>
+<h1>📚 Çalışma Masası</h1>
+<p id="alan"></p>
+<div id="kitaplar"></div>
+<script>
+const veri = {{VERI}};
+const e = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+const sayi = (n) => Number(n || 0).toLocaleString("tr-TR");
+document.getElementById("alan").textContent = "Çalışma alanı: " + veri.calisma_alani + (veri.kurulum.surum ? " · kurulum sürümü " + veri.kurulum.surum : " · kurulum yok");
+const kutu = document.getElementById("kitaplar");
+if (!veri.kitaplar.length) kutu.innerHTML = "<p>Henüz kitap yok. /roman-yaz ile başlayabilirsiniz.</p>";
+for (const k of veri.kitaplar) {
+  const ipucu = k.acik_ipuclari.map(i => `<tr><td>${e(i.id)}</td><td>${e(i.ozet)}</td><td>${e(i.durum)}</td></tr>`).join("") || "<tr><td colspan=3>Açık ipucu yok</td></tr>";
+  const kar = k.karakterler.map(c => `<tr><td>${e(c.ad)}</td><td>${e(c.yasam)}</td><td>${e(c.konum)}</td></tr>`).join("");
+  const bol = k.bolumler.map(b => `<tr><td>${e(b.dosya)}</td><td>${sayi(b.kelime)}</td></tr>`).join("");
+  kutu.insertAdjacentHTML("beforeend", `<div class="kart ${k.aktif ? "aktif" : ""}">
+    <h2>${e(k.ad)} ${k.aktif ? '<span class="etiket">aktif</span>' : ""}</h2>
+    <p>${e(k.yol)} · son kayıt: Bölüm ${e(k.son_kaydedilen_bolum)} · ${sayi(k.bolum_sayisi)} bölüm · ${sayi(k.plan_sayisi)} plan · ${sayi(k.toplam_kelime)} kelime</p>
+    <h3>Bölümler</h3><table><tr><th>Dosya</th><th>Kelime</th></tr>${bol}</table>
+    <h3>Açık ipuçları</h3><table><tr><th>No</th><th>Özet</th><th>Durum</th></tr>${ipucu}</table>
+    <h3>Karakterler</h3><table><tr><th>Ad</th><th>Yaşam</th><th>Konum</th></tr>${kar}</table></div>`);
+}
+if (veri.oykuler.length) kutu.insertAdjacentHTML("beforeend", `<div class="kart"><h2>Öyküler</h2><p>${veri.oykuler.map(e).join(" · ")}</p></div>`);
+</script>
+</body>
+</html>

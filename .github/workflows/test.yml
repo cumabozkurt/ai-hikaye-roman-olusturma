@@ -1,0 +1,52 @@
+name: Testler
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: ${{ matrix.os }} · Python ${{ matrix.python }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        python: ["3.11", "3.12", "3.13", "3.14"]
+        include:
+          - os: windows-latest
+            python: "3.13"
+          - os: macos-latest
+            python: "3.13"
+    env:
+      PYTHONUTF8: "1"
+      PYTHONIOENCODING: utf-8
+    steps:
+      - name: Sembolik bağlantıları etkinleştir (Windows)
+        if: runner.os == 'Windows'
+        run: git config --global core.symlinks true
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Bağımlılıklar
+        run: python -m pip install --upgrade pip pytest pillow
+      - name: Paylaşılan kopyalar eşit mi?
+        run: python betikler/paylasilanlari_esitle.py --denetle
+      - name: Bildirimler güncel mi?
+        run: python betikler/eklenti_dosyalari_uret.py --denetle
+      - name: Statik denetim
+        run: python betikler/statik_denetim.py
+      - name: Türkçe uyum denetimi (CJK ve Türkçe karakter hataları)
+        run: python betikler/turkce_uyum_denetle.py
+      - name: Testler
+        run: python -m pytest -q

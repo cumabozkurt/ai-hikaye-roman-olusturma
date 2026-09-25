@@ -1,0 +1,16 @@
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+# Yerel çalışma dosyaları
+.hikaye/calisma/
+.hikaye/devir-notu.md
+.hikaye/oturum-gunlugu.md

@@ -1,0 +1,34 @@
+{
+  "name": "ai-hikaye-roman-olusturma",
+  "owner": {
+    "name": "Cuma Bozkurt",
+    "url": "https://github.com/cumabozkurt"
+  },
+  "metadata": {
+    "description": "AI Hikaye & Roman Oluşturma: Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı.",
+    "version": "1.0.0"
+  },
+  "plugins": [
+    {
+      "name": "ai-hikaye-roman-olusturma",
+      "source": "./",
+      "description": "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı.",
+      "version": "1.0.0",
+      "category": "writing",
+      "keywords": [
+        "turkce",
+        "roman-yazimi",
+        "oyku",
+        "wattpad",
+        "yazarlik",
+        "agent-skills",
+        "claude-code",
+        "codex",
+        "opencode",
+        "tdk"
+      ],
+      "homepage": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma",
+      "license": "MIT"
+    }
+  ]
+}

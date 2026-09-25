@@ -1,0 +1,32 @@
+{
+  "sema_surumu": 1,
+  "kip": "ekle",
+  "bolum": 2,
+  "bolum_basligi": "Kapağın İçi",
+  "beklenen_revizyon": 1,
+  "degisim": {
+    "sonuc": "Defne gizli kapağı açtı ve '14.03.1987 — N.' yazısını buldu. Kerem, Tahsin'in ağabeyi olduğunu söyledi. Sabah çekmece kilidinde taze çizikler vardı.",
+    "karakter_degisimleri": [
+      {"ad": "Defne Aras", "degisim": "Kerem'e temkinli bir güven duymaya başladı"},
+      {"ad": "Kerem Yalın", "degisim": "Tahsin'in ağabeyi olduğunu açıkladı, gerisini sakladı"}
+    ],
+    "ipucu_degisimleri": [
+      {"islem": "ekle", "id": "F003", "ozet": "Cep saatinin gizli kapağında '14.03.1987 — N.' yazıyor", "onem": "yüksek", "durum": "ekili", "ekildigi_bolum": 2, "planlanan_cozum_bolumu": 20},
+      {"islem": "ekle", "id": "F004", "ozet": "Çekmece kilidinde taze çizikler: biri gece dükkâna girmeye çalıştı", "onem": "orta", "durum": "ekili", "ekildigi_bolum": 2, "planlanan_cozum_bolumu": 6}
+    ],
+    "zaman_olaylari": [],
+    "sonraki_bolum_sozleri": ["Çekmeceyi kim zorladı?", "Mart ortasında dükkân neden kapanırdı?"],
+    "emekliye_ayrilan_baglam": [],
+    "emekliye_ayrilan_karakterler": []
+  },
+  "baglam": {
+    "konum": {"cilt": "1. Cilt — Durmuş Saatler", "cilt_baslangic_bolumu": 1, "hikaye_zamani": "Kasım, kırk birinci gün sabahı", "sahne": "Saatçi dükkânı, tezgâh"},
+    "kalici_kisitlar": ["Kerem'in iç sesi birinci ciltte verilmez", "Kırmızı defter 20. bölümden önce adıyla anılmaz"],
+    "aktif_karakterler": ["Defne Aras", "Kerem Yalın"],
+    "sureklilik_riskleri": ["Duvardaki saatlerin sayısı 32; adlı olanlar Kara Kuzu, Paşa, Tombul", "Cep saati Defne'nin evinde, yastığın altında; fotoğraf dükkân kasasında"]
+  },
+  "karakter_anliklari": {
+    "Defne Aras": {"kimlik": "27 yaşında saatçi, Nuri Usta'nın torunu", "durum": "Tedirgin; dükkânı satma kararını erteledi", "hedef": "Tarihin anlamını ve çekmeceyi zorlayanı bulmak", "konum": "Dükkân", "yasam_durumu": "hayatta", "bildikleri": ["Dedesi her mart ortasında dükkânı bir gün kapatırdı", "Saatte 14.03.1987 — N. yazıyor", "Kerem, Tahsin'in ağabeyi"]},
+    "Kerem Yalın": {"kimlik": "31 yaşında, Tahsin Yalın'ın ağabeyi", "durum": "Açıklamanın yarısını yaptı; mesleğini saklıyor", "hedef": "Tahsin'in katilini bulmak", "konum": "Bilinmiyor", "yasam_durumu": "hayatta", "iliskiler": ["Defne: temkinli ortak"]}
+  }
+}

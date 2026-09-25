@@ -1,0 +1,21 @@
+{
+  "sema_surumu": 1,
+  "kitap_adi": "Saatçinin Kızı",
+  "son_bolum": 0,
+  "baglam": {
+    "konum": {"cilt": "1. Cilt — Durmuş Saatler", "cilt_baslangic_bolumu": 1, "hikaye_zamani": "Kasım, Nuri Usta'nın ölümünün kırkıncı günü", "sahne": "Kuzguncuk, saatçi dükkânı"},
+    "kalici_kisitlar": ["Kerem'in iç sesi birinci ciltte verilmez", "Kırmızı defter 20. bölümden önce adıyla anılmaz"],
+    "aktif_karakterler": ["Defne Aras"],
+    "sureklilik_riskleri": [],
+    "son_bolumler": [],
+    "sonraki_bolum_sozleri": ["Dükkânın açılışı ve duran saatlerin gizemi"]
+  },
+  "karakter_anliklari": {
+    "Defne Aras": {"kimlik": "27 yaşında saatçi, Nuri Usta'nın torunu", "durum": "Yasta; dükkânı satmaya kararlı", "hedef": "Dükkânı satıp geçmişi kapatmak", "konum": "Kuzguncuk", "yasam_durumu": "hayatta", "bildikleri": ["Dedesi her mart ortasında dükkânı bir gün kapatırdı"]},
+    "Nuri Usta": {"kimlik": "Defne'nin dedesi, saatçi", "durum": "Hikâye başlamadan kırk gün önce öldü", "hedef": "yok", "konum": "Kuzguncuk mezarlığı", "yasam_durumu": "öldü"}
+  },
+  "ipuclari": [],
+  "zaman_olaylari": [
+    {"id": "E001", "nesnel_olgu": "Nuri Usta 1987'de kaçakçılık ağının kayıtlarını tutan kırmızı bir defteri dükkâna sakladı", "okur_bilgisi": "", "hikaye_zamani": "Mart 1987", "karakterler": ["Nuri Usta"], "aciga_cikma": "gizli", "anahtar_kelimeler": ["kırmızı defter"]}
+  ]
+}

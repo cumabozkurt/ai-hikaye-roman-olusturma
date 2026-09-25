@@ -1,0 +1,21 @@
+name: Özellik isteği
+description: Yeni bir beceri, tür kartı, kalıp, platform bilgisi ya da iyileştirme önerin.
+title: "[Öneri] "
+labels: ["öneri"]
+body:
+  - type: textarea
+    id: sorun
+    attributes:
+      label: Hangi yazım sorununu çözüyor?
+    validations:
+      required: true
+  - type: textarea
+    id: oneri
+    attributes:
+      label: Önerilen çözüm
+    validations:
+      required: true
+  - type: textarea
+    id: alternatif
+    attributes:
+      label: Düşündüğünüz alternatifler

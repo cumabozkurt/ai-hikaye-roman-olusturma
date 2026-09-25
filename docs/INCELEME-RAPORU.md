@@ -1,0 +1,145 @@
+# İnceleme Raporu
+
+Bu rapor, üst kaynak [zenstory-ai/oh-story-claudecode](https://github.com/zenstory-ai/oh-story-claudecode) (MIT, v0.7.11, `401019ea` işlemesi) ile bu deponun (AI Hikaye & Roman Oluşturma 1.0.0) yayın öncesi ayrıntılı incelemesini kaydeder. İnceleme altı bakış açısından yapıldı; her bakış açısı için bulunan eksik ve hatalar ile yapılan düzeltmeler listelenir.
+
+İnceleme tarihi: 25 Eylül 2026.
+
+## Özet
+
+| Bakış açısı | Bulgu | Düzeltilen | Açık kalan |
+|---|---|---|---|
+| (a) İşlevsellik ve üst kaynağa göre bütünlük | 9 | 9 | 0 |
+| (b) Türkçe dil kalitesi ve tr-TR uyumu | 10 | 10 | 0 |
+| (c) Türkiye pazarı ve kültürel uygunluk | 8 | 8 | 0 |
+| (d) Güncel teknoloji ve ev sahibi uyumluluğu | 12 | 12 | 0 |
+| (e) Kod kalitesi, testler, güvenlik ve sağlamlık | 11 | 11 | 0 |
+| (f) Belgeler ve kurulum deneyimi | 9 | 9 | 0 |
+
+Son durum: 90 test geçiyor (Python 3.11, 3.13 ve 3.14 ile yerelde denendi), statik denetim 0 hata, Türkçe uyum denetimi 0 bulgu, depoda CJK karakteri 0.
+
+## (a) İşlevsellik ve üst kaynağa göre bütünlük
+
+Üst kaynakta 13 beceri, 7 ajan, 8 kanca olayı, bölüm takip sistemi, Node.js ve Python betikleri ile Playwright testleri vardı.
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| a1 | 13 becerinin tamamı eşlenmeli, hiçbir özellik kaybolmamalı. | Hepsi eşlendi: `hikaye`, `hikaye-kurulum`, `roman-tara`, `oyku-tara`, `roman-cozumle`, `oyku-cozumle`, `roman-yaz`, `oyku-yaz`, `yz-tadi-gider`, `metin-incele`, `hikaye-ice-aktar`, `kapak-tasarla`, `tarayici-cdp`. Eşleme tablosu README'de. |
+| a2 | 7 ajanın görev tanımları Türkçe yazım akışına uyarlanmalı. | 7 ajan Türkçe yeniden yazıldı (`skills/hikaye-kurulum/varliklar/ajanlar/`); Claude, Codex (TOML), OpenCode ve ZCode biçimlerine dönüştürülüyor. |
+| a3 | Üst kaynağın takip sistemi (işlem, revizyon, türetilmiş görünüm) korunmalı. | `hikayectl.py` ve `takip_kaydet.py` aynı sözleşmeyi uygular: eski revizyon reddi, atomik yazma, elle düzenleme tespiti. Örnek romanın takip dosyaları işlemlerden bayt bayt yeniden üretiliyor (test). |
+| a4 | Kanca olayları: üst kaynakta 8 olay. | 9 olay: oturum başı, sıkıştırma sonrası, çağrı öncesi (Antigravity), yazı öncesi, kayıt öncesi, yazı sonrası, sıkıştırma öncesi, oturum sonu, dur. Tek çekirdek (`hikaye_kanca.py`). |
+| a5 | Üst kaynak OpenCode için yalnızca 2.x eklenti API'sini destekliyordu. | Hem 1.x (`ai-hikaye-v1.ts`) hem 2.x (`ai-hikaye-v2.ts`) eklentisi; kurulum sürümü algılıyor. |
+| a6 | Playwright uçtan uca ve pano testleri Node gerektiriyordu. | pytest'e taşındı; kurulum, kanca, takip, çözümleme, tarama ve yayın akışlarını kapsayan 90 test. |
+| a7 | Üst kaynağın Çin mağazası kazıyıcıları Türkiye'de işe yaramaz. | Wattpad herkese açık API'si + `tarayici-cdp` ile yazarın kendi tarayıcısı; bkz. (c). |
+| a8 | Türkiye'deki yazarın ihtiyaç duyduğu yayın sonrası adımlar üst kaynakta yoktu. | 6 yeni beceri: `yazim-denetle`, `sureklilik-denetle`, `wattpad-bolum-planla`, `yayinevi-dosyasi`, `uyarlama-sinopsis`, `sesli-kitap-hazirla`. |
+| a9 | Yapay zekâ tadı giderme için önce/sonra örneği yoktu (üst kaynağın örnekleri Çinceydi). | `ornekler/yz-tadi-karsilastirma/`: önceki hâlde 10 bulgu (6 engelleyici), sonraki hâlde 0; test ediliyor. |
+
+## (b) Türkçe dil kalitesi ve %100 tr-TR uyumu
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| b1 | README örnek isteklerinde CJK köşeli ayraçlar (U+3008 ve U+3009) kalmıştı. | `[ ]` ile değiştirildi. |
+| b2 | `metin_olcum.py` düzenli ifadesinde tam genişlikli iki nokta (U+FF1A) vardı. | Kaldırıldı; CJK taraması `.py` dosyalarını da kapsıyor. |
+| b3 | argparse iletileri İngilizceydi (`usage`, `error`, `the following arguments are required`). | Paylaşılan `turkce_argparse.py` modülü `kullanım`, `seçenekler`, `hata`, `şu argümanlar zorunlu`, `geçersiz seçim` vb. çevirileri uygular; bütün betiklere eklendi, testle doğrulanıyor. |
+| b4 | Oranlarda ondalık ayırıcı nokta idi ("108.7"). | `tr_ondalik()` ile virgül: "1.000 kelimede 108,7". |
+| b5 | Klasör ve dosya adları ASCII olduğu için denetleyici bunları yanlış yazım sanabilirdi. | Türkçe uyum denetimi kod bloklarını, satır içi kodu, bağlantı hedeflerini, HTML'yi ve tire/alt çizgili tanımlayıcıları atlıyor; düzyazı ile ön bilgi açıklamasını denetliyor. |
+| b6 | Otomatik bir Türkçe uyum denetimi yoktu. | `betikler/turkce_uyum_denetle.py`: `cjk` (Han, Hiragana, Katakana, Hangul, tam genişlikli biçimler), `ascii-turkce` (ASCII'leştirilmiş Türkçe sözcükler), `yazim` (herkez, birşey, şuan, yalnış…), `kodlama` (U+FFFD, UTF-8 dışı), `ingilizce` (düzyazıya sızan İngilizce işlev sözcükleri). CI'da ve pytest'te çalışıyor; 5 olumsuz test her kuralın gerçekten hata verdiğini doğruluyor. |
+| b7 | Kullanıcıya dönük hata iletilerinde İngilizce kalıntı kalmamalı. | Paylaşılan betiklerde `Error`, `Warning`, `not found` gibi sözcükleri arayan test eklendi. |
+| b8 | Yazım kurallarını anlatan belgelerde bilinçli yanlış örnekler denetimi bozar. | `tdk-yazim-rehberi.md` ve bu rapor `yazim` kuralından muaf; diğer belgelerde satır sonuna `<!-- turkce-uyum: yoksay -->` konabiliyor. |
+| b9 | Terim birliği: "yapay zekâ" (şapkalı), "bölüm planı", "bağlam kartı", "takip" gibi terimler her yerde aynı olmalı. | Belgeler ve SKILL.md dosyaları tarandı; şapkasız yazım (`yapay zeka`) 0; Türkçe uyum denetimi bunu da yakalıyor. |
+| b10 | "Yapay zekâ tadı" kalıpları çeviri değil, Türkçeye özgü olmalı. | Kalıplar Türkçe düzyazıya göre yeniden tanımlandı: "değil…, …ydı" dönüşü, "bir yandan… diğer yandan", "yoktu" dizileri, çeviri kalıpları ("günün sonunda", "fark yaratmak"), edilgen çeviri yapıları. |
+
+## (c) Türkiye pazarı ve kültürel uygunluk
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| c1 | **Wattpad Türkiye'de erişime kapalı.** Ankara 10. Sulh Ceza Hâkimliğinin 2024/6507 sayılı kararıyla 12 Temmuz 2024'ten beri engelli; Eylül 2026 itibarıyla engel sürüyor. İlk taslak Wattpad'i birincil platform gibi sunuyordu. | `platformlar-turkiye.md`, `wattpad-rehberi.md`, `wattpad-bolum-planla` ve `roman-tara` becerileri ile README'ye erişim notu eklendi. Beceri açıklaması "Wattpad ve benzeri bölümlü çevrim içi yayın" oldu. `liste_tara.py` bağlantı hatasında durumu Türkçe açıklıyor ve `--girdi` seçeneğini öneriyor. Engeli aşma yöntemi önerilmiyor. |
+| c2 | BluTV, HBO Max'e dönüştü (Nisan 2025). | Uyarlama platformları listesi güncellendi. |
+| c3 | Dergi ve yarışma başvurularında eş zamanlı gönderim yasağı gibi yerel kurallar yoktu. | Notos'un güncel gönderim kuralları (Word, 12 punto, 1,5 satır aralığı, 4–5 A4 sayfa, eş zamanlı gönderim yok, 3 ay yanıt gelmezse ret) ve dergilerin genel yasağı eklendi. |
+| c4 | Tarama çıktısının klasörü belgelerde farklı adlandırılmıştı. | Bütün belge ve becerilerde `pazar/`. |
+| c5 | Kitap mağazaları (Kitapyurdu, D&R, idefix, BKM, Amazon.com.tr) otomatik isteklere kapalı. | Kazıyıcı yazılmadı; yazarın tarayıcısıyla görünen metin okunuyor, veri kaynağıyla yazılıyor. |
+| c6 | Türler Türk okurunun raf düzenine uymalı. | 12 tür kartı: romantik, genç kurgu, fantastik, polisiye, tarihî, psikolojik gerilim, bilimkurgu/distopya, korku/doğaüstü, aile dramı, mizah, edebî kurgu, kısa öykü. |
+| c7 | Yayınevi başvuru dosyası Türkiye alışkanlıklarına göre olmalı. | `yayinevi-dosyasi`: ön yazı, sinopsis, örnek bölüm, biyografi; sözleşme ve telif için "hukuki danışmanlık değildir" uyarısı. |
+| c8 | Diyalog dizgisi Türk yayıncılık geleneğine uymalı. | Konuşma çizgisiyle diyalog ve tırnak kullanımı `tdk-yazim-rehberi.md` içinde; `noktalama_duzelt.py` satır başındaki kısa çizgiyi konuşma çizgisine (—), düz tırnağı isteğe bağlı olarak Türkçe dizgi tırnağına çeviriyor; `yazim_denetle.py` konuşma dili biçimlerini diyalogda serbest bırakıp anlatıda uyarıyor. |
+
+Kaynaklar: [İFÖD, Wattpad erişime engellendi](https://ifade.org.tr/engelliweb/wattpad-erisime-engellendi/), [NTV, Wattpad erişim engelinde son durum](https://www.ntv.com.tr/teknoloji/wattpad-erisim-engelinde-son-durum-wattpad-ne-zaman-acilacak,blKogul2VUuF-Ze7da5Tpw), [Warner Bros. Discovery basın bülteni, Türkiye lansmanı 15 Nisan 2025](https://press.wbd.com/us/media-release/hbo-max/max-launches-turkey-april-15), [Cumhuriyet, Max Türkiye'de yayında](https://www.cumhuriyet.com.tr/kultur-sanat/dunyanin-en-buyuk-dijital-platformlarindan-max-turkiyedeki-yayin-2319213), [HBO Max yardım merkezi, BluTV aboneleri](https://help.hbomax.com/tr-en/answer/detail/000002564), [Notos Kitap, yayımlanma koşulları](https://notoskitap.com/yayimlanma-kosullari/).
+
+## (d) Güncel teknoloji ve ev sahibi uyumluluğu
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| d1 | Agent Skills belirtimi: `name` klasör adıyla aynı, küçük harf/rakam/tire, en çok 64 karakter; `description` en çok 1024 karakter; taşınabilirlik için yalnızca `name`, `description`, `license`, `compatibility`, `metadata`, `allowed-tools`. | Ön bilgi yalnızca beş belirtim alanını kullanıyor; açıklamalar 500 karakterle sınırlı (Claude Code listesindeki 1.536 karakter sınırının da altında); `metadata` dizgiden dizgiye eşleme. Statik denetim bunları zorunlu kılıyor. |
+| d2 | Claude Code: SKILL.md 500 satırın altında kalmalı, ayrıntı destek dosyalarına taşınmalı. | Statik denetim 500 satırı aşan SKILL.md'yi reddediyor; ayrıntılar `kaynaklar/` altında. |
+| d3 | Claude Code eklentileri kök `hooks/hooks.json` dosyasını kendiliğinden yükler. | Kök `hooks/` bilinçli olarak yok; kancalar yalnızca `hikaye-kurulum` ile projeye kuruluyor (bkz. mimari kararlar MK-5). Test bunu koruyor. |
+| d4 | Claude Code pazar yeri: `.claude-plugin/marketplace.json` ve eklenti bildirimi güncel şemaya uymalı. | Bildirimler tek üreticiden (`eklenti_dosyalari_uret.py`) çıkıyor; CI `--denetle` ile sapmayı yakalıyor. |
+| d5 | Codex kancaları: `Stop` yerine oturum kapanışında `SessionEnd`; `SessionStart` ve `PostToolUse` ek bağlamı varsayılan olarak yaklaşık 2.500 jetonla sınırlı. | Codex kurulumu `SessionStart`, `PreToolUse`, `PostToolUse`, `PreCompact`, `SessionEnd` yazıyor; `additionalContextLimit` 4000 ve 3000; Windows için `commandWindows`. Test güncellendi. |
+| d6 | Codex becerileri `~/.agents/skills` ve depo içi `.agents/skills` altında aranıyor; eklenti bildirimi `.codex-plugin/plugin.json`. | `.agents/skills -> ../skills` bağlantısı, `.agents/plugins/marketplace.json` ve `.codex-plugin/plugin.json`. Windows'ta bağlantı yerine düz dosya çıkarsa statik denetim bunu kabul ediyor, CI'da `core.symlinks` açılıyor. |
+| d7 | Agent Plugins şeması (`plugin.schema.json` 1.0.0) izin verilen alanları sınırlıyor. | Kök `plugin.json` yalnızca şemadaki alanları kullanıyor; test ediliyor. |
+| d8 | OpenCode 2.x eklenti API'si 1.x'ten farklı (göç rehberi). | İki ayrı eklenti dosyası; beceriler `~/.config/opencode/skills` (ya da `$XDG_CONFIG_HOME`) altına kuruluyor, ajanlar OpenCode ajan biçiminde. |
+| d9 | Windows'ta `python3` komutu olmayabilir. | Her SKILL.md'de yedek not: önce `python3`, yoksa `python`, Windows'ta `py -3`. |
+| d10 | Python sürümleri: güncel kararlı sürüm 3.14; en düşük desteklenen 3.11. | CI Ubuntu'da 3.11–3.14, Windows ve macOS'ta 3.13. Yerelde 3.11.16, 3.13.5 ve 3.14.7 ile bütün testler çalıştırıldı; bütün `.py` dosyaları 3.11 sözdizimiyle derleniyor. |
+| d11 | pytest 9: `--strict-markers`, `testpaths`. | `pytest.ini` bu ayarlarla; ağ gerektiren testler `ag` işaretiyle ayrılıyor. |
+| d12 | GitHub Actions eylemlerinin eski ana sürümleri Node 20 uyarısı veriyor. | `actions/checkout@v5`, `actions/setup-python@v6`. |
+
+## (e) Kod kalitesi, testler, güvenlik ve sağlamlık
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| e1 | `kur.py`, `~/.agents/skills` içindeki kullanıcının başka becerilerini de projeye kopyalayabiliyordu. | Yalnızca SKILL.md'sinde paket kimliği bulunan beceriler kopyalanıyor. |
+| e2 | Süreklilik denetimi "Defne Aras" öldüyse metindeki "Defne"yi yakalamıyordu. | Tam adın yanında, karakterler arasında benzersizse ilk ad da eşleşiyor; test eklendi. |
+| e3 | Kapak betiği `--kuru` çıktısında API anahtarı görünmemeli. | Anahtar maskeleniyor; anahtar yoksa Türkçe hata ve çıkış kodu; test ediliyor. |
+| e4 | Kullanıcı dosyalarının üzerine yazılmamalı. | Dosya paketi, sesli kitap ve kurulum mevcut dosyayı korur; `--yeniden` gibi açık bir seçenek gerekir. Bozuk JSON ayar dosyası üzerine yazılmıyor, sembolik bağlantı hedefine yazma reddediliyor (testli). |
+| e5 | Yarım yazılmış durum dosyası takip sistemini bozar. | Bütün durum yazımları geçici dosya + `os.replace` ile atomik. |
+| e6 | Geçersiz takip işlemi durumu yarıda değiştirmemeli. | Doğrulama önce, yazma sonra; test durumun değişmediğini doğruluyor. |
+| e7 | CDP istemcisi ağdan erişilebilir olmamalı. | Hata ayıklama bağlantı noktası yalnızca `127.0.0.1`; ayrı tarayıcı profili; yalnızca görünen metin okunuyor. |
+| e8 | Wattpad API'sine yük bindirilmemeli. | İstekler arasında 1 saniye, sayfa sınırı, oturum ve kişisel veri yok. |
+| e9 | Yeni betikler testsiz kalabilir. | "Kapsam bekçisi" testi, her betik adının testlerde geçtiğini denetliyor. |
+| e10 | Paylaşılan kopyalar zamanla birbirinden ayrışabilir. | `paylasilanlari_esitle.py --denetle` CI'da; içe aktarma bağımlılıkları da otomatik çözülüyor. |
+| e11 | Kurulum betikleri (`kur.sh`, `kur.ps1`) `__pycache__` ve bağlantılı hedefleri taşımamalı. | İkisi de önbellek klasörlerini atıyor, bağlantılı hedefleri atlıyor; `kur.sh` geçici `HOME` ile test ediliyor. |
+
+## (f) Belgeler ve kurulum deneyimi
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| f1 | Kurulum komutları depo adıyla tutarlı olmalı. | Bütün komutlar `cumabozkurt/ai-hikaye-roman-olusturma` ve `ai-hikaye-roman-olusturma@ai-hikaye-roman-olusturma` ile. |
+| f2 | Eklentiyle kurulan becerilerin ad alanıyla çağrıldığı anlatılmıyordu. | README ve `ev-sahipleri.md`: `/ai-hikaye-roman-olusturma:roman-yaz`. |
+| f3 | `npx` ya da eklenti sistemi olmayan kullanıcı için kurulum yolu yoktu. | `betikler/kur.sh` (macOS/Linux) ve `betikler/kur.ps1` (Windows): Claude, Codex, OpenCode ya da hepsi. |
+| f4 | Ev sahibine göre sorun giderme yoktu. | `docs/ev-sahipleri.md`: 8 ev sahibi için kurulum, kanca dosyaları, güven onayı (Codex `/hooks`) ve sık sorunlar. |
+| f5 | Mimari gerekçeler kayıt altında değildi. | `docs/mimari.md` ve `docs/mimari-kararlar.md` (7 karar). |
+| f6 | Kullanım rehberleri eksikti. | `docs/bilgi-tabani.md`, `docs/yz-tadi-giderme.md`, `docs/100-bolum-tutarlilik.md`, `docs/liste-tarama-ve-cozumleme.md`. |
+| f7 | Hata bildirimi için yapılandırılmış form yoktu. | `.github/ISSUE_TEMPLATE/`: hata, özellik isteği, çıktı kalitesi örneği. |
+| f8 | Katkı kuralları ve yerel denetimler yazılı değildi. | `CONTRIBUTING.md`, `AGENTS.md`, `CLAUDE.md`; isteğe bağlı `claude plugin validate .` notu. |
+| f9 | Kaynak gösterme ve lisans. | README'de "Kaynak ve Teşekkür" bölümü; LICENSE her iki telif satırını içeriyor; CHANGELOG 1.0.0. |
+
+## Aktarılmayanlar ve gerekçeleri
+
+| Üst kaynak öğesi | Gerekçe |
+|---|---|
+| ClawHub yayın iş akışı | Gizli anahtar gerektiriyor; bu depo için anlamlı değil. |
+| Playwright uçtan uca ve pano testleri | pytest ile yeniden yazıldı. |
+| Çin mağaza kazıyıcıları ve yazı tipi karıştırma çözücüsü | Türkiye'de karşılığı yok; Wattpad API'si ve yazarın tarayıcısı kullanılıyor. |
+| Çince örnek projeler, üçüncü taraf çözümleme alıntıları, kapak görseli, pano ekran görüntüsü | Telif ve dil; yerine özgün Türkçe örnekler yazıldı. |
+| İngilizce README ve iki dilli belgeler | Ürün yalnızca Türkçe. |
+| Üst kaynağın geliştirme araçları (belge bütçesi, beceri numaralandırma, npm paketi, Node kancaları) | Python araçlarıyla değiştirildi. |
+| Telegram ve topluluk bağlantıları | Üst kaynağa özgü. |
+
+## Başvurulan belgeler
+
+- Claude Code becerileri: <https://code.claude.com/docs/en/skills>
+- Claude Code eklenti başvurusu: <https://code.claude.com/docs/en/plugins-reference>
+- Claude Code eklenti pazar yerleri: <https://code.claude.com/docs/en/plugin-marketplaces>
+- Claude Code kancaları: <https://code.claude.com/docs/en/hooks>
+- Agent Skills belirtimi: <https://agentskills.io/specification>
+- Agent Plugins şeması: <https://agent-plugins.org/schemas/1.0.0/plugin.schema.json>
+- Codex becerileri: <https://developers.openai.com/codex/skills>
+- Codex alt ajanları: <https://developers.openai.com/codex/subagents>
+- Codex kancaları: <https://developers.openai.com/codex/hooks>
+- Codex eklenti oluşturma: <https://developers.openai.com/codex/plugins/build>
+- OpenCode becerileri: <https://opencode.ai/docs/skills/>
+- OpenCode eklentileri (1.x): <https://opencode.ai/docs/plugins/>
+- OpenCode 2.x eklentileri: <https://opencode.ai/v2/docs/plugins>
+- OpenCode 1.x'ten 2.x'e göç: <https://opencode.ai/v2/docs/migrate-v1/>
+- OpenCode 2.x ajanları: <https://opencode.ai/v2/docs/agents>
+- Python sürümleri: <https://www.python.org/downloads/>
+- pytest: <https://docs.pytest.org/en/stable/>
+- GitHub Actions `setup-python`: <https://github.com/actions/setup-python>
+- TDK Yazım Kılavuzu: <https://sozluk.gov.tr/>

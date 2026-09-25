@@ -1,0 +1,31 @@
+name: Çıktı kalitesi örneği
+description: Üretilen metin ya da plan beklentinizin altında kaldı (yapay zekâ tadı, tutarsızlık, yazım hatası).
+title: "[Çıktı] "
+labels: ["çıktı-kalitesi"]
+body:
+  - type: input
+    id: beceri
+    attributes:
+      label: Beceri ve istek
+      placeholder: "ör. /roman-yaz 7. bölümü yaz"
+    validations:
+      required: true
+  - type: textarea
+    id: ornek
+    attributes:
+      label: Kısa çıktı örneği
+      description: En fazla birkaç paragraf; kişisel bilgi ve başkasına ait metin eklemeyin.
+    validations:
+      required: true
+  - type: textarea
+    id: sorun
+    attributes:
+      label: Sorun nedir, nasıl olmalıydı?
+    validations:
+      required: true
+  - type: textarea
+    id: denetim
+    attributes:
+      label: Denetçi çıktısı (varsa)
+      description: ai_kalip_denetle.py, yazim_denetle.py ya da sureklilik_denetle.py çıktısı.
+      render: text

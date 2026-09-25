@@ -368,7 +368,7 @@ Ayrıntılar: [docs/mimari.md](docs/mimari.md) · [docs/100-bolum-tutarlilik.md]
 
 ## 🛡️ Kalite güvencesi
 
-- **Testler:** 206 pytest testi her gönderimde Ubuntu (Python 3.11, 3.12, 3.13, 3.14), macOS ve Windows üzerinde çalışır. Uçtan uca senaryo testi bir romanı kurulumdan planlamaya, iki bölümün kapılardan ve revizyon döngüsünden geçirilmesine, turnuvaya, süreklilik ve dönem denetimine, anlık görüntü farkına, bütün biçimlerde dışa aktarmaya, DOCX'in geri içe aktarılmasına ve çalışma masası sunucusuna kadar tek akışta yürütür.
+- **Testler:** 207 pytest testi her gönderimde Ubuntu (Python 3.11, 3.12, 3.13, 3.14), macOS ve Windows üzerinde çalışır. Uçtan uca senaryo testi bir romanı kurulumdan planlamaya, iki bölümün kapılardan ve revizyon döngüsünden geçirilmesine, turnuvaya, süreklilik ve dönem denetimine, anlık görüntü farkına, bütün biçimlerde dışa aktarmaya, DOCX'in geri içe aktarılmasına ve çalışma masası sunucusuna kadar tek akışta yürütür.
 - **Çıktı doğrulama:** EPUB'lar W3C EPUBCheck 5.1.0 ile hatasız; DOCX ve ODT dosyaları XML olarak ayrıştırılır ve LibreOffice ile başsız açılıp dönüştürülür (CI'da Ubuntu işinde).
 - **Sağlamlık:** 964 bozuk girdi denemesinde (boş, ikili, Windows-1254, BOM, bozuk JSON, bozuk DOCX/ODT/EPUB, DOCTYPE/ENTITY içeren XML, yol aşımı denemeleri, bozuk durum dosyaları) Python izi yok; bütün hata iletileri Türkçe. Ayrıntı için `HIKAYE_AYIKLA=1`.
 - **Türkçe uyum:** `turkce_uyum_denetle.py` her gönderimde CJK karakteri, ASCII'leştirilmiş Türkçe, yaygın yazım yanlışları, bozuk kodlama ve düzyazıya sızan İngilizce için bütün depoyu tarar.

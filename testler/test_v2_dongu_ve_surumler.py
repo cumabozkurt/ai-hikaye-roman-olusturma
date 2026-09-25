@@ -40,12 +40,13 @@ def test_dongu_mekanik_olcum_ve_kapi(roman: Path) -> None:
 def test_dongu_turlar_karar_brief_ve_kabul(roman: Path, tmp_path: Path) -> None:
     rd = modul_yukle("revizyon_dongusu.py")
     kaynak = (roman / "metin" / "bolum-002_kapagin-ici.md").read_text(encoding="utf-8")
-    t1 = yaz(tmp_path / "t1.md", kaynak)
+    t1 = tmp_path / "t1.md"
+    t1.write_bytes(kaynak.replace("\n", "\r\n").encode("utf-8"))  # Windows düzenleyicisinden gelmiş gibi CRLF
     rubrik = calistir("revizyon_dongusu.py", "rubrik", "--proje", roman, "--bolum", 2)
     assert rubrik.returncode == 0 and "plan_sadakati" in rubrik.stdout and "Açığa" in rubrik.stdout
     k1 = rd.kaydet(roman, 2, t1, hakem_json(tmp_path / "h1.json", 6.0, "eksik"), "ilk", 8.0, 4)
     assert k1["tur"] == 1 and k1["karar"] == "devam" and k1["acik_plan_maddesi"] == 1
-    # tur kopyası her platformda LF satır sonuyla yazılmalı; aksi hâlde Windows'ta özet tutmaz
+    # CRLF girdi bile olsa tur kopyası LF saklanmalı; aksi hâlde özet platforma göre değişir
     assert b"\r" not in (roman / ".hikaye" / "dongu" / "bolum-002" / "tur-01.md").read_bytes()
     with pytest.raises(rd.DonguHatasi, match="aynı"):
         rd.kaydet(roman, 2, t1, hakem_json(tmp_path / "h1.json", 6.0, "eksik"), "", 8.0, 4)
@@ -250,3 +251,12 @@ def test_istatistik_bozuk_defter(roman: Path) -> None:
     yaz(roman / ".hikaye" / "istatistik.json", "{bozuk")
     sonuc = calistir("yazim_istatistik.py", "pano", "--proje", roman)
     assert sonuc.returncode == 2 and "istatistik.json" in sonuc.stderr
+
+
+def test_metin_oku_satir_sonlarini_lf_yapar(tmp_path: Path) -> None:
+    do = modul_yukle("dosya_oku.py")
+    yol = tmp_path / "crlf.md"
+    yol.write_bytes("# Başlık\r\n\r\nİlk satır.\rİkinci satır.\r\n".encode("utf-8"))
+    assert do.metin_oku(yol) == "# Başlık\n\nİlk satır.\nİkinci satır.\n"
+    yol.write_bytes("Çocuk ağladı.\r\n".encode("cp1254"))
+    assert do.metin_oku(yol, uyar=False) == "Çocuk ağladı.\n"

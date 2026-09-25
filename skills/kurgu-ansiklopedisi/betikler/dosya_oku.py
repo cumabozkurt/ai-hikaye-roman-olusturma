@@ -33,6 +33,11 @@ def _var_mi(yol: Path) -> None:
         raise DosyaHatasi(f"dosya bekleniyordu, klasör verildi: {yol}")
 
 
+def _satir_sonlari(metin: str) -> str:
+    """CRLF ve CR satır sonlarını LF'ye çevirir; özetler ve ölçümler her platformda aynı çıkar."""
+    return metin.replace("\r\n", "\n").replace("\r", "\n")
+
+
 def metin_oku(yol: Path | str, uyar: bool = True) -> str:
     yol = Path(yol)
     _var_mi(yol)
@@ -40,7 +45,7 @@ def metin_oku(yol: Path | str, uyar: bool = True) -> str:
     if b"\x00" in ham[:8192]:
         raise DosyaHatasi(f"ikili (metin olmayan) dosya: {yol}. Word belgesini önce .txt ya da .md olarak kaydedin.")
     try:
-        return ham.decode("utf-8-sig")
+        return _satir_sonlari(ham.decode("utf-8-sig"))
     except UnicodeDecodeError:
         pass
     metin = ham.decode("cp1254", errors="strict") if _cp1254_mu(ham) else None
@@ -49,7 +54,7 @@ def metin_oku(yol: Path | str, uyar: bool = True) -> str:
     if uyar:
         print(f"uyarı: {yol} UTF-8 değil; Windows-1254 (Türkçe) olarak okundu. Dosyayı UTF-8 olarak kaydetmeniz önerilir.",
               file=sys.stderr)
-    return metin
+    return _satir_sonlari(metin)
 
 
 def _cp1254_mu(ham: bytes) -> bool:

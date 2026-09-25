@@ -34,6 +34,10 @@ En büyük güncelleme: dokuz açık kaynak roman yazım projesi uçtan uca ince
 - Takip durumundaki ipuçları sözlük biçimindeyken bazı araçlar liste bekliyordu.
 - Örnek romanda Kerem ile Tahsin arasındaki akrabalık metinde ve takip dosyalarında çelişiyordu (ağabey / kardeş); yaşlarla uyumlu olarak amca–yeğen yapıldı.
 - Çalışma masası `--port` yardımında yanlış varsayılan (9222) yazıyordu.
+- Windows'ta CRLF satır sonlu dosyalar özetleri platforma göre değiştiriyordu: ortak okuyucu satır sonlarını LF'ye çeviriyor, betikler her platformda LF yazıyor.
+- macOS'ta başsız Chrome PDF'yi yazdıktan sonra kapanmayabiliyordu: tamamlanan PDF izlenip süreç kapatılıyor, toplam süre 90 saniyeyle sınırlı.
+- Dönem denetimi "radyoaktif", "radyolog" gibi sözcüklerde yanlış uyarı veriyordu.
+- İstatistik, çok az yazım gününden anlamsız bitiş tarihleri tahmin ediyordu; artık son 7 günde en az 3 yazım günü gerekiyor.
 
 ## [1.1.0] - 2026-09-25
 

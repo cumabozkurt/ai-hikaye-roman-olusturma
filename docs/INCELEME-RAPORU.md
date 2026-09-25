@@ -259,3 +259,105 @@ Yöntem: Kurulumlar bu makinede gerçekten yapıldı (geçici `HOME` ile, kullan
 ### İkinci turda eklenen testler
 
 `test_saglamlik.py` (33 test: bozuk girdiler, kodlamalar, JSON kökü, Türkçe hata iletileri, bütün seçeneklerde yardım metni), `test_yeni_ozellikler.py` (15 test: Ateşman hesabı, yankı ve cümle başı tekrarı, bitmemiş işaretler, `.yasak-kaliplar`, EPUB yapısı ve yeniden üretilebilirlik, kapak, hata yolları, değerlendirme paketi biçimi, tür kartı soruları, terminal görselleri, README görsel bağlantıları, TDK yanlış alarm regresyonları) ve çalışma masası `Host` testi.
+
+## Üçüncü Tur (v2.0.0)
+
+İnceleme tarihi: 25 Eylül 2026 · Sürüm: 1.1.0 → 2.0.0.
+
+Bu turda dokuz açık kaynak roman yazma projesi baştan sona incelendi (ayrıntı ve lisanslar: [OZELLIK-KARSILASTIRMA.md](OZELLIK-KARSILASTIRMA.md)), eksik kalan yetenekler bağımsız olarak yeniden tasarlandı ve yazıldı. **GPL-3.0, AGPL-3.0 ya da lisanssız depolardan kod, istem, metin ya da görsel alınmadı**; yalnızca fikir düzeyinde esinlenildi. MIT lisanslı tek depodan (chinese-novelist-skill) da kod alınmadı.
+
+Yeni kod üç ayrı bakışla gözden geçirildi, ardından CI'da ve gerçek kurulumlarda regresyon turu yapıldı.
+
+### Özet
+
+| Bakış | Bulgu | Düzeltilen | Açık kalan |
+|---|---|---|---|
+| (i) Mühendis: doğruluk, sağlamlık, platformlar | 13 | 13 | 0 |
+| (ii) Türk romancı ve editör | 9 | 9 | 0 |
+| (iii) İlk kez kullanan yazar | 6 | 6 | 0 |
+| (iv) Regresyon turu (CI, kurulum, bozuk girdi) | 0 yeni | — | 1 (sosyal önizleme görseli elle yüklenmeli) |
+
+Son durum: 207 test geçiyor (yerelde Python 3.11, 3.13, 3.14; CI'da Ubuntu 3.11–3.14, macOS, Windows ve ayrıca EPUBCheck + LibreOffice doğrulama işi), statik denetim 0 hata (24 beceri), Türkçe uyum 0 bulgu, CJK 0, 964 bozuk girdi denemesinde 0 Python izi.
+
+### Yeni yetenekler (özet)
+
+| Alan | Betik / beceri |
+|---|---|
+| Kar tanesi ve yapı planlama (üç perde, kahramanın yolculuğu, serim-düğüm-çözüm, yedi nokta), sahne kartları, plan panosu | `kurgu_plani.py`, `roman-planla` |
+| Kurgu ansiklopedisi (karakter, mekân, nesne, sözlük, zaman çizelgesi, ilişkiler), tutarlılık denetimi, karakter/mekân dağılımı | `kurgu_ansiklopedisi.py`, `kurgu-ansiklopedisi` |
+| Uzun roman belleği: bölüm özetleri, perde özetleri, bağlam paketi, yerel arama | `bilgi_ara.py`, `kurgu_ansiklopedisi.py paket` |
+| İpucu (ekme-hasat) defteri: açık ipuçları, geciken hasat, yetim hasat | `ipucu_defteri.py` |
+| Yazar denetimli yaz-eleştir-düzelt döngüsü, ölçülebilir rubrik, `bolum-hakemi` ajanı, onaysız kabul yok | `revizyon_dongusu.py`, `bolum-dongusu` |
+| Ses izi ve bölüm turnuvası (Elo) | `ses_izi.py`, `turnuva.py` |
+| Anlık görüntü, fark, geri yükleme | `anlik_goruntu.py` |
+| Yazım hedefleri, seri, bitiş tahmini, HTML pano | `yazim_istatistik.py`, `proje_durumu.py`, `yazim-panosu` |
+| Dönem uygunluk denetimi (Osmanlı ve erken Cumhuriyet), iki yeni tür kartı | `donem_denetle.py`, `osmanli-donemi`, `erken-cumhuriyet` |
+| DOCX, ODT, baskıya hazır HTML, PDF, TXT, Markdown dışa aktarma; DOCX/ODT/EPUB içe aktarma | `e_kitap_derle.py`, `belge_yazicilar.py`, `belge_ice_aktar.py` |
+| Sekmeli çalışma masası (genel, sahneler, kurgu, ipuçları, döngü, istatistik) | `calisma_masasi.py`, `calisma-masasi.html` |
+
+### (i) Mühendis: doğruluk, sağlamlık, platformlar
+
+Yöntem: Her yeni betiğin her alt komutu gerçekçi, sınır ve bozuk girdilerle çalıştırıldı; bozuk girdi düzeneği 964 komuta genişletildi (boş, ikili, Windows-1254, BOM, bozuk JSON, bozuk DOCX/ODT/EPUB, DOCTYPE/ENTITY içeren XML, yol aşımı, bozuk durum dosyaları). Python izi, 0/1/2 dışı çıkış kodu ya da İngilizce ileti "sorun" sayıldı.
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| i1 | Bir düzenli ifade `\s` yüzünden satır sonlarını aşıp iki satırı tek alan olarak okuyordu. | Satır içi boşluk sınıfı; regresyon testi. |
+| i2 | Süreklilik bulgularında satır numarası ön bilgi bloğu kadar kayıyordu. | Satır numarası özgün dosyaya göre hesaplanıyor; test. |
+| i3 | `ipuclari` alanı bazı dosyalarda sözlük, bazılarında liste olarak yazılmıştı; okuyucu biri gelince düşüyordu. | İki biçim de okunuyor, yazım tek biçimde; test. |
+| i4 | Bozuk XML'de İngilizce expat iletisi kullanıcıya sızıyordu; DOCTYPE/ENTITY yalnızca ilk baytlarda aranıyordu. | Türkçe ileti ("bozuk XML (satır X, sütun Y)…"), DOCTYPE/ENTITY bütün veride reddediliyor. |
+| i5 | İstatistik, tek günlük yazımdan 2107 gibi anlamsız bitiş tarihleri tahmin ediyordu. | Son 7 günde en az 3 yazım günü şartı; 10 yıldan uzun tahminler "on yıldan uzun sürer" olarak gösteriliyor; test. |
+| i6 | Dağılım tablosunda dört basamaklı kelime sayıları sütunları kaydırıyordu. | Dinamik sütun genişliği. |
+| i7 | Turnuva, göreli yolla eklenen adayları başka bir çalışma dizininden çağrılınca bulamıyordu. | Aday yolları proje köküne göre saklanıp çözülüyor; test. |
+| i8 | Binlik ayırıcı İngilizce virgüldü. | `tr_sayi()` (1.234) ve Türkçe yüzde (`%1,1`). |
+| i9 | Windows'ta LibreOffice doğrulaması `UserInstallation` yolunu URI'ye çevirmediği için başarısızdı. | `Path.as_uri()`. |
+| i10 | `calisma_masasi.py --port` yardımı yanlış varsayılan port yazıyordu. | Yardım metinleri düzeltildi. |
+| i11 | `revizyon_dongusu.py kaydet` makine okunur çıktı vermiyordu. | `--json`. |
+| i12 | **CI (Windows):** tur kopyası CRLF ile yazılıyor, özet LF metinden hesaplandığı için `kabul` "tur dosyası değiştirilmiş" diyordu; CRLF kaydedilmiş bölümler de özetleri platforma göre değiştiriyordu. | Ortak `metin_oku` satır sonlarını LF'ye çeviriyor, bütün betikler her platformda LF yazıyor (`newline="\n"`); CRLF girdiyle bayt düzeyinde test. |
+| i13 | **CI (macOS):** başsız Chrome PDF'yi yazdıktan sonra kapanmayıp 120 saniyede zaman aşımına düşüyordu. | Tamamlanan PDF (`%%EOF`, sabit boyut) izlenip süreç kapatılıyor; `--use-mock-keychain`, `--no-first-run`; toplam süre 90 saniyeyle sınırlı. |
+
+### (ii) Türk romancı ve editör
+
+Yöntem: Örnek roman *Saatçinin Kızı* yeni dosyalarla (karakter, mekân, nesne, sözlük, zaman çizelgesi, sahne kartları, üç perde planı) zenginleştirildi ve bütün denetçiler bu projede bir editör gözüyle çalıştırıldı; çıktıların Türkçesi tek tek okundu.
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| ii1 | Örnek romanda Kerem–Tahsin akrabalığı çelişkiliydi (metinde "ağabeyim", takip verisinde farklı; yaşlar inandırıcı değildi). | Amca–yeğen olarak metinde, takip JSON'unda, karakter durumlarında, bağlamda, ilişkilerde ve planda tutarlı hâle getirildi; doğum yılları eklendi. |
+| ii2 | "tamamlanan %0'ı" gibi ek uyumu bozuk yüzde ifadeleri. | Cümleler ek gerektirmeyecek biçimde yeniden kuruldu. |
+| ii3 | Ondalık ayırıcı nokta idi. | Türkçe ondalık virgül (hem terminalde hem çalışma masasında). |
+| ii4 | Yapı noktası soruları çeviri kokuyordu. | Sorular Türkçe anlatım alışkanlığına göre yeniden yazıldı. |
+| ii5 | "Tek cümlelik öz" başlığı ayrıştırılmıyordu. | Başlık varyantları tanınıyor; test. |
+| ii6 | Ölmüş karakterin geri dönüş sahnesinde (anı, rüya) yanlış alarm. | Anı/rüya bağlamı ve bölüm sırası dikkate alınıyor; test. |
+| ii7 | Dönem denetimi "fes" ekli biçimlerini (fesini, fesiyle) kaçırıyor, "festival"de yanlış alarm veriyordu. | Ek listesi ve sözcük sınırı; test. |
+| ii8 | Cümle başındaki her büyük harfli kelime atlandığı için cümle başında yanlış yazılan adlar (ör. "Defme") gözden kaçıyordu. | Cümle başında, kayıtlı bir adın tek harf farklı yazımı ayrıca aranıyor. |
+| ii9 | Dönem denetimi "radyoaktif", "radyolog" gibi sözcüklerde radyo uyarısı veriyordu. | Desen bilimsel terimleri dışlıyor; test. |
+
+### (iii) İlk kez kullanan yazar
+
+Yöntem: Boş bir klasörde yalnızca README ve beceri talimatlarıyla sıfırdan roman kuruldu, planlandı, iki bölüm döngüden geçirildi ve dışa aktarıldı; her takılma noktası yazıldı.
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| iii1 | Yapı iskeleti hazırken `proje_durumu` yine "genel plan yok → kurgu_plani baslat" diyerek döngüye sokuyordu. | İskelet varsa `/roman-yaz` kurulum akışıyla `genel-plan.md` yazılması öneriliyor; `roman-planla` 5. adım açıklandı. |
+| iii2 | Beceri talimatı ile denetçi, değer yükü biçimi ("güven + → korku −") ve `planlandı` durumu konusunda uyuşmuyordu. | Denetçi iki biçimi de kabul ediyor, `planlandı` durumu eklendi. |
+| iii3 | Şablonda yapı noktası başına `Olay:` satırı yoktu; boş satır dolu sayılıyordu. | Şablona `- Olay:` eklendi; boş satır dolu sayılmıyor. |
+| iii4 | Çok kelimeli arama tırnaksız yazılınca hata veriyordu. | `bilgi_ara --sorgu` birden çok kelime kabul ediyor. |
+| iii5 | Çalışma masası tarihleri ISO biçiminde gösteriyordu; sekme bağlantısı paylaşılamıyordu. | Türkçe tarih ve sayı biçimi, `#sekme=` derin bağlantıları. |
+| iii6 | Kayıttan sonra elle değiştirilen bölüm fark edilmiyordu. | `proje_durumu` gövde özetini karşılaştırıp "1. ve 2. bölüm kayıttan sonra değişti" uyarısı veriyor (`degisen_bolumler`). |
+
+### (iv) Regresyon turu
+
+- **Testler:** 207 test Python 3.11, 3.13 ve 3.14 ile yerelde geçiyor. Doğrulama araçları eksikse testler atlanmıyor, başarısız sayılıyor (`HIKAYE_DOGRULAMA_ZORUNLU=1`). Uçtan uca senaryo kurulumdan dışa aktarmaya, DOCX'in geri içe aktarılmasına ve çalışma masası sunucusuna kadar tek akışta yürüyor.
+- **Çıktı doğrulama:** EPUB, EPUBCheck 5.1.0 ile 0 hata / 0 uyarı; DOCX ve ODT `zipfile` + XML ile ayrıştırılıyor ve LibreOffice ile başsız olarak PDF'ye dönüştürülüyor; PDF başsız Chrome ile üretilip imzası denetleniyor.
+- **CI:** İlk gönderimde Windows (i12) ve macOS (i13) işleri kırmızıydı. İlk düzeltmeden sonra Windows'ta CRLF girdinin hâlâ korunduğu görüldü; satır sonu normalleştirmesi ortak okuyucuya taşındı ve bütün işler yeşile döndü.
+- **Bozuk girdi:** Düzeltmelerden sonra yeniden çalıştırıldı: 964 komut, 0 sorun.
+
+| Ortam | Sürüm | Denenen (geçici `HOME`) | Sonuç |
+|---|---|---|---|
+| Claude Code | 2.1.282 | `claude plugin validate .`, `marketplace add`, `plugin install`, `plugin details` | Doğrulama geçti; eklenti 2.0.0 etkin, 24 beceri. |
+| OpenAI Codex CLI | 0.157.0 | `codex plugin marketplace add`, `codex plugin add` | 2.0.0 kuruldu, 24 beceri. |
+| npx skills | güncel | `npx skills add … -g -a claude-code codex opencode -y` | 24 beceri `~/.agents/skills` altında, Claude Code için bağlantılı. |
+| OpenCode | 1.18.32 | `opencode debug skill` (boş klasörde, npx kurulumundan sonra) | 24 becerinin tamamı bulundu. |
+
+### Açık kalan
+
+- Sosyal önizleme görseli (`docs/gorseller/sosyal-onizleme.png`) yeniden üretildi; GitHub API'si ayarlamaya izin vermediği için Ayarlar → Social preview üzerinden elle yüklenmesi gerekiyor.

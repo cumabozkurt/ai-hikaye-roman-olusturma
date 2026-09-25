@@ -173,7 +173,7 @@ def _dosya_yaz(yol: Path, icerik: str) -> Path:
     if yol.exists():
         raise PlanHatasi(f"dosya zaten var, üzerine yazılmadı: {yol}")
     yol.parent.mkdir(parents=True, exist_ok=True)
-    yol.write_text(icerik, encoding="utf-8")
+    yol.write_text(icerik, encoding="utf-8", newline="\n")
     return yol
 
 
@@ -425,7 +425,7 @@ def main(argv: list[str] | None = None) -> int:
             print(pano_metni(arg.proje))
             if arg.html:
                 arg.html.parent.mkdir(parents=True, exist_ok=True)
-                arg.html.write_text(pano_html(arg.proje), encoding="utf-8")
+                arg.html.write_text(pano_html(arg.proje), encoding="utf-8", newline="\n")
                 print(f"\nHTML pano yazıldı: {arg.html}")
     except (PlanHatasi, kitap_proje.ProjeHatasi, dosya_oku.DosyaHatasi) as hata:
         print(f"hata: {hata}", file=sys.stderr)

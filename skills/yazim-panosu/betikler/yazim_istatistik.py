@@ -95,7 +95,7 @@ def defter_yaz(proje: Path, defter: dict[str, Any]) -> None:
     yol = _dosya(proje)
     yol.parent.mkdir(parents=True, exist_ok=True)
     gecici = yol.with_suffix(".gecici")
-    gecici.write_text(json.dumps(defter, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    gecici.write_text(json.dumps(defter, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
     os.replace(gecici, yol)
 
 
@@ -326,7 +326,7 @@ def main(argv: list[str] | None = None) -> int:
             metin = metin_panosu(sonuc)
             if arg.html:
                 arg.html.parent.mkdir(parents=True, exist_ok=True)
-                arg.html.write_text(html_panosu(sonuc), encoding="utf-8")
+                arg.html.write_text(html_panosu(sonuc), encoding="utf-8", newline="\n")
                 metin += f"\n\nHTML pano yazıldı: {arg.html}"
     except (IstatistikHatasi, kitap_proje.ProjeHatasi) as hata:
         print(f"hata: {hata}", file=sys.stderr)

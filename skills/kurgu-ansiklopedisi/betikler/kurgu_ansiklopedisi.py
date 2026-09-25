@@ -293,7 +293,7 @@ def olustur(proje: Path, tur: str, ad: str) -> Path:
         satirlar += ["## Karakter Mülakatı", "",
                      "Yanıtları karakterin ağzından, birinci tekil kişiyle yazın. Boş bırakılan soru sorun değildir.", ""]
         satirlar += [f"**{s}**\n\n" for s in MULAKAT]
-    yol.write_text("\n".join(satirlar).rstrip() + "\n", encoding="utf-8")
+    yol.write_text("\n".join(satirlar).rstrip() + "\n", encoding="utf-8", newline="\n")
     return yol
 
 
@@ -670,7 +670,7 @@ def main(argv: list[str] | None = None) -> int:
             print(json.dumps(veri, ensure_ascii=False, indent=2) if arg.json else dagilim_metni(veri))
             if arg.html:
                 arg.html.parent.mkdir(parents=True, exist_ok=True)
-                arg.html.write_text(dagilim_html(veri, kitap_proje.kitap_basligi(arg.proje)), encoding="utf-8")
+                arg.html.write_text(dagilim_html(veri, kitap_proje.kitap_basligi(arg.proje)), encoding="utf-8", newline="\n")
         elif arg.komut == "grafik":
             print(grafik(arg.proje, arg.bolum, arg.bicim))
         else:
@@ -679,7 +679,7 @@ def main(argv: list[str] | None = None) -> int:
             paket = baglam(arg.proje, arg.bolum, arg.sinir)
             if arg.cikti:
                 arg.cikti.parent.mkdir(parents=True, exist_ok=True)
-                arg.cikti.write_text(paket, encoding="utf-8")
+                arg.cikti.write_text(paket, encoding="utf-8", newline="\n")
                 print(f"Bağlam paketi yazıldı: {arg.cikti} ({len(paket.encode('utf-8'))} bayt)")
             else:
                 print(paket, end="")

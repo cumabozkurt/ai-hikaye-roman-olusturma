@@ -45,6 +45,8 @@ def test_dongu_turlar_karar_brief_ve_kabul(roman: Path, tmp_path: Path) -> None:
     assert rubrik.returncode == 0 and "plan_sadakati" in rubrik.stdout and "Açığa" in rubrik.stdout
     k1 = rd.kaydet(roman, 2, t1, hakem_json(tmp_path / "h1.json", 6.0, "eksik"), "ilk", 8.0, 4)
     assert k1["tur"] == 1 and k1["karar"] == "devam" and k1["acik_plan_maddesi"] == 1
+    # tur kopyası her platformda LF satır sonuyla yazılmalı; aksi hâlde Windows'ta özet tutmaz
+    assert b"\r" not in (roman / ".hikaye" / "dongu" / "bolum-002" / "tur-01.md").read_bytes()
     with pytest.raises(rd.DonguHatasi, match="aynı"):
         rd.kaydet(roman, 2, t1, hakem_json(tmp_path / "h1.json", 6.0, "eksik"), "", 8.0, 4)
     t2 = yaz(tmp_path / "t2.md", kaynak + "\nDefne kapağı kapattı.\n")

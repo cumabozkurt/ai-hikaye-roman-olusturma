@@ -18,6 +18,7 @@ import re
 import shutil
 import subprocess
 import tempfile
+import time
 import zipfile
 from pathlib import Path
 from typing import Any, Iterable
@@ -364,6 +365,53 @@ def tarayici_bul() -> str | None:
     return None
 
 
+PDF_SURE_SINIRI = 90  # saniye
+
+
+def _pdf_tamam(hedef: Path) -> bool:
+    try:
+        veri = hedef.read_bytes()
+    except OSError:
+        return False
+    return len(veri) > 500 and veri.startswith(b"%PDF") and b"%%EOF" in veri[-1024:]
+
+
+def _tarayici_calistir(komut: list[str], hedef: Path) -> None:
+    """Tarayıcıyı çalıştırır; PDF tamamlanınca süreç kendiliğinden kapanmasa da bekletmez.
+
+    Bazı sistemlerde (özellikle macOS) başsız tarayıcı PDF'yi yazdıktan sonra açık kalabiliyor.
+    Dosya tamamlanıp boyutu sabitlenince süreç kapatılır; toplam süre PDF_SURE_SINIRI ile sınırlıdır.
+    """
+    if hedef.exists():
+        hedef.unlink()
+    try:
+        surec = subprocess.Popen(komut, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    except OSError as hata:
+        raise BelgeHatasi(f"tarayıcı başlatılamadı: {hata.__class__.__name__}") from None
+    son = time.monotonic() + PDF_SURE_SINIRI
+    onceki = -1
+    try:
+        while time.monotonic() < son:
+            if surec.poll() is not None:
+                return
+            if _pdf_tamam(hedef):
+                boyut = hedef.stat().st_size
+                if boyut == onceki:
+                    return
+                onceki = boyut
+            time.sleep(0.5)
+        if not _pdf_tamam(hedef):
+            raise BelgeHatasi(f"tarayıcı {PDF_SURE_SINIRI} saniyede PDF üretemedi; 'yazdir' HTML çıktısını elle yazdırın")
+    finally:
+        if surec.poll() is None:
+            surec.terminate()
+            try:
+                surec.wait(timeout=10)
+            except subprocess.TimeoutExpired:
+                surec.kill()
+                surec.wait(timeout=10)
+
+
 def pdf_yaz(hedef: Path, html_metni: str) -> None:
     tarayici = tarayici_bul()
     if tarayici is None:
@@ -372,15 +420,13 @@ def pdf_yaz(hedef: Path, html_metni: str) -> None:
     hedef.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory() as gecici:
         kaynak = Path(gecici) / "kitap.html"
-        kaynak.write_text(html_metni, encoding="utf-8")
-        komut = [tarayici, "--headless=new", "--disable-gpu", "--no-pdf-header-footer",
+        kaynak.write_text(html_metni, encoding="utf-8", newline="\n")
+        komut = [tarayici, "--headless=new", "--disable-gpu", "--no-pdf-header-footer", "--no-first-run",
+                 "--no-default-browser-check", "--disable-extensions", "--use-mock-keychain", "--password-store=basic",
                  f"--user-data-dir={Path(gecici) / 'profil'}", f"--print-to-pdf={hedef.resolve()}", kaynak.resolve().as_uri()]
         if hasattr(os, "geteuid") and os.geteuid() == 0:
             komut.insert(1, "--no-sandbox")
-        try:
-            subprocess.run(komut, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=180, check=False)
-        except (OSError, subprocess.TimeoutExpired) as hata:
-            raise BelgeHatasi(f"tarayıcı PDF üretemedi: {hata.__class__.__name__}") from None
+        _tarayici_calistir(komut, hedef)
     if not hedef.is_file() or hedef.stat().st_size < 500 or not hedef.read_bytes().startswith(b"%PDF"):
         raise BelgeHatasi("tarayıcı PDF dosyası üretmedi; 'yazdir' HTML çıktısını elle yazdırın")
 

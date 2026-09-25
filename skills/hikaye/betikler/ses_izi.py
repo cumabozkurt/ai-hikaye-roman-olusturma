@@ -230,7 +230,7 @@ def main(argv: list[str] | None = None) -> int:
             veri = json.dumps(profil, ensure_ascii=False, indent=1)
             if hedef:
                 hedef.parent.mkdir(parents=True, exist_ok=True)
-                hedef.write_text(veri + "\n", encoding="utf-8")
+                hedef.write_text(veri + "\n", encoding="utf-8", newline="\n")
                 print(f"Ses izi yazıldı: {hedef} ({profil['kelime']} kelime, {profil['parca']} parça)")
                 if profil["uyari"]:
                     print(f"uyarı: {profil['uyari']}", file=sys.stderr)

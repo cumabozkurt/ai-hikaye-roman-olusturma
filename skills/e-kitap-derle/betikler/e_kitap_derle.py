@@ -282,7 +282,7 @@ def html_yaz(hedef: Path, baslik: str, yazar: str, bolumler: list[Bolum]) -> Non
              f'<nav class="icindekiler"><p><strong>İçindekiler</strong></p><ol>{icindekiler}</ol></nav>\n'
              f"{govde}\n</body>\n</html>\n")
     hedef.parent.mkdir(parents=True, exist_ok=True)
-    hedef.write_text(sayfa, encoding="utf-8")
+    hedef.write_text(sayfa, encoding="utf-8", newline="\n")
 
 
 def dosya_adi(baslik: str) -> str:
@@ -344,18 +344,18 @@ def main(argv: list[str] | None = None) -> int:
             baski = by.yazdir_html(baslik, yazar, bolumler, zaman.year)
             if "yazdir" in secilen:
                 (cikti / f"{ad}-baski.html").parent.mkdir(parents=True, exist_ok=True)
-                (cikti / f"{ad}-baski.html").write_text(baski, encoding="utf-8")
+                (cikti / f"{ad}-baski.html").write_text(baski, encoding="utf-8", newline="\n")
                 uretilen.append(cikti / f"{ad}-baski.html")
             if "pdf" in secilen:
                 by.pdf_yaz(cikti / f"{ad}.pdf", baski)
                 uretilen.append(cikti / f"{ad}.pdf")
         if "txt" in secilen:
             (cikti / f"{ad}.txt").parent.mkdir(parents=True, exist_ok=True)
-            (cikti / f"{ad}.txt").write_text(by.txt_metni(baslik, yazar, bolumler), encoding="utf-8")
+            (cikti / f"{ad}.txt").write_text(by.txt_metni(baslik, yazar, bolumler), encoding="utf-8", newline="\n")
             uretilen.append(cikti / f"{ad}.txt")
         if "md" in secilen:
             (cikti / f"{ad}-tam.md").parent.mkdir(parents=True, exist_ok=True)
-            (cikti / f"{ad}-tam.md").write_text(by.md_metni(baslik, yazar, bolumler), encoding="utf-8")
+            (cikti / f"{ad}-tam.md").write_text(by.md_metni(baslik, yazar, bolumler), encoding="utf-8", newline="\n")
             uretilen.append(cikti / f"{ad}-tam.md")
     except (DerlemeHatasi, by.BelgeHatasi, dosya_oku.DosyaHatasi, OSError) as hata:
         print(f"hata: {hata_iletisi(hata)}", file=sys.stderr)

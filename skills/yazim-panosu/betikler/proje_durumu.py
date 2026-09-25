@@ -259,7 +259,7 @@ def main(argv: list[str] | None = None) -> int:
             belge = ozet_katmanlari(arg.proje, arg.grup, arg.sinir)
             if arg.cikti:
                 arg.cikti.parent.mkdir(parents=True, exist_ok=True)
-                arg.cikti.write_text(belge, encoding="utf-8")
+                arg.cikti.write_text(belge, encoding="utf-8", newline="\n")
                 print(f"Özet katmanları yazıldı: {arg.cikti} ({len(belge.encode('utf-8'))} bayt)")
             else:
                 print(belge, end="")

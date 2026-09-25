@@ -450,15 +450,15 @@ def aktar(plan: dict, proje: Path) -> dict:
         raise AktarmaHatasi(f"kelime doğrulaması başarısız: kaynak {beklenen}, aktarılan {toplam}; hiçbir dosya yazılmadı")
     metin_klasoru.mkdir(parents=True, exist_ok=True)
     for dosya, icerik in yazilacak:
-        dosya.write_text(icerik, encoding="utf-8")
+        dosya.write_text(icerik, encoding="utf-8", newline="\n")
     kayit_klasoru = proje / ".hikaye" / "ice-aktarma"
     kayit_klasoru.mkdir(parents=True, exist_ok=True)
     if plan["on_metin"]:
-        (kayit_klasoru / "on-metin.md").write_text("\n\n".join(plan["on_metin"]) + "\n", encoding="utf-8")
+        (kayit_klasoru / "on-metin.md").write_text("\n\n".join(plan["on_metin"]) + "\n", encoding="utf-8", newline="\n")
     rapor = {"kaynak": plan["kaynak"], "bolum_sayisi": len(yazilacak), "kaynak_kelime": beklenen, "aktarilan_kelime": toplam,
              "dosyalar": [d.relative_to(proje).as_posix() for d, _ in yazilacak],
              "on_metin": bool(plan["on_metin"])}
-    (kayit_klasoru / "rapor.json").write_text(json.dumps(rapor, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (kayit_klasoru / "rapor.json").write_text(json.dumps(rapor, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     return rapor
 
 

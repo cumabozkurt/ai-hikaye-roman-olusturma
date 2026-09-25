@@ -121,7 +121,7 @@ def main(argv: list[str] | None = None) -> int:
         toplam += sum(int(d["adet"]) for d in degisiklikler)
         rapor[str(yol)] = degisiklikler
         if arg.yaz and yeni != eski:
-            yol.write_text(yeni, encoding="utf-8")
+            yol.write_text(yeni, encoding="utf-8", newline="\n")
     if arg.json:
         print(json.dumps({"toplam": toplam, "dosyalar": rapor}, ensure_ascii=False, indent=2))
     else:

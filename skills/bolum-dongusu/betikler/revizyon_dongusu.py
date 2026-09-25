@@ -251,7 +251,7 @@ def kaydet(proje: Path, bolum: int, dosya: Path, hakem: Path | None, not_: str, 
     klasor = _klasor(proje, bolum)
     klasor.mkdir(parents=True, exist_ok=True)
     kopya = klasor / f"tur-{no:02d}.md"
-    kopya.write_text(metin, encoding="utf-8")
+    kopya.write_text(metin, encoding="utf-8", newline="\n")
     toplam = olcum["mekanik"]
     if hakem_verisi:
         toplam = round(MEKANIK_AGIRLIK * olcum["mekanik"] + (1 - MEKANIK_AGIRLIK) * hakem_verisi["hakem"], 2)
@@ -272,7 +272,7 @@ def kaydet(proje: Path, bolum: int, dosya: Path, hakem: Path | None, not_: str, 
     yol = klasor / "dongu.json"
     gecici = yol.with_suffix(".gecici")
     gecici.write_text(json.dumps({"sema_surumu": 1, "bolum": bolum, "hedef": hedef, "en_fazla_tur": en_fazla,
-                                  "turlar": liste}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+                                  "turlar": liste}, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
     os.replace(gecici, yol)
     return kayit
 

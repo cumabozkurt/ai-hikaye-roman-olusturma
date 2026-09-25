@@ -79,7 +79,7 @@ def yaz(proje: Path, ad: str, veri: dict[str, Any]) -> None:
     yol = _yol(proje, ad)
     yol.parent.mkdir(parents=True, exist_ok=True)
     gecici = yol.with_suffix(".gecici")
-    gecici.write_text(json.dumps(veri, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    gecici.write_text(json.dumps(veri, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
     os.replace(gecici, yol)
 
 

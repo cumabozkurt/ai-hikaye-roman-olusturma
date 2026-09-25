@@ -194,7 +194,7 @@ def anlik_al(proje: Path, not_: str = "", degismediyse_atla: bool = True,
     klasor = _kok(proje) / "kayitlar"
     klasor.mkdir(parents=True, exist_ok=True)
     gecici = klasor / f"{kayit['kimlik']}.json.gecici"
-    gecici.write_text(json.dumps(kayit, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    gecici.write_text(json.dumps(kayit, ensure_ascii=False, indent=1) + "\n", encoding="utf-8", newline="\n")
     os.replace(gecici, klasor / f"{kayit['kimlik']}.json")
     kayit["yeni_nesne"] = yeni_nesne
     return kayit

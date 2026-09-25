@@ -37,7 +37,7 @@ try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
 except ImportError:  # pragma: no cover
     hata_iletisi = str
 
-SURUM = "1.0.0"
+SURUM = "1.1.0"
 AJAN_SURUMU = 1
 BETIKLER = Path(__file__).resolve().parent
 BECERI_KOKU = BETIKLER.parent

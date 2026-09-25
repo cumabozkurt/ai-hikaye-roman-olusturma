@@ -35,3 +35,11 @@ son cümlenin dönüşü.
 ## Tipik uzunluk
 
 1.500–5.000 kelime (dergi ve yarışmalar sınırı belirler; çağrıyı okuyun).
+
+## Öz denetim soruları
+
+Öykü yazıldıktan sonra yazar ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. Öykü tek bir dönüm noktası etrafında mı toplanıyor?
+2. Çıkarıldığında öykünün eksilmeyeceği bir paragraf var mı?
+3. Son cümle ilk sahneyle bir yankı kuruyor mu?

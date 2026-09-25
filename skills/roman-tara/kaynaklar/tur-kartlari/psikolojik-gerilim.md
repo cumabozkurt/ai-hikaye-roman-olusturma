@@ -35,3 +35,11 @@ tehdit mesajı, anlatıcının yalanının açığa çıkması, zaman atlaması,
 ## Tipik uzunluk
 
 Basılı: 70–90 bin kelime.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. Anlatıcının güvenilmezliği ipuçlarıyla hazırlanıyor mu, yoksa sonda hileyle mi açıklanıyor?
+2. Tehdit bu bölümde bir adım daha yaklaştı mı?
+3. Dönemeç, geriye dönüp okunduğunda önceki sahnelerle tutarlı mı?

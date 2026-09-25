@@ -3,7 +3,7 @@ name: hikaye-ice-aktar
 description: "Mevcut taslağı, Word/TXT/Markdown dosyasını ya da Wattpad'de yayımlanmış bölümleri sistemin proje yapısına aktarır: bölümlere böler, plan ve kurgu dosyalarını tersine çıkarır, karakter durumlarını ve ipuçlarını takip kaydına işler, sonra /roman-yaz ile devam edilebilir hâle getirir. Tetikleyiciler: /hikaye-ice-aktar, \"elimde yazılmış bölümler var\", \"romanımı içeri al\", \"taslağımı aktar\"."
 license: MIT
 compatibility: "Python 3.11+. DOCX için pandoc ya da python-docx isteğe bağlıdır; yoksa yazardan Markdown/TXT istenir."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "oh-story-claudecode/story-import"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-import"}
 ---
 
 # hikaye-ice-aktar: Taslağı İçeri Aktarma

@@ -67,7 +67,7 @@
 2. **Cümle geçişi**: engelleyici kalıplar, çeviri kalkları, edilgen yapılar, soyut dolgu.
 3. **Ses geçişi**: klişeleri somut ayrıntıyla değiştir; karakter seslerini ayır; kültürel dokuyu (mekân, eşya, hitap) ekle.
 
-Her geçişten sonra `ai_kalip_denetle.py --basarisiz engelleyici` ve `bozulma_denetle.py` yeniden çalıştırılır. Uyarıların sıfırlanması hedef değildir; her uyarıya "düzelt" ya da "bilinçli tercih" kararı verilir. Bilinçli tercihler kitabın `.yz-beyaz-liste` dosyasına satır satır yazılır.
+Her geçişten sonra `ai_kalip_denetle.py --basarisiz engelleyici` ve `bozulma_denetle.py` yeniden çalıştırılır. Uyarıların sıfırlanması hedef değildir; her uyarıya "düzelt" ya da "bilinçli tercih" kararı verilir. Bilinçli tercihler kitabın `.yz-beyaz-liste` dosyasına satır satır yazılır. Kitaba özgü yasaklar (yazarın bir daha görmek istemediği ifadeler) `.yasak-kaliplar` dosyasına `ifade => öneri` biçiminde yazılır ve engelleyici sayılır.
 
 ## 6. Yapmayın
 

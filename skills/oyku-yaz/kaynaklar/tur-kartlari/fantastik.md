@@ -35,3 +35,11 @@ güç bedelinin ödenmesi, dünya kuralının kırılması, ihanet, haritada yen
 ## Tipik uzunluk
 
 Wattpad: 50–100 bölüm; basılı: 90–130 bin kelime, seri.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. Büyü ya da gücün bedeli bu bölümde hissedildi mi?
+2. Yeni bir dünya kuralı, kullanılmadan önce okura gösterildi mi?
+3. Uydurma adlar Türkçede okunabilir ve birbirinden ayırt edilebilir mi?

@@ -2,7 +2,7 @@
 
 Kepenk, kırk günlük tozu Defne'nin ayakkabılarına döktü. İki basamak inip kapıyı itti. İçerisi makine yağı, pirinç ve bayat çay kokuyordu. Dedesinin kokusu.
 
-Duvarda otuz iki saat vardı. Defne onları saymak zorunda değildi; çocukken her birine ad vermişti. Hepsi susuyordu. Akrepler üçte, yelkovanlar on dördün üstünde bekliyordu.
+Duvarda otuz iki saat vardı. Defne onları saymak zorunda değildi; çocukken her birine ad vermişti. Hepsi susuyordu. Akrepler üçün hemen ötesinde, yelkovanlar on dördüncü dakika çizgisinde bekliyordu.
 
 Hepsi.
 

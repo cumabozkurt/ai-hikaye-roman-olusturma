@@ -35,3 +35,11 @@ tarihî olayın kapıya dayanması, mektup, ihanet, ayrılık.
 ## Tipik uzunluk
 
 Basılı: 90–150 bin kelime.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. Dönem ayrıntısı (eşya, hitap, para, ulaşım) doğrulandı mı (hikaye-arastirmaci)?
+2. Karakterler bugünün değerleriyle değil, kendi dönemlerinin koşullarıyla mı düşünüyor?
+3. Tarihî olay arka plan mı, yoksa karakterin kararını doğrudan etkiliyor mu?

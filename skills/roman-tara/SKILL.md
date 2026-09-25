@@ -3,7 +3,7 @@ name: roman-tara
 description: "Türkiye roman pazarı ve Wattpad taraması: tür ve etiket eğilimleri, en çok okunan diziler, bölüm sayıları, okur profili ve yayın yolu (Wattpad, e-kitap, basılı, sesli kitap). Sonunda gerekçeli konu ve tür kararı önerir. Tetikleyiciler: /roman-tara, \"hangi tür tutuyor\", \"Wattpad'de ne okunuyor\", \"pazar araştırması\", \"ne yazsam\"."
 license: MIT
 compatibility: "Python 3.11+ ve internet erişimi (Wattpad herkese açık API). Mağaza listeleri için isteğe bağlı olarak tarayici-cdp."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "oh-story-claudecode/story-long-scan"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-long-scan"}
 ---
 
 # roman-tara: Roman Pazarı Taraması

@@ -1,6 +1,6 @@
 # Tür Kartları
 
-Her kart bir türün okur beklentisini, temel mekaniklerini, düzyazı dokusunu, sık kullanılan kalıplarını (trope), kaçınılacakları, bölüm sonu kancası seçeneklerini ve tipik uzunluğu özetler. Kitabın `kurgu/tur-konumu.md` dosyasında seçilen tür, yazar istemindeki "Tür düzyazı kartı" yuvasına bu karttan süzülerek yazılır.
+Her kart bir türün okur beklentisini, temel mekaniklerini, düzyazı dokusunu, sık kullanılan kalıplarını (trope), kaçınılacakları, bölüm sonu kancası seçeneklerini, tipik uzunluğu ve bölüm sonrası öz denetim sorularını özetler. Kitabın `kurgu/tur-konumu.md` dosyasında seçilen tür, yazar istemindeki "Tür düzyazı kartı" yuvasına bu karttan süzülerek yazılır.
 
 | Kart | Tür |
 |---|---|
@@ -16,3 +16,5 @@ Her kart bir türün okur beklentisini, temel mekaniklerini, düzyazı dokusunu,
 | [mizah](mizah.md) | Mizah |
 | [edebi-kurgu](edebi-kurgu.md) | Edebî Kurgu |
 | [kisa-oyku](kisa-oyku.md) | Kısa Öykü |
+
+**Uzunluk notu:** Türkçe sondan eklemeli bir dil olduğu için aynı hikâye Türkçede İngilizceye göre daha az sayıda ama daha uzun kelimeyle anlatılır. Basılı bir sayfa ortalama 230–280 kelimedir; kartlardaki aralıklar Türkçe kelime sayısıdır.

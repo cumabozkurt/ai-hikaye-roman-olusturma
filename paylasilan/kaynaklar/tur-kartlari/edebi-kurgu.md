@@ -34,4 +34,12 @@ fark ediş anı, sessiz karar.
 
 ## Tipik uzunluk
 
-Basılı: 50–90 bin kelime.
+Basılı: 40–80 bin kelime.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. Bölümün sonunda karakterin bir şeyi görüş biçimi değişti mi?
+2. Her imge metnin ana izleğine hizmet ediyor mu, yoksa süs mü?
+3. Anlam okura bırakılıyor mu, yoksa son paragraf açıklıyor mu?

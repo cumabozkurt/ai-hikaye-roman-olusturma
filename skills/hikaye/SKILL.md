@@ -3,7 +3,7 @@ name: hikaye
 description: "Hikâye ve roman yazımının giriş noktası: isteği doğru beceriye yönlendirir, yazım projesinin durumunu özetler, birden fazla kitap arasında geçiş yapar, yazar hafızasını yönetir ve yerel çalışma masası panelini açar. Tetikleyiciler: /hikaye, \"hikâye yazmak istiyorum\", \"nereden başlasam\", \"kitaplarım\", \"projenin durumu ne\", \"çalışma masasını aç\", \"bunu hatırla\"."
 license: MIT
 compatibility: "Python 3.11+ (çalışma masası için tarayıcı). Claude Code, Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "oh-story-claudecode/story"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story"}
 ---
 
 # hikaye: Giriş ve Yönlendirme
@@ -48,6 +48,7 @@ Kısa bir durum özeti ver:
 | Yayınevine gönderilecek dosya | `/yayinevi-dosyasi` |
 | Dizi / film uyarlaması için sinopsis | `/uyarlama-sinopsis` |
 | Sesli kitap hazırlığı | `/sesli-kitap-hazirla` |
+| EPUB e-kitap ya da beta okur kopyası | `/e-kitap-derle` |
 | Kancaları, ajanları kurmak | `/hikaye-kurulum` |
 | Tarayıcıyla bir sayfayı okumak | `/tarayici-cdp` |
 

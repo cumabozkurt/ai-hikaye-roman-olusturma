@@ -21,6 +21,7 @@ kaynak dosyalarını yalnızca beceri söylediğinde yükle.
 | Yayınevine dosya hazırlama | `yayinevi-dosyasi` |
 | Dizi/film uyarlama sinopsisi | `uyarlama-sinopsis` |
 | Sesli kitap metni | `sesli-kitap-hazirla` |
+| EPUB ya da HTML okuma kopyası | `e-kitap-derle` |
 | Var olan kitabı içe aktarma | `hikaye-ice-aktar` |
 | Kapak | `kapak-tasarla` |
 | Kurulum / güncelleme | `hikaye-kurulum` |

@@ -3,7 +3,7 @@ name: hikaye-kurulum
 description: "Yazım projesine ajanları, kancaları (yazım sonrası yapay zekâ tadı uyarısı, bölüm kaydı hatırlatması, oturum devri), proje kurallarını ve ortak kaynakları kurar ya da günceller. Claude Code, Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix ve genel ajanları destekler. Tetikleyiciler: /hikaye-kurulum, \"projeyi kur\", \"kancaları kur\", \"ajanları güncelle\", \"kurulumu denetle\"."
 license: MIT
 compatibility: "Python 3.11+. Kancalar için ev sahibinin kanca desteği gerekir (Claude Code, Codex, OpenCode, Antigravity, ZCode)."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "oh-story-claudecode/story-setup"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-setup"}
 ---
 
 # hikaye-kurulum: Proje Kurulumu

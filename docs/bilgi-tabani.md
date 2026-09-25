@@ -34,3 +34,4 @@ Her becerinin `kaynaklar/` klasörü yalnızca gerektiğinde okunur; bağlamı b
 | `yayinevi-dosyasi` | dosya hazırlığı: ön yazı, sinopsis, örnek bölüm, biyografi |
 | `uyarlama-sinopsis` | uyarlama biçimleri: logline, sinopsis, karakter dosyası, tretman, sezon yayı |
 | `sesli-kitap-hazirla` | seslendirme, süre, telaffuz ve platform rehberi |
+| `e-kitap-derle` | EPUB ve HTML okuma kopyası rehberi, teslim listesi |

@@ -1,6 +1,9 @@
 {
   "$aciklama": "paylasilan/ altındaki tek doğru kaynak dosyaların hangi becerilere kopyalanacağı. 'betikler' dosyalarının import bağımlılıkları otomatik eklenir. Düzenledikten sonra: python betikler/paylasilanlari_esitle.py",
   "betikler": {
+    "e-kitap-derle": [
+      "metin_analizi.py"
+    ],
     "hikaye": [
       "yazar_hafizasi.py",
       "metin_olcum.py"
@@ -25,7 +28,8 @@
       "sureklilik_denetle.py",
       "takip_kaydet.py",
       "metin_olcum.py",
-      "yazar_hafizasi.py"
+      "yazar_hafizasi.py",
+      "metin_analizi.py"
     ],
     "oyku-cozumle": [
       "metin_olcum.py"
@@ -40,7 +44,8 @@
       "noktalama_duzelt.py",
       "yazim_denetle.py",
       "yazar_hafizasi.py",
-      "plan_denetle.py"
+      "plan_denetle.py",
+      "metin_analizi.py"
     ],
     "roman-cozumle": [
       "metin_olcum.py"
@@ -55,7 +60,8 @@
       "sureklilik_denetle.py",
       "yazim_denetle.py",
       "noktalama_duzelt.py",
-      "yazar_hafizasi.py"
+      "yazar_hafizasi.py",
+      "metin_analizi.py"
     ],
     "sesli-kitap-hazirla": [
       "metin_olcum.py"
@@ -73,19 +79,22 @@
     ],
     "yayinevi-dosyasi": [
       "metin_olcum.py",
-      "yazim_denetle.py"
+      "yazim_denetle.py",
+      "metin_analizi.py"
     ],
     "yazim-denetle": [
       "yazim_denetle.py",
       "noktalama_duzelt.py",
-      "ai_kalip_denetle.py"
+      "ai_kalip_denetle.py",
+      "metin_analizi.py"
     ],
     "yz-tadi-gider": [
       "ai_kalip_denetle.py",
       "bozulma_denetle.py",
       "noktalama_duzelt.py",
       "yazim_denetle.py",
-      "yazar_hafizasi.py"
+      "yazar_hafizasi.py",
+      "metin_analizi.py"
     ]
   },
   "kaynaklar": {

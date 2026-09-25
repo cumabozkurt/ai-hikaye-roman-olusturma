@@ -14,3 +14,6 @@ Thumbs.db
 .hikaye/calisma/
 .hikaye/devir-notu.md
 .hikaye/oturum-gunlugu.md
+
+# claude plugin eval çıktıları
+evals/results/

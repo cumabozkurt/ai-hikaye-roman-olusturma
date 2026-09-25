@@ -27,6 +27,7 @@ Klasör ve dosya adları ASCII'dir (Türkçe karakter içermez); böylece Window
 ├── arastirma/                 # hikaye-arastirmaci notları
 ├── karsilastirma/{kitap}/     # örnek alınan kitaplardan seçilmiş çözümleme parçaları
 ├── .yz-beyaz-liste            # bilinçli tercih edilen kalıplar (isteğe bağlı)
+├── .yasak-kaliplar            # kitaba özgü yasak ifadeler: ifade => öneri (isteğe bağlı)
 └── .hikaye/
     ├── calisma/bolum-NNN/     # geçici dosyalar (bölüm kaydedilince silinir)
     └── yazar-hafizasi/        # kitaba özgü tercihler

@@ -3,7 +3,7 @@ name: kapak-tasarla
 description: "Roman ya da öykü kapağı tasarlar: türe göre görsel dil, Türkçe karakterleri doğru çizilmiş kitap adı ve yazar adı, Wattpad, e-kitap, basılı ve sesli kitap boyutları. Ajan ortamının yerleşik görsel aracını kullanır; yoksa ve yazar isterse görsel API'sine başvurur. Tetikleyiciler: /kapak-tasarla, \"kapak yap\", \"Wattpad kapağı\", \"kitap kapağı tasarla\"."
 license: MIT
 compatibility: "Python 3.11+. Yerleşik görsel üretim aracı (ör. Codex imagegen) ya da GPT_IMAGE_API_KEY; kırpma için isteğe bağlı Pillow."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "oh-story-claudecode/story-cover"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-cover"}
 ---
 
 # kapak-tasarla: Kapak Tasarımı

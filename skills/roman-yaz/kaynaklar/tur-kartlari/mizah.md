@@ -34,4 +34,12 @@ felaketin büyümesi, yanlış anlaşılma, beklenmedik misafir.
 
 ## Tipik uzunluk
 
-Basılı: 50–80 bin kelime.
+Basılı: 40–70 bin kelime.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. Espri karakterin bakışından ve durumdan mı doğuyor?
+2. Komik sahnenin sonunda hikâye bir adım ilerliyor mu?
+3. Aynı şaka türü üst üste üçten fazla tekrarlanıyor mu?

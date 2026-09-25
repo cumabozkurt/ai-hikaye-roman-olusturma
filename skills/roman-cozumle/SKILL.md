@@ -3,7 +3,7 @@ name: roman-cozumle
 description: "Bir romanı ya da Wattpad dizisini yapısal olarak çözümler: bölüm dizini, ilk üç bölümün derin incelemesi, bölüm özetleri, olay örgüsü, tempo, duygu mekanizmaları, karakterler, ilişki şeması (Mermaid) ve üslup profili. Sonuçlar kitaplar arası ilham kütüphanesine eklenir. Tetikleyiciler: /roman-cozumle, \"bu romanı çözümle\", \"yapısını çıkar\", \"neden bu kadar okunuyor\", \"ilham kütüphanesi\"."
 license: MIT
 compatibility: "Python 3.11+. Kaynak metin yazarın yasal olarak eriştiği bir kopya olmalıdır."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "oh-story-claudecode/story-long-analyze"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-long-analyze"}
 ---
 
 # roman-cozumle: Roman Çözümleme

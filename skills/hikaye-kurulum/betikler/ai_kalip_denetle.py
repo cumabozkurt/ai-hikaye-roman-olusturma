@@ -12,6 +12,10 @@ değiştirmez: güvenli düzeltme bağlama bağlıdır.
 
 Kitap kökündeki ``.yz-beyaz-liste`` dosyasında her satıra yazılan birebir
 ifadeler (yazarın bilinçli üslup tercihleri) taramadan çıkarılır.
+
+Kitap kökündeki ``.yasak-kaliplar`` dosyası ise kitaba özgü yasakları ekler: her
+satır bir ifade, isteğe bağlı olarak ``ifade => öneri`` biçiminde. Büyük/küçük harf
+duyarsız aranır ve ``kitap-yasagi`` kuralıyla engelleyici bulgu verir.
 """
 
 from __future__ import annotations
@@ -66,6 +70,23 @@ def beyaz_liste_yukle(dosya: Path) -> list[str]:
     return []
 
 
+def yasak_liste_yukle(dosya: Path) -> list[tuple[str, str]]:
+    """``.yasak-kaliplar`` dosyasını (ifade, öneri) çiftlerine çevirir."""
+    for klasor in [dosya.parent, *dosya.parents][:4]:
+        aday = klasor / ".yasak-kaliplar"
+        if aday.is_file():
+            ciftler: list[tuple[str, str]] = []
+            for satir in dosya_oku.metin_oku(aday).splitlines():
+                satir = satir.strip()
+                if not satir or satir.startswith("#"):
+                    continue
+                ifade, _, oneri = satir.partition("=>")
+                if ifade.strip():
+                    ciftler.append((tk.tr_kucuk(ifade.strip()), oneri.strip()))
+            return ciftler
+    return []
+
+
 def maskele(metin: str, beyaz: list[str]) -> str:
     for ifade in beyaz:
         metin = metin.replace(ifade, " " * len(ifade))
@@ -76,7 +97,8 @@ def _cumleler(metin: str) -> list[str]:
     return [c.strip() for c in re.split(r"(?<=[.!?…])\s+", metin) if c.strip()]
 
 
-def denetle_metin(metin: str, dosya: str = "<metin>", beyaz: list[str] | None = None) -> list[Bulgu]:
+def denetle_metin(metin: str, dosya: str = "<metin>", beyaz: list[str] | None = None,
+                  yasak: list[tuple[str, str]] | None = None) -> list[Bulgu]:
     metin = maskele(metin.replace("\r\n", "\n"), beyaz or [])
     satirlar = metin.split("\n")
     bulgular: list[Bulgu] = []
@@ -99,6 +121,12 @@ def denetle_metin(metin: str, dosya: str = "<metin>", beyaz: list[str] | None = 
         anlati = tk.tirnak_disi(ham)
         kucuk = tk.tr_kucuk(ham)
         kucuk_anlati = tk.tr_kucuk(anlati)
+
+        # 0) Kitaba özgü yasak ifadeler (.yasak-kaliplar)
+        for ifade, oneri in yasak or []:
+            for m in re.finditer(re.escape(ifade), kucuk):
+                ekle(no, m.start(), m.end(), ENGELLEYICI, "kitap-yasagi",
+                     oneri or "Bu ifade kitabın yasak listesinde (.yasak-kaliplar); başka bir anlatım bulun.")
 
         # 1) "X değil, Y" / "sadece X değildi; bir Y'ydi" dönüşü (engelleyici)
         for m in re.finditer(r"\b(?:sadece|yalnızca|basit\s+bir|bu\s+bir)\b[^.!?\n]{1,60}?\bdeğil(?:di|dir|miş|mişti)?\b\s*[,;:—–]", kucuk_anlati):
@@ -223,7 +251,7 @@ def denetle_metin(metin: str, dosya: str = "<metin>", beyaz: list[str] | None = 
 
 
 def denetle_dosya(yol: Path) -> list[Bulgu]:
-    return denetle_metin(dosya_oku.metin_oku(yol), str(yol), beyaz_liste_yukle(yol))
+    return denetle_metin(dosya_oku.metin_oku(yol), str(yol), beyaz_liste_yukle(yol), yasak_liste_yukle(yol))
 
 
 def ozet(bulgular: list[Bulgu]) -> dict[str, int]:

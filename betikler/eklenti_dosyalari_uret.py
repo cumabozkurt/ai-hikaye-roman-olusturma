@@ -29,16 +29,17 @@ except ImportError:  # pragma: no cover
     pass
 
 KOK = Path(__file__).resolve().parent.parent
-SURUM = "1.0.0"
+BECERI_SAYISI = len(list((KOK / "skills").glob("*/SKILL.md")))
+SURUM = "1.1.0"
 AD = "ai-hikaye-roman-olusturma"
 GORUNEN_AD = "AI Hikaye & Roman Oluşturma"
 DEPO = "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma"
 YAZAR = {"name": "Cuma Bozkurt", "url": "https://github.com/cumabozkurt"}
 KISA = "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı."
-UZUN = ("19 Türkçe beceri, 7 ajan ve kancalarla fikirden yayına roman ve öykü yazımı: Wattpad ve Türkiye kitap pazarı taraması, "
+UZUN = (f"{BECERI_SAYISI} Türkçe beceri, 7 ajan ve kancalarla fikirden yayına roman ve öykü yazımı: Wattpad ve Türkiye kitap pazarı taraması, "
         "roman/öykü çözümleme, bölüm bölüm yazım, 100+ bölümlük süreklilik takibi, TDK yazım denetimi, yapay zekâ tadı giderme, "
-        "kapak, Wattpad yayın takvimi, yayınevi dosyası, uyarlama sinopsisi ve sesli kitap hazırlığı.")
-ANAHTARLAR = ["turkce", "roman-yazimi", "oyku", "wattpad", "yazarlik", "agent-skills", "claude-code", "codex", "opencode", "tdk"]
+        "kapak, Wattpad yayın takvimi, yayınevi dosyası, EPUB e-kitap, uyarlama sinopsisi ve sesli kitap hazırlığı.")
+ANAHTARLAR = ["turkce", "roman-yazimi", "oyku", "wattpad", "yazarlik", "agent-skills", "claude-code", "codex", "opencode", "tdk", "epub"]
 KANCA_YOLU = "skills/hikaye-kurulum/varliklar/kancalar/hikaye_kanca.py"
 ZCODE_KLASORU = "skills/hikaye-kurulum/varliklar/zcode"
 
@@ -97,7 +98,7 @@ def dosyalar() -> dict[str, Any]:
         },
         "marketplace.json": {
             "name": f"{AD}-zcode", "description": f"{GORUNEN_AD} için ZCode eklenti pazar yeri", "version": 1,
-            "plugins": [{"name": AD, "source": "./", "version": SURUM, "description": "19 Türkçe yazım becerisi, komutlar ve ZCode yazım kancaları."}],
+            "plugins": [{"name": AD, "source": "./", "version": SURUM, "description": f"{BECERI_SAYISI} Türkçe yazım becerisi, komutlar ve ZCode yazım kancaları."}],
         },
         ".zcode-plugin/plugin.json": {
             "name": AD, "version": SURUM, "description": KISA, "skills": "skills",

@@ -3,7 +3,7 @@ name: oyku-cozumle
 description: "Bir kısa öyküyü çözümler: açılış kancası, paragraf paragraf merak ve duygu eğrisi, dönüm noktasının hazırlanışı, karakter tasarımı, ilişkiler, son paragrafın etkisi ve yeniden kullanılabilir teknikler. Tetikleyiciler: /oyku-cozumle, \"bu öyküyü çözümle\", \"neden etkileyici\", \"tekniğini çıkar\"."
 license: MIT
 compatibility: "Python 3.11+. Kaynak metin yazarın yasal olarak eriştiği bir kopya olmalıdır."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "oh-story-claudecode/story-short-analyze"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-short-analyze"}
 ---
 
 # oyku-cozumle: Kısa Öykü Çözümleme

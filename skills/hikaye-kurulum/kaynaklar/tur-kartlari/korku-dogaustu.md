@@ -35,3 +35,11 @@ ses, kapı, ölü birinin mesajı, kuralın ihlali.
 ## Tipik uzunluk
 
 Wattpad: 25–45 bölüm; basılı: 60–80 bin kelime.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. Tehdit gösterilmeden önce yeterince sezdirildi mi?
+2. Karakterin kaçmaması için inandırıcı bir nedeni var mı?
+3. Korku bir ses, koku ya da dokunma ayrıntısıyla bedene indiriliyor mu?

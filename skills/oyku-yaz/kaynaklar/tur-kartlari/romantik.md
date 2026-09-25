@@ -34,4 +34,12 @@ duygusal kırılma, yanlış anlaşılma riski, üçüncü kişinin girişi, iti
 
 ## Tipik uzunluk
 
-Wattpad: 40–60 bölüm × 2.000–2.500 kelime; basılı: 70–100 bin kelime.
+Wattpad: 40–60 bölüm × 2.000–2.500 kelime; basılı: 60–100 bin kelime.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. İki karakteri ayıran engel içsel mi, dışsal mı ve bu bölümde değişti mi?
+2. Yakınlaşma bir eylemle mi gösterildi, yoksa duygu adlandırılarak mı anlatıldı?
+3. Her iki karakterin de aşk dışında bir hedefi var mı?

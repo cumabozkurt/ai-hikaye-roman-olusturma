@@ -3,7 +3,7 @@ name: yazim-denetle
 description: "TDK yazım kurallarına göre Türkçe yazım ve noktalama denetimi: bitişik yazılan de/da, ki ve mi, kesme işareti, sık yazım yanlışları, konuşma çizgisi, üç nokta, noktalama boşlukları ve anlatıdaki gayriresmî kullanımlar. Güvenli düzeltmeleri otomatik uygular. Tetikleyiciler: /yazim-denetle, \"yazım hatalarını bul\", \"TDK'ya uygun mu\", \"noktalamayı düzelt\", \"imla kontrolü\"."
 license: MIT
 compatibility: "Python 3.11+. Claude Code, Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "yeni"}
 ---
 
 # yazim-denetle: TDK Yazım ve Noktalama Denetimi

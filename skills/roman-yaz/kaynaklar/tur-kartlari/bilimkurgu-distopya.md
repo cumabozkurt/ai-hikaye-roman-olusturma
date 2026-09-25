@@ -35,3 +35,11 @@ sistemin açığı, kimliğin ifşası, teknolojinin bedeli, müttefikin ihaneti
 ## Tipik uzunluk
 
 Basılı: 80–110 bin kelime.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. Öncülün kuralı ilk üç bölümde bir sahneyle gösterildi mi, yoksa yalnızca anlatıldı mı?
+2. Teknoloji ya da düzen, karakterin bir kararını zorlaştırıyor mu?
+3. Dünya bilgisi bilgi yığını olarak değil, çatışmanın içinde mi veriliyor?

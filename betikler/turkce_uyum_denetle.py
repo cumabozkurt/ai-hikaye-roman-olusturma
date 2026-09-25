@@ -55,6 +55,8 @@ YAZIM_YANLIS = {
 INGILIZCE = {"the", "and", "with", "you", "your", "should", "must", "this", "that", "from", "into", "which", "when"}
 # Bilerek yanlış yazımları listeleyen dosyalar (denetim kuralları, kural belgeleri) yazım denetiminden muaftır.
 YAZIM_MUAF = {"tdk-yazim-rehberi.md", "INCELEME-RAPORU.md"}
+# Yazım denetimi becerisinin değerlendirme istemi bilerek yanlış yazılmış bir metin içerir.
+YAZIM_MUAF_KLASORLER = ("evals/yazim-denetle-tetiklenir/",)
 # Satır sonuna HTML yorumu olarak eklenirse o satırın yazım denetimi atlanır (bilinçli yanlış örnekler için).
 YOKSAY = "turkce-uyum: yoksay"
 YOKSAY_ISARET = "\x00"
@@ -132,7 +134,7 @@ def denetle(yollar: list[Path]) -> list[dict[str, object]]:
             for yanlis, dogru in ASCII_YANLIS.items():
                 if dogru and re.search(rf"(?<![\wçğıöşüâîû]){re.escape(yanlis)}(?![\wçğıöşüâîû])", kucuk):
                     bulgular.append({"dosya": goreli, "satir": no, "kural": "ascii-turkce", "bulunan": yanlis, "oneri": dogru})
-            if p.name not in YAZIM_MUAF and YOKSAY_ISARET not in satir:
+            if p.name not in YAZIM_MUAF and not goreli.startswith(YAZIM_MUAF_KLASORLER) and YOKSAY_ISARET not in satir:
                 for yanlis, dogru in YAZIM_YANLIS.items():
                     if dogru and re.search(rf"(?<![\wçğıöşüâîû]){re.escape(yanlis)}(?![\wçğıöşüâîû])", kucuk):
                         bulgular.append({"dosya": goreli, "satir": no, "kural": "yazim", "bulunan": yanlis, "oneri": dogru})

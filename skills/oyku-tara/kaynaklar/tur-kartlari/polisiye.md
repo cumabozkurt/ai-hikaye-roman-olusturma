@@ -8,7 +8,7 @@ Okur adil bir bulmaca ister: çözüm için gereken ipuçları okura da verilmi�
 
 - Adil oyun: her ipucu (F###) çözüm bölümünden önce metinde görünür.
 - Şüpheli havuzu: en az üç inandırıcı şüpheli, her birinin gerekçesi.
-- Soruşturma gerçekçiliği: Türkiye'de savcılık, emniyet ve adli tıp süreçleri doğru yansıtılır (hikaye-arastirmaci).
+- Soruşturma gerçekçiliği: Türkiye'de savcılık, emniyet (şehirde), jandarma (kırsalda) ve adli tıp süreçleri doğru yansıtılır (hikaye-arastirmaci).
 
 ## Düzyazı dokusu
 
@@ -34,4 +34,12 @@ yeni ceset, ipucunun çürümesi, şüphelinin kaybolması, dedektifin hatası.
 
 ## Tipik uzunluk
 
-Basılı: 70–90 bin kelime; Wattpad: 30–50 bölüm.
+Basılı: 60–90 bin kelime; Wattpad: 30–50 bölüm.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. Çözüm için gereken her ipucu okura açıkça gösterildi mi (F### kayıtları)?
+2. Her şüphelinin en az bir inandırıcı gerekçesi ve bir mazereti var mı?
+3. Soruşturma adımları Türkiye'deki savcılık, emniyet, jandarma ve adli tıp işleyişine uygun mu?

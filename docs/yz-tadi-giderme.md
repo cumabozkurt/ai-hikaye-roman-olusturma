@@ -29,7 +29,7 @@ Ayrıca `bozulma_denetle.py` zayıf modellerin sert sinyallerini yakalar: yarım
 4. **Bölümü müjdeyle değil eylemle bitirmek:** "Her şey değişecekti" yerine somut bir replik ya da nesne.
 5. **Karaktere özgü tepki:** Genel beden klişesi yerine o karakterin alışkanlığı.
 
-Bilinçli bir üslup tercihi olan ifadeleri kitap kökündeki `.yz-beyaz-liste` dosyasına satır satır yazabilirsiniz; denetçi onları atlar.
+Bilinçli bir üslup tercihi olan ifadeleri kitap kökündeki `.yz-beyaz-liste` dosyasına satır satır yazabilirsiniz; denetçi onları atlar. Tersine, bu kitapta hiç görmek istemediğiniz ifadeleri `.yasak-kaliplar` dosyasına yazın (her satır `ifade` ya da `ifade => öneri`); denetçi onları engelleyici `kitap-yasagi` bulgusu olarak gösterir.
 
 ## Örnek
 

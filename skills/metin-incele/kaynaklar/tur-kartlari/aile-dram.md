@@ -35,3 +35,11 @@ tokat / yüzleşme, sırrın bir kişiye açılması, kapıda beliren biri, vasi
 ## Tipik uzunluk
 
 Basılı: 90–130 bin kelime; dizi uyarlaması için güçlü aday.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. Her aile üyesinin kendi haklı gerekçesi var mı, yoksa biri yalnızca kötü mü?
+2. Açığa çıkan her sır bir ilişkiyi kalıcı olarak değiştiriyor mu?
+3. Duygu yoğunluğu diyalogda bağırmakla değil, susulan şeylerle de kuruluyor mu?

@@ -3,7 +3,7 @@ name: roman-yaz
 description: "Uzun soluklu roman ve Wattpad dizisi yazımı: yapı tartışması, genel plan, cilt ve bölüm planı, bölüm bölüm yazım, günlük yazım ve revizyon. Bölüm kaydı, 100+ bölümlük süreklilik takibi ve yapay zekâ tadı denetimiyle çalışır. Tetikleyiciler: /roman-yaz, \"roman yazalım\", \"yeni bölüm yaz\", \"sıradaki bölüm\", \"planı güncelle\", \"bugün 2 bölüm yaz\"."
 license: MIT
 compatibility: "Python 3.11+. Claude Code, OpenAI Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix ve SKILL.md okuyabilen her ajan."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "oh-story-claudecode/story-long-write"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-long-write"}
 ---
 
 # roman-yaz: Uzun Soluklu Roman Yazımı

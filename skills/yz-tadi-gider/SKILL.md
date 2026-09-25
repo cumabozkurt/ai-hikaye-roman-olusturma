@@ -3,7 +3,7 @@ name: yz-tadi-gider
 description: "Metindeki yapay zekâ tadını giderir: kalıp ifadeler, çeviri kokan yapılar, duygu adlandırma, benzetme yığını, üçlü sıralamalar, ders veren sonlar ve tekrar döngüleri. Yazarın üslubunu koruyarak yeniden yazar, önce/sonra raporu verir. Tetikleyiciler: /yz-tadi-gider, \"yapay zekâ yazmış gibi\", \"robotik duruyor\", \"daha doğal yap\", \"AI tadını gider\"."
 license: MIT
 compatibility: "Python 3.11+. Claude Code, Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "oh-story-claudecode/story-deslop"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-deslop"}
 ---
 
 # yz-tadi-gider: Yapay Zekâ Tadını Giderme
@@ -15,7 +15,7 @@ Yollar bu SKILL.md dosyasının klasörüne görelidir (Claude Code'da `${CLAUDE
 ## Önce oku
 
 1. `kaynaklar/yz-tadi.md` (Türkçe yapay zekâ kalıpları kataloğu ve önce/sonra örnekleri), sonuna kadar.
-2. `kaynaklar/uslup-karari.md`: kitabın `kurgu/ton.md` dosyası ve yazar hafızası genel kurallardan önce gelir. Yazar bilinçli olarak bir kalıbı kullanıyorsa (ör. karakterin konuşma tiki) çalışma alanındaki `.yz-beyaz-liste` dosyasına eklenir ve dokunulmaz.
+2. `kaynaklar/uslup-karari.md`: kitabın `kurgu/ton.md` dosyası ve yazar hafızası genel kurallardan önce gelir. Yazar bilinçli olarak bir kalıbı kullanıyorsa (ör. karakterin konuşma tiki) çalışma alanındaki `.yz-beyaz-liste` dosyasına eklenir ve dokunulmaz. Tersine, yazarın bu kitapta hiç görmek istemediği ifadeler (ör. "kalbi yerinden fırlayacak gibi", karakterin tekrarlayan bir tiki) `.yasak-kaliplar` dosyasına `ifade => öneri` biçiminde yazılır; denetçi bunları engelleyici `kitap-yasagi` bulgusu olarak raporlar.
 3. `kaynaklar/tdk-yazim-rehberi.md`.
 
 ## Akış
@@ -26,7 +26,10 @@ Yollar bu SKILL.md dosyasının klasörüne görelidir (Claude Code'da `${CLAUDE
 python3 betikler/ai_kalip_denetle.py <dosya> [--json]
 python3 betikler/bozulma_denetle.py <dosya>
 python3 betikler/yazim_denetle.py <dosya>
+python3 betikler/metin_analizi.py <dosya>
 ```
+
+`metin_analizi.py` yakın tekrarları, art arda aynı kelimeyle başlayan cümleleri ve tekdüze cümle ritmini gösterir; bunlar yapay zekâ metninin kalıp dışı ama belirgin izleridir.
 
 Betik bulguları başlangıç noktasıdır; anlam düzeyindeki kalıpları (duygu açıklaması, özet cümleler, her paragrafın aynı ritimde bitmesi, karakterlerin aynı sesle konuşması) okuyarak sen bulursun.
 

@@ -3,7 +3,7 @@ name: tarayici-cdp
 description: "Otomatik erişimi engelleyen ya da JavaScript ile çizilen sayfaları (kitap mağazası çok satan listeleri, yayınevi dosya kabul sayfaları, yarışma şartnameleri) yazarın bilgisayarında ayrı profilli bir Chrome ile açıp metnini okur. Tetikleyiciler: /tarayici-cdp, \"bu sayfayı oku\", \"Kitapyurdu listesine bak\", \"tarayıcıyla aç\"."
 license: MIT
 compatibility: "Python 3.11+, yerelde Chrome, Chromium ya da Edge. Uzak/sunucusuz ortamlarda çalışmaz."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.0.0", "ust-kaynak": "oh-story-claudecode/browser-cdp"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/browser-cdp"}
 ---
 
 # tarayici-cdp: Tarayıcıyla Sayfa Okuma

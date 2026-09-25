@@ -35,3 +35,11 @@ tehlike, sırrın yarısı, beklenmedik mesaj, karar anı.
 ## Tipik uzunluk
 
 Wattpad: 30–70 bölüm × 1.500–2.500 kelime.
+
+## Öz denetim soruları
+
+Bölüm yazıldıktan sonra anlatı yazarı ve inceleme bu soruları yanıtlar; "hayır" yanıtı bir revizyon notudur.
+
+1. İlk üç paragrafta bir soru ya da çatışma var mı?
+2. Bölüm sonu okuru yorum yazmaya ya da sonraki bölüme geçmeye itiyor mu?
+3. Karakterin sesi yaşına uygun ama karikatür değil mi?

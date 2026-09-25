@@ -150,3 +150,26 @@ def test_cdp_istemci_tarayici_yokken_anlasilir_hata() -> None:
     assert sonuc.returncode != 0
     assert "Traceback" not in sonuc.stderr
     assert "tarayıcı" in (sonuc.stdout + sonuc.stderr).lower() or "cdp" in (sonuc.stdout + sonuc.stderr).lower()
+
+
+def test_calisma_masasi_yalnizca_yerel_host_kabul_eder(roman: Path) -> None:
+    import http.client
+    import threading
+    cm = modul_yukle("calisma_masasi.py")
+    sunucu = cm.sunucu_olustur(roman.parent, 0)
+    port = sunucu.server_address[1]
+    threading.Thread(target=sunucu.serve_forever, daemon=True).start()
+    try:
+        def iste(host: str, yol: str = "/api/durum") -> int:
+            baglanti = http.client.HTTPConnection("127.0.0.1", port, timeout=5)
+            baglanti.request("GET", yol, headers={"Host": host})
+            kod = baglanti.getresponse().status
+            baglanti.close()
+            return kod
+        assert iste(f"127.0.0.1:{port}") == 200
+        assert iste(f"localhost:{port}") == 200
+        assert iste("kotu-site.example:80") == 403  # DNS yeniden bağlama girişimi
+        assert iste(f"127.0.0.1:{port}", "/../../etc/passwd") == 404
+    finally:
+        sunucu.shutdown()
+        sunucu.server_close()

@@ -115,6 +115,11 @@ def sayfa(ozet: dict[str, Any]) -> str:
 def sunucu_olustur(kok: Path, port: int) -> ThreadingHTTPServer:
     class Isleyici(BaseHTTPRequestHandler):
         def do_GET(self) -> None:  # noqa: N802
+            # DNS yeniden bağlama (rebinding) saldırılarına karşı yalnızca yerel Host başlığı kabul edilir.
+            konak = (self.headers.get("Host") or "").rsplit(":", 1)[0].strip("[]").lower()
+            if konak not in {"127.0.0.1", "localhost"}:
+                self.send_error(403, "Forbidden", "Yalnızca yerel erişime izin verilir.")
+                return
             if self.path in ("/", "/index.html"):
                 govde, tur = sayfa(durum_ozeti(kok)).encode("utf-8"), "text/html; charset=utf-8"
             elif self.path == "/api/durum":

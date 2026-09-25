@@ -269,7 +269,11 @@ def test_proje_durumu_sonraki_adim_ve_yarim_bolum(roman: Path) -> None:
     assert "takibe kaydedilmemiş" in pd.durum_raporu(roman)["adimlar"][0]
     (roman / "metin" / "bolum-003_yeni.md").unlink()
     (roman / "plan" / "bolum-plani_003.md").unlink()
-    assert "planı yok" in pd.durum_raporu(roman)["adimlar"][0]
+    d = pd.durum_raporu(roman)
+    assert "planı yok" in d["adimlar"][0] and "/kitaptik-yayimla" in d["adimlar"][1]
+    (roman / "yayin" / "kitaptik").mkdir(parents=True)
+    (roman / "yayin" / "kitaptik" / "rapor.json").write_text("{}", encoding="utf-8")
+    assert not any("/kitaptik-yayimla" in a for a in pd.durum_raporu(roman)["adimlar"])
     cli = calistir("proje_durumu.py", "durum", "--proje", roman, "--json")
     assert cli.returncode == 0 and json_cikti(cli)["son_kaydedilen_bolum"] == 2
 

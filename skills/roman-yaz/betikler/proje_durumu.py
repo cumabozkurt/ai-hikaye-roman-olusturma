@@ -84,6 +84,9 @@ def durum_raporu(proje: Path, bugun: dt.date | None = None) -> dict[str, Any]:
     if not adimlar:
         if sonraki not in planli:
             adimlar.append(f"{sonraki}. bölümün planı yok: plan/bolum-plani_{sonraki:03d}.md yazın (bölüm planı şablonu).")
+            if son >= 1 and not (proje / "yayin" / "kitaptik" / "rapor.json").is_file():
+                adimlar.append("Planlanan bölümlerin hepsi yazıldı. Kitap bittiyse ya da ilk bölümleri okura açmak "
+                               "istiyorsanız '/kitaptik-yayimla' ile Kitaptik (kitaptik.com) yayın paketini hazırlayın.")
         else:
             adimlar.append(f"{sonraki}. bölümü yazın: önce 'kurgu_ansiklopedisi.py baglam --bolum {sonraki}' ile bağlam paketini alın.")
     kayitlar = takip.get("uzunluk_kayitlari")

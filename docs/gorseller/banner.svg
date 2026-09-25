@@ -79,7 +79,7 @@
   </g>
   <g font-family="'Segoe UI', 'Helvetica Neue', Arial, 'DejaVu Sans', sans-serif" font-size="17" font-weight="600">
     <g transform="translate(522 292)">
-      <rect width="112" height="34" rx="17" fill="#e0a84f"/><text x="56" y="23" text-anchor="middle" fill="#0a1830">24 beceri</text>
+      <rect width="112" height="34" rx="17" fill="#e0a84f"/><text x="56" y="23" text-anchor="middle" fill="#0a1830">25 beceri</text>
     </g>
     <g transform="translate(646 292)">
       <rect width="96" height="34" rx="17" fill="none" stroke="#e0a84f" stroke-width="1.6"/><text x="48" y="23" text-anchor="middle" fill="#f7eedb">8 ajan</text>
@@ -94,7 +94,7 @@
       <rect width="400" height="34" rx="17" fill="none" stroke="#6f8bb8" stroke-width="1.4"/><text x="200" y="23" text-anchor="middle" fill="#c9d6ec">Claude Code · Codex · OpenCode · npx skills</text>
     </g>
     <g transform="translate(934 338)">
-      <rect width="228" height="34" rx="17" fill="none" stroke="#6f8bb8" stroke-width="1.4"/><text x="114" y="23" text-anchor="middle" fill="#c9d6ec">EPUB · DOCX · ODT · PDF</text>
+      <rect width="224" height="34" rx="17" fill="none" stroke="#56d364" stroke-width="1.6"/><text x="112" y="23" text-anchor="middle" fill="#eafff2">EPUB · PDF · Kitaptik</text>
     </g>
   </g>
 </svg>

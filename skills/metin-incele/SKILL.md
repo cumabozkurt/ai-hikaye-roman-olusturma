@@ -3,7 +3,7 @@ name: metin-incele
 description: "Roman bölümü ya da öykü için editör gözüyle kalite incelemesi: açılış, kanca, karakter, diyalog, tempo, tutarlılık, dil ve yapay zekâ tadı üzerinden 100 puanlık değerlendirme, öncelikli düzeltme listesi ve Türkiye yayın yoluna uygunluk. Tetikleyiciler: /metin-incele, \"metnimi değerlendir\", \"puanla\", \"editör gibi oku\", \"bu bölüm nasıl olmuş\"."
 license: MIT
 compatibility: "Python 3.11+. Claude Code, Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "oh-story-claudecode/story-review"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "oh-story-claudecode/story-review"}
 ---
 
 # metin-incele: Editör Gözüyle İnceleme
@@ -41,7 +41,7 @@ Roman bölümüyse ve takip varsa: `python3 betikler/sureklilik_denetle.py --pro
 4. **Puanla:** `inceleme-olcutleri.md` tablosuyla 100 üzerinden. Her ölçüt için puan + tek cümlelik gerekçe + alıntı.
 5. **Okur paneli (isteğe bağlı):** `kaynaklar/okur-paneli.md` içinden 3 okur seç, her biri için bırakma noktası, tutan an ve aklında kalan soruyu yaz.
 6. **Öncelik listesi:** en çok etki edecek 3–5 düzeltme, her biri "sorun → neden önemli → nasıl" biçiminde.
-7. **Yayın yolu notu (istenirse):** Wattpad için ilk bölüm kancası ve bölüm uzunluğu; yayınevi için ilk 30 sayfanın gücü ve dosya hazırlığı (`/yayinevi-dosyasi`).
+7. **Yayın yolu notu (istenirse):** Kitaptik ya da Wattpad gibi bölümlü platformlar için ilk bölüm kancası ve bölüm uzunluğu (`/kitaptik-yayimla`); yayınevi için ilk 30 sayfanın gücü ve dosya hazırlığı (`/yayinevi-dosyasi`).
 
 ## Rapor biçimi
 

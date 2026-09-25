@@ -40,3 +40,8 @@ Her karar: sorun, karar, değerlendirilen alternatifler ve sonuçlar.
 
 - **Sorun:** Wattpad Türkiye'de erişime kapalı; ancak yazarların alışkanlıkları ve yurt dışındaki Türkçe okur kitlesi hâlâ Wattpad ölçülerine göre şekilleniyor.
 - **Karar:** `wattpad-bolum-planla` adı korunur (bilinirlik), açıklaması "Wattpad ve benzeri bölümlü çevrim içi yayın" olarak genişletildi; erişim durumu belgelerde ve beceride açıkça yazılır.
+
+## MK-8: Kitaptik'e yükleme yapılmaz, paket hazırlanır
+
+- **Sorun:** Yazılan kitabın okura ulaşması iş akışının son adımı; Wattpad Türkiye'de erişime kapalı. Türkçe okuma platformu Kitaptik'e (kitaptik.com) yükleme otomatikleştirilebilirdi.
+- **Karar:** `kitaptik-yayimla` siteye bağlanmaz, giriş yapmaz, form doldurmaz. Yazar ekranının sınırlarına uygun toplu yükleme DOCX'i, kopyalanacak kitap bilgileri ve kontrol listesi üretir; yükleme ve **Yayınla** yazarın elindedir. Böylece hesap bilgisi istenmez, sitenin arayüzü değişince beceri bozulmaz ve yazarın onayı olmadan hiçbir metin yayımlanmaz. Sınırlar doğrulama tarihiyle birlikte `kitaptik_hazirla.py` ve beceri rehberinde tutulur.

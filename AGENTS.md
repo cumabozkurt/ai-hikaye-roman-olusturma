@@ -4,7 +4,7 @@ Bu dosya, **AI Hikaye & Roman Oluşturma** deposunu geliştiren kodlama ajanlar�
 
 ## Depo nedir?
 
-Türkçe roman ve öykü yazımı için 24 beceri (`skills/<ad>/SKILL.md` + `kaynaklar/`, `betikler/`, `varliklar/`), 8 ajan şablonu, tek Python kanca çekirdeği ve 8 ev sahibi için uyarlama katmanı. Ürün, Markdown ile yazılmış yazım yöntemi ve iş akışı sözleşmesidir; betikler belirlenimci denetim ve kayıt araçlarıdır.
+Türkçe roman ve öykü yazımı için 25 beceri (`skills/<ad>/SKILL.md` + `kaynaklar/`, `betikler/`, `varliklar/`), 8 ajan şablonu, tek Python kanca çekirdeği ve 8 ev sahibi için uyarlama katmanı. Ürün, Markdown ile yazılmış yazım yöntemi ve iş akışı sözleşmesidir; betikler belirlenimci denetim ve kayıt araçlarıdır.
 
 ## Değişiklikten önce bilinmesi gerekenler
 

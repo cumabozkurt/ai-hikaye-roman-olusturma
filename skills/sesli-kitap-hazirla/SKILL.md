@@ -3,7 +3,7 @@ name: sesli-kitap-hazirla
 description: "Roman ya da öyküyü sesli kitaba hazırlar: seslendirme için temizlenmiş metin, bölüm başına süre tahmini, özel ad ve yabancı sözcükler için telaffuz sözlüğü, karakter ses kartları, seslendirmen ya da metin okuma (TTS) notları ve Storytel/Audible teslim kontrol listesi. Tetikleyiciler: /sesli-kitap-hazirla, \"sesli kitap yapmak istiyorum\", \"seslendirme metni\", \"telaffuz listesi\"."
 license: MIT
 compatibility: "Python 3.11+."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
 ---
 
 # sesli-kitap-hazirla: Sesli Kitap Hazırlığı

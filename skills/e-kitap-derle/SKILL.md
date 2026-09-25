@@ -3,7 +3,7 @@ name: e-kitap-derle
 description: "Roman ya da öykü bölümlerini EPUB 3 e-kitaba, yayınevine gönderilecek DOCX ve ODT dosyasına (A4, TNR 12, 1,5 aralık, sayfa numarası), A5 baskıya hazır HTML ve PDF'ye, HTML okuma kopyasına, TXT ve tek Markdown'a derler; bitmemiş metin işaretlerini yakalar, teslim listesi verir. Pandoc gerekmez. Tetikleyiciler: /e-kitap-derle, \"EPUB yap\", \"Word dosyası\", \"PDF hazırla\", \"okuma kopyası\", \"beta okurlara gönder\"."
 license: MIT
 compatibility: "Python 3.11+ (yalnızca standart kütüphane)."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
 ---
 
 # e-kitap-derle: EPUB, DOCX, ODT, PDF ve Okuma Kopyası
@@ -42,7 +42,7 @@ python3 betikler/e_kitap_derle.py --dosya oyku/<ad>/metin.md --baslik "Öykü Ad
 | `txt`, `md` | `<ad>.txt`, `<ad>-tam.md` | Düz metin, tek dosya Markdown |
 | `hepsi` (varsayılan) | epub, html, docx, odt, yazdir | |
 
-Çıktılar varsayılan olarak `<kitap>/yayin/` klasörüne yazılır (`--cikti` ile değişir). Bölüm sırası dosya adındaki numaradır (`bolum-001_…`); bölüm başlığı dosyadaki ilk `#` başlığıdır. Yayınevine gönderim kuralları için `/yayinevi-dosyasi` becerisine bak; her yayınevinin kendi şartı önce gelir.
+Çıktılar varsayılan olarak `<kitap>/yayin/` klasörüne yazılır (`--cikti` ile değişir). Bölüm sırası dosya adındaki numaradır (`bolum-001_…`); bölüm başlığı dosyadaki ilk `#` başlığıdır. Yayınevine gönderim kuralları için `/yayinevi-dosyasi` becerisine bak; her yayınevinin kendi şartı önce gelir. Kitabı Kitaptik'te (kitaptik.com) okura açmak için `/kitaptik-yayimla` kullan: oradaki toplu yükleme DOCX'i bu gönderim DOCX'inden farklıdır (kapak sayfası yok, her bölüm bir Başlık 1).
 
 4. **Bitmemiş işaretler:** Betik `[TK]`, `[DOLDUR]`, `⟦…⟧`, `TODO` bulursa çıkış kodu 1 ile durur ve satırları listeler. Yazar yalnızca beta okuma kopyası istiyorsa `--taslak` ile derle ve raporda "taslak" olarak belirt.
 5. **Doğrulama:** Mümkünse W3C EPUBCheck ile doğrula (`java -jar epubcheck.jar <dosya>.epub`); yoksa HTML kopyasını tarayıcıda açıp içindekiler bağlantılarını ve Türkçe karakterleri kontrol et. DOCX/ODT dosyasını Word ya da LibreOffice'te açıp ilk sayfayı, üst bilgiyi ve sayfa numaralarını göz ile denetle.

@@ -2,6 +2,27 @@
 
 Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) ilkelerine, sürümleme [Anlamsal Sürümleme](https://semver.org/lang/tr/) kurallarına uyar.
 
+## [2.1.0] - 2026-09-25
+
+Yazılan kitabın okura ulaşması için yeni son adım: **Kitaptik'te yayımla**. [Kitaptik](https://kitaptik.com), Türkiye'den erişilebilen, Türkçe kitap yazma ve okuma platformudur (web, iOS, Android). Yeni beceri kitabı Kitaptik'in yazar ekranına hazırlar; siteye giriş yapmaz, dosya yüklemez. Rehber: [docs/KITAPTIK-ILE-YAYIMLAMA.md](docs/KITAPTIK-ILE-YAYIMLAMA.md). İnceleme: [docs/INCELEME-RAPORU.md](docs/INCELEME-RAPORU.md) (Dördüncü Tur).
+
+### Eklendi
+- **Yeni beceri** `kitaptik-yayimla` (toplam 25) ve `kitaptik_hazirla.py` (yalnızca standart kütüphane):
+  - `baslat`: `yayin/kitaptik.md` yayın bilgisi dosyası; kitabın türünden Kitaptik ana ve alt kategorisi ile etiket önerisi, plandaki tek cümlelik özden açıklama taslağı.
+  - `denetle`: Kitaptik'in yazar ekranı sınırları (bölüm başına 10.000 kelime, bölüm başlığı 77 karakter, açıklama 2.500, "Neden okumalı?" 333, en çok 3 alt kategori, etiket kuralları, kapak biçimi, boyutu, ölçüsü ve hareketliliği); bitmemiş metin işaretleri, görsel, tablo ve bağlantılar; Topluluk Kuralları'na göre 18+ işareti ve `[TW: İntihar]` uyarısı gerekebilecek yerler için anahtar sözcük taraması.
+  - `paket`: **Toplu Yükle** ekranına hazır DOCX (her bölüm bir Başlık 1, uzun bölümler sahne ayracına yakın yerden "(1/2)" diye bölünür, 500'den çok bölümde birden çok dosya), kitap bilgileri formu, karakter kartları (sırlar alınmaz), yayın kontrol listesi ve `rapor.json`. Hata varken dosya yazılmaz; aynı girdi aynı DOCX'i verir.
+  - `kategoriler`: Kitaptik'in 10 ana kategorisi ve alt kategorileri.
+- `docs/KITAPTIK-ILE-YAYIMLAMA.md`: adım adım yayımlama rehberi, doğrulanmış özellikler ve sınırlar, kazanç koşulları (vaatsiz).
+- `testler/test_kitaptik.py` (32 test) ve `testler/araclar/kitaptik_docx_oku.js`: üretilen DOCX açık kaynak mammoth kitaplığıyla, Kitaptik'in "her Başlık 1 yeni bölüm" kuralına göre okunur; bölüm başlıkları ve kelime sayıları raporla karşılaştırılır. CI çıktı doğrulama işinde atlanmadan çalışır.
+- Kitaptik değerlendirme vakası (toplam 28).
+
+### Değişti
+- İş akışı Kitaptik'le bitiyor: `hikaye`, `roman-yaz`, `e-kitap-derle`, `wattpad-bolum-planla`, `metin-incele` ve kurulum yönlendirme tablosu yayın adımında `/kitaptik-yayimla`yı öneriyor; `proje_durumu.py` planlanan bölümler bitince Kitaptik paketini hatırlatıyor.
+- `platformlar-turkiye.md`: Kitaptik satırı; Wattpad'in Türkiye'deki erişim engeli notu yurt içi seçeneği gösteriyor.
+- Örnek roman Kitaptik'te yayımlanacak biçimde güncellendi (tür, yayın biçimi, karakter rolleri).
+- `e_kitap_derle.py` ve `belge_yazicilar.py` paylaşılan betiklere taşındı (e-kitap-derle ve kitaptik-yayimla aynı kodu kullanır).
+- Eklenti açıklamaları ajan sayısını dosyalardan sayıyor (8).
+
 ## [2.0.0] - 2026-09-25
 
 En büyük güncelleme: dokuz açık kaynak roman yazım projesi uçtan uca incelendi ve Türkçe roman yazan birinin başka bir araca ihtiyaç duymaması için eksik yetenekler bağımsız olarak, testleriyle birlikte yazıldı. Karşılaştırma ve lisanslar: [docs/OZELLIK-KARSILASTIRMA.md](docs/OZELLIK-KARSILASTIRMA.md). İnceleme: [docs/INCELEME-RAPORU.md](docs/INCELEME-RAPORU.md) (Üçüncü Tur).

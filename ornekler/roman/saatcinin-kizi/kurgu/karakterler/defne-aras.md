@@ -1,5 +1,6 @@
 # Defne Aras
 
+- Rol: ana karakter
 - Yaş: 27
 - Doğum yılı: 1997
 - Göz rengi: ela

@@ -1,4 +1,4 @@
-"""2.0.0 uçtan uca senaryo: bir yazarın kurulumdan e-kitaba kadar bütün iş akışı, yalnızca komut satırı araçlarıyla.
+"""2.x uçtan uca senaryo: bir yazarın kurulumdan e-kitaba ve Kitaptik paketine kadar bütün iş akışı, yalnızca komut satırı araçlarıyla.
 
 Her adım, bir yapay zekâ ajanının becerilerde yazan komutları çalıştırdığı sırayla yürütülür; bir adımın çıktısı
 sonrakinin girdisidir. Amaç tek tek araçları değil, aralarındaki sözleşmeleri (dosya biçimleri, çıkış kodları,
@@ -166,6 +166,20 @@ def test_yazarin_bastan_sona_is_akisi(tmp_path: Path) -> None:
     tamam(calistir("belge_ice_aktar.py", "aktar", "--kaynak", yayin / "saatcinin-kizi.docx", "--proje", ikinci))
     kp = modul_yukle("kitap_proje.py")
     assert [b.kelime for b in kp.bolumler(ikinci)] == [b.kelime for b in kp.bolumler(kitap)]
+
+    # 11b. Kitaptik: yayın bilgisi, vitrin metinleri, denetim ve toplu yükleme paketi
+    tamam(calistir("kitaptik_hazirla.py", "baslat", "--proje", kitap, "--zorla"))
+    bilgi = kitap / "yayin" / "kitaptik.md"
+    metin = bilgi.read_text(encoding="utf-8").replace(
+        "## Neden okumalı?\n", "## Neden okumalı?\n\nİstanbul'da bir saatçi dükkânında ağır ağır açılan bir aile sırrı.\n")
+    bilgi.write_text(metin.replace("- Yazar adı: ", "- Yazar adı: Ayşe Yılmaz"), encoding="utf-8")
+    kitaptik = json_cikti(calistir("kitaptik_hazirla.py", "paket", "--proje", kitap, "--json"))
+    assert kitaptik["ozet"]["hata"] == 0 and kitaptik["ozet"]["kitaptik_bolumu"] == 2
+    with zipfile.ZipFile(kitap / "yayin" / "kitaptik" / "saatcinin-kizi-kitaptik.docx") as z:
+        assert z.read("word/document.xml").decode().count('w:val="Heading1"') == 2
+    # Kitaptik boşlukla ayrılan her parçayı sayar (konuşma çizgisi dahil); görünür kelime ölçüsünden biraz fazladır
+    for kt, b in zip(kitaptik["ozet"]["bolumler"], kp.bolumler(kitap)):
+        assert b.kelime <= kt["kelime"] <= b.kelime * 1.1
 
     # 12. Çalışma masası: bütün sekmelerin verisi hatasız ve sunucu yalnızca yerel
     masa = json_cikti(calistir("calisma_masasi.py", "--calisma-alani", alan, "--json"))

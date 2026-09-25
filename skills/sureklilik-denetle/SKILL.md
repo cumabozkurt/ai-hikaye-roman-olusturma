@@ -3,7 +3,7 @@ name: sureklilik-denetle
 description: "Uzun romanda tutarlılık hatası avı: ölü ya da kayıp karakterin sahnede görünmesi, süresi geçmiş ipuçları, henüz açılmamış sırların erken sızması, karakter adı kayması ve benzer adlar, göz rengi, saç, yaş gibi nitelik çelişkileri. Takip kayıtlarına dayanır. Tetikleyiciler: /sureklilik-denetle, \"tutarlılık hatası var mı\", \"karakter çelişkisi\", \"100 bölümü tara\", \"ipuçlarım unutuldu mu\"."
 license: MIT
 compatibility: "Python 3.11+. Takip kaydı (takip/_takip-durumu.json) olan romanlar için."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
 ---
 
 # sureklilik-denetle: Süreklilik Denetimi

@@ -3,7 +3,7 @@ name: bolum-dongusu
 description: "Bir bölümü yazar kontrolünde ölçülebilir puanla iyileştirir: mekanik ölçüm (YZ kalıpları, ritim, tekrar, uzunluk, ses izi), bölüm planından çıkarılan maddelerle hakem rubriği, tur kaydı, plato ve hedef kararı, revizyon talimatı, yazar onayıyla kabul; taslakları Elo ile sıralayan bölüm turnuvası; üslup parmak izi. Tetikleyiciler: /bolum-dongusu, \"bölümü puanla\", \"bu bölümü iyileştir\", \"hangi taslak daha iyi\", \"üslubum kaydı mı\"."
 license: MIT
 compatibility: "Python 3.11+ (yalnızca standart kitaplık). Hakem için alt ajan desteği (Claude Code, Codex, OpenCode) önerilir; yoksa ana oturum hakemlik yapar."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
 ---
 
 # bolum-dongusu: Yaz → Eleştir → Düzelt Döngüsü, Turnuva ve Ses İzi

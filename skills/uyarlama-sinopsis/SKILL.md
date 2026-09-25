@@ -3,7 +3,7 @@ name: uyarlama-sinopsis
 description: "Romanı dizi, film ya da dijital platform uyarlaması için sunuma hazırlar: tek cümlelik öncül (logline), bir ve üç sayfalık sinopsis, karakter kartları, sezon ve bölüm dökümü, ton ve referans önerisi, pazar notu. Türkiye dizi sektörünün (haftalık uzun bölüm, dijital platform kısa sezon) biçimlerine uyar. Tetikleyiciler: /uyarlama-sinopsis, \"dizi olur mu\", \"yapımcıya sunum\", \"logline yaz\", \"sezon planı\"."
 license: MIT
 compatibility: "Python 3.11+ (yalnızca kelime ölçümü için)."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
 ---
 
 # uyarlama-sinopsis: Uyarlama Sunum Dosyası

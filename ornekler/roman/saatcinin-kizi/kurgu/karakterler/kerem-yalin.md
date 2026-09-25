@@ -1,5 +1,6 @@
 # Kerem Yalın
 
+- Rol: yardımcı karakter; Defne'nin gönülsüz ortağı
 - Yaş: 31
 - Doğum yılı: 1993
 - Göz rengi: gri

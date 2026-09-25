@@ -361,3 +361,61 @@ Yöntem: Boş bir klasörde yalnızca README ve beceri talimatlarıyla sıfırda
 ### Açık kalan
 
 - Sosyal önizleme görseli (`docs/gorseller/sosyal-onizleme.png`) yeniden üretildi; GitHub API'si ayarlamaya izin vermediği için Ayarlar → Social preview üzerinden elle yüklenmesi gerekiyor.
+
+## Dördüncü Tur (v2.1.0)
+
+İnceleme tarihi: 25 Eylül 2026 · Sürüm: 2.0.0 → 2.1.0.
+
+Bu turun konusu iş akışının son adımı: yazılan kitabı Türkçe okuma platformu [Kitaptik](https://kitaptik.com)'e hazırlayan `kitaptik-yayimla` becerisi ve `kitaptik_hazirla.py`. Tanıtılan her özellik kitaptik.com'un herkese açık sayfalarında (Nasıl Yazar Olunur, Nasıl Para Kazanılır, Kullanım Kılavuzu, Sık Sorulan Sorular, Topluluk Kuralları, Kullanım Şartları, Tanıtım, Mobil Uygulamalar, Kategoriler) ve yazar ekranında 25 Eylül 2026'da yalnızca okunarak doğrulandı; siteye üye olunmadı, form gönderilmedi. Doğrulanamayan ya da değişken olan bilgiler (okunma sayıları, kazanç örnekleri, platformun yürüttüğü yarışmalar) tanıtıma alınmadı.
+
+### Özet
+
+| Bakış | Bulgu | Düzeltilen | Açık kalan |
+|---|---|---|---|
+| (i) Mühendis | 7 | 7 | 0 |
+| (ii) Türk editör | 6 | 6 | 0 |
+| (iii) İlk kez yazan | 5 | 5 | 0 |
+
+Son durum: 239 test geçiyor (yerelde Python 3.11, 3.13, 3.14; `HIKAYE_DOGRULAMA_ZORUNLU=1` ile EPUBCheck, LibreOffice ve mammoth atlanmadan), statik denetim 0 hata (25 beceri), Türkçe uyum 0 bulgu, CJK 0, 1.084 bozuk girdi denemesinde 0 sorun.
+
+### (i) Mühendis
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| e1 | Toplu yükleme DOCX'inde gövde paragrafları özel biçem adları taşıyordu; mammoth her paragraf için "tanınmayan biçem" uyarısı veriyordu. | Gövde Word'ün "Normal" biçemini kullanıyor, sahne ayracı doğrudan ortalanıyor; test uyarı listesinin boş olduğunu denetliyor. |
+| e2 | DOCX'in bir okuyucuda nasıl bölüneceği yalnızca XML ile denetleniyordu. | `testler/araclar/kitaptik_docx_oku.js`: mammoth ile "her Başlık 1 yeni bölüm" kuralı bağımsız uygulanıyor; başlıklar, kelime sayıları ve ilk başlıktan önce metin olmadığı rapora karşı denetleniyor. CI çıktı doğrulama işinde atlanmadan çalışıyor. |
+| e3 | Kitaptik kelimeyi boşlukla ayırıyor (konuşma çizgisi dahil); projenin görünür kelime ölçüsü bundan birkaç yüzde düşük. | 10.000 kelime sınırı Kitaptik'in ölçüsüyle denetleniyor; uçtan uca testte iki ölçünün ilişkisi açıkça sınanıyor. |
+| e4 | Başlık uzunluğu Python karakteriyle ölçülüyordu; tarayıcı emojiyi iki, birleşik "İ"yi NFC öncesi iki sayar. | NFC + UTF-16 kod birimiyle ölçüm; emoji ve birleşik karakter testleri. |
+| e5 | Bölme işlevinde gereksiz ve kafa karıştırıcı bir koşul vardı. | Sadeleştirildi; bölme noktasının sahne ayracında ve yarıya en yakın yerde olduğu test ediliyor. |
+| e6 | Eklenti açıklamasında ajan sayısı "7" olarak elle yazılıydı (gerçekte 8). | Beceri ve ajan sayısı dosyalardan sayılıyor. |
+| e7 | Bozuk girdi düzeneği yeni betiği kapsamıyordu. | 120 yeni komut: ikili ve Windows-1254 yayın bilgisi, bozuk PNG/JPEG/WebP başlığı, emoji başlık, tek paragrafı sınırı aşan bölüm, aynı numaralı iki bölüm, uç `--bolum-siniri` değerleri, dosya olan çıktı yolu. 0 sorun. |
+
+### (ii) Türk editör
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| t1 | Karakter kartlarında alan adları `str.capitalize` ile "Istediği" yazılıyordu. | Türkçe baş harf ("İstediği"); test. |
+| t2 | Rolü yazılmamış her karakter "Diğer" diye işaretleniyordu. | Rol yoksa seçenekler listeleniyor; örnek romandaki karakterlere rol eklendi. |
+| t3 | Örnek kitabın açıklama taslağı metinde olmayan ayrıntılar içeriyordu. | Açıklama ilk iki bölümün olaylarıyla birebir yeniden yazıldı; sonu vermiyor. |
+| t4 | Kontrol listesindeki düğme adları tahmine dayanıyordu. | Yazar ekranındaki adlarla eşlendi: **Toplu Yükle**, **İçe Aktar**, **Mevcut bölümlere ekle**, **Tümünü değiştir**, **Yayınla**. |
+| t5 | Tanıtım dilinde doğrulanmamış iddialar vardı ("kapaksız kitap daha az tıklanır", "daha çok etkileşim getirir", "beş dakikada"). | Çıkarıldı; kalan öneriler Kitaptik'in kendi yazarlık rehberine bağlandı. Hiçbir yerde okunma, kazanç ya da okur yorumu vaadi yok. |
+| t6 | Örnek romanın tür ve yayın biçimi Wattpad'e göre yazılmıştı. | Kitaptik alt kategorileriyle (Polisiye ve Gizem, Aşk) güncellendi; tür eşlemesi bundan doğru öneri üretiyor. |
+
+### (iii) İlk kez yazan
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| f1 | Planlanan bölümler bitince "sıradaki adım" yalnızca yeni plan istiyordu. | `proje_durumu.py` Kitaptik paketini öneriyor (paket zaten varsa önermiyor); test. |
+| f2 | "Beceri benim yerime yükler mi?" sorusunun cevabı yoktu. | README SSS ve rehber: giriş yapmaz, şifre istemez, yüklemez. |
+| f3 | Yayın bilgisi dosyasının dolu hâli görülemiyordu. | Örnek romana dolu `yayin/kitaptik.md` eklendi; README'de gerçek `paket` çıktısının görseli var. |
+| f4 | 18+ ve tetikleyici uyarısı bulguları "yasak" gibi okunabiliyordu. | İletiler kuralın maddesini gösteriyor ve kararın yazarda olduğunu söylüyor. |
+| f5 | Yayımlanmış kitapta **Tümünü değiştir** seçeneğinin bölümleri sildiği söylenmiyordu. | Beceri ve rehber uyarıyor; yeni bölümler için **Mevcut bölümlere ekle** öneriliyor. |
+
+### Regresyon
+
+- **Çıktı doğrulama:** Kitaptik DOCX'i `zipfile` + XML ile ayrıştırılıyor, LibreOffice ile metne dönüştürülüyor ve mammoth ile bölümlere ayrılıyor; aynı girdi bayt düzeyinde aynı DOCX'i veriyor (`SOURCE_DATE_EPOCH`).
+- **Gizlilik:** Depoya yalnızca kitaptik.com'un herkese açık sayfalarında ve yazar ekranında görünen bilgiler girdi.
+
+### Açık kalan
+
+- Sosyal önizleme görseli elle yüklenmeli (önceki turdan).

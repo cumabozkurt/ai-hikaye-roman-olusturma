@@ -5,15 +5,15 @@
     "url": "https://github.com/cumabozkurt"
   },
   "metadata": {
-    "description": "AI Hikaye & Roman Oluşturma: Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı.",
-    "version": "2.0.0"
+    "description": "AI Hikaye & Roman Oluşturma: Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, e-kitap, yayınevi dosyası ve Kitaptik'te yayımlama.",
+    "version": "2.1.0"
   },
   "plugins": [
     {
       "name": "ai-hikaye-roman-olusturma",
       "source": "./",
-      "description": "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı.",
-      "version": "2.0.0",
+      "description": "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, e-kitap, yayınevi dosyası ve Kitaptik'te yayımlama.",
+      "version": "2.1.0",
       "category": "writing",
       "keywords": [
         "turkce",
@@ -26,7 +26,8 @@
         "codex",
         "opencode",
         "tdk",
-        "epub"
+        "epub",
+        "kitaptik"
       ],
       "homepage": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma",
       "license": "MIT"

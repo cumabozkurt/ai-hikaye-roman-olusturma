@@ -35,6 +35,7 @@ Her becerinin `kaynaklar/` klasörü yalnızca gerektiğinde okunur; bağlamı b
 | `uyarlama-sinopsis` | uyarlama biçimleri: logline, sinopsis, karakter dosyası, tretman, sezon yayı |
 | `sesli-kitap-hazirla` | seslendirme, süre, telaffuz ve platform rehberi |
 | `e-kitap-derle` | EPUB, DOCX, ODT, baskı HTML'i ve PDF rehberi, teslim listesi |
+| `kitaptik-yayimla` | Kitaptik rehberi (yayın adımları, sınırlar, Topluluk Kuralları, haklar, kazanç koşulları; doğrulama tarihiyle), Türkiye platformları |
 | `roman-planla` | proje yapısı, bölüm planı şablonu, tür kartları (yapı yöntemi seçimi için) |
 | `kurgu-ansiklopedisi` | proje yapısı, tür kartları (dönem denetimi için Osmanlı ve erken Cumhuriyet kartları) |
 | `bolum-dongusu` | proje yapısı, Türkçe yapay zekâ kalıpları (mekanik puanın bir bileşeni) |

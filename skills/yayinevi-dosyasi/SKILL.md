@@ -3,7 +3,7 @@ name: yayinevi-dosyasi
 description: "Türkiye'deki yayınevlerine roman ya da öykü dosyası hazırlar: künye, örnek bölümler (yaklaşık 30 sayfa), tam metin, bir sayfalık sinopsis, üst yazı, yazar biyografisi, yazım denetimi ve Word çıktısı; yayınevi seçimi, gönderim ve sözleşme öncesi kontrol listesi. Tetikleyiciler: /yayinevi-dosyasi, \"yayınevine göndereceğim\", \"sinopsis yaz\", \"üst yazı\", \"dosya hazırla\"."
 license: MIT
 compatibility: "Python 3.11+. Word çıktısı için isteğe bağlı pandoc."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
 ---
 
 # yayinevi-dosyasi: Yayınevi Dosyası

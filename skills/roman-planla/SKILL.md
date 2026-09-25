@@ -3,7 +3,7 @@ name: roman-planla
 description: "Romanı yazmaya başlamadan önce yapı kurar ve planı denetler: üç perde, kahramanın yolculuğu, serim-düğüm-çözüm, yedi nokta ya da kar tanesi yöntemiyle iskelet; sahne kartları (bakış açısı, mekân, amaç, çatışma, sonuç, değer değişimi) ve mantar pano; vuruşların doğru bölüme düşüp düşmediğini ölçen denetim; özet katmanları ve \"nerede kaldım\" raporu. Tetikleyiciler: /roman-planla, \"romanımı planla\", \"kar tanesi yöntemi\", \"sahne kartı\", \"üç perde\", \"olay örgüsü iskeleti\", \"nerede kalmıştım\"."
 license: MIT
 compatibility: "Python 3.11+ (yalnızca standart kitaplık). Proje yapısı: kaynaklar/proje-yapisi.md."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
 ---
 
 # roman-planla: Yapı, Sahne Kartları ve Plan Denetimi

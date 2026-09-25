@@ -6,8 +6,8 @@
     {
       "name": "ai-hikaye-roman-olusturma",
       "source": "./",
-      "version": "2.0.0",
-      "description": "24 Türkçe yazım becerisi, komutlar ve ZCode yazım kancaları."
+      "version": "2.1.0",
+      "description": "25 Türkçe yazım becerisi, komutlar ve ZCode yazım kancaları."
     }
   ]
 }

@@ -9,6 +9,8 @@
   &nbsp;·&nbsp;
   <a href="#-ne-üretir"><b>Ne üretir?</b></a>
   &nbsp;·&nbsp;
+  <a href="#-kitabını-yaz-kitaptikte-yayımla"><b>Kitaptik'te yayımla</b></a>
+  &nbsp;·&nbsp;
   <a href="#-beceriler"><b>Beceriler</b></a>
   &nbsp;·&nbsp;
   <a href="docs/OZELLIK-KARSILASTIRMA.md"><b>Karşılaştırma</b></a>
@@ -21,7 +23,7 @@
 <p align="center">
   <a href="https://github.com/cumabozkurt/ai-hikaye-roman-olusturma/actions/workflows/test.yml"><img alt="Testler" src="https://img.shields.io/github/actions/workflow/status/cumabozkurt/ai-hikaye-roman-olusturma/test.yml?branch=main&style=flat-square&label=Testler&logo=githubactions&logoColor=white"></a>
   <a href="https://github.com/cumabozkurt/ai-hikaye-roman-olusturma/releases/latest"><img alt="Sürüm" src="https://img.shields.io/github/v/release/cumabozkurt/ai-hikaye-roman-olusturma?style=flat-square&label=S%C3%BCr%C3%BCm&color=0a1830"></a>
-  <img alt="Beceri: 24" src="https://img.shields.io/badge/Beceri-24-e0a84f?style=flat-square">
+  <img alt="Beceri: 25" src="https://img.shields.io/badge/Beceri-25-e0a84f?style=flat-square">
   <img alt="Ajan: 8" src="https://img.shields.io/badge/Ajan-8-e0a84f?style=flat-square">
   <img alt="Python 3.11 – 3.14" src="https://img.shields.io/badge/Python-3.11%20%E2%80%93%203.14-3776AB?style=flat-square&logo=python&logoColor=white">
   <a href="LICENSE"><img alt="Lisans: MIT" src="https://img.shields.io/badge/Lisans-MIT-1F6FEB?style=flat-square"></a>
@@ -30,15 +32,18 @@
 </p>
 
 <p align="center">
+  <a href="https://kitaptik.com"><img alt="Kitaptik'te yayımla" src="https://img.shields.io/badge/Yay%C4%B1mla-kitaptik.com-0f3d2e?style=for-the-badge"></a>
   <a href="https://github.com/cumabozkurt/ai-hikaye-roman-olusturma/discussions"><img alt="Tartışmalar" src="https://img.shields.io/badge/GitHub-Tart%C4%B1%C5%9Fmalar-181717?style=for-the-badge&logo=github&logoColor=white"></a>
 </p>
 
-<h3 align="center">Romanınızı planlayan, hatırlayan, denetleyen ve yayına hazırlayan Türkçe yazım atölyesi.</h3>
+<h3 align="center">Romanınızı planlayan, hatırlayan, denetleyen ve Kitaptik'te okurla buluşturan Türkçe yazım atölyesi.</h3>
 
-<p align="center">Kar tanesinden sahne kartına, kurgu ansiklopedisinden ipucu defterine, yazar onaylı revizyon döngüsünden EPUB, DOCX, ODT ve PDF'e kadar<br>bir romanın bütün yolu, kullandığınız yapay zekâ ajanının içinde ve kendi dosyalarınızda.</p>
+<p align="center">Kar tanesinden sahne kartına, kurgu ansiklopedisinden ipucu defterine, yazar onaylı revizyon döngüsünden EPUB, DOCX, PDF'e ve <a href="https://kitaptik.com">Kitaptik</a>'teki okura kadar<br>bir romanın bütün yolu, kullandığınız yapay zekâ ajanının içinde ve kendi dosyalarınızda.</p>
 
-**AI Hikaye & Roman Oluşturma**, Claude Code, OpenAI Codex, OpenCode ve SKILL.md okuyabilen her kodlama ajanının içine kurulan **Türkçe bir yazım atölyesidir**. 24 beceri, 8 uzman ajan ve yalnızca Python standart kitaplığıyla çalışan belirlenimci denetçiler; planlamayı, uzun roman belleğini, sürekliliği, TDK yazımını, yapay zekâ tadı gidermeyi, sürümleri, yazım istatistiklerini ve yayın dosyalarını tek bir iş akışında toplar. Kitabınız sohbet hafızasında değil, dosyalarınızda yaşar; ek model, GPU, bulut hesabı ya da kurulacak kitaplık gerekmez.
+**AI Hikaye & Roman Oluşturma**, Claude Code, OpenAI Codex, OpenCode ve SKILL.md okuyabilen her kodlama ajanının içine kurulan **Türkçe bir yazım atölyesidir**. 25 beceri, 8 uzman ajan ve yalnızca Python standart kitaplığıyla çalışan belirlenimci denetçiler; planlamayı, uzun roman belleğini, sürekliliği, TDK yazımını, yapay zekâ tadı gidermeyi, sürümleri, yazım istatistiklerini, yayın dosyalarını ve Kitaptik'te yayımlamayı tek bir iş akışında toplar. Kitabınız sohbet hafızasında değil, dosyalarınızda yaşar; ek model, GPU, bulut hesabı ya da kurulacak kitaplık gerekmez.
 
+> **2.1'de yeni:** [Kitaptik'te yayımla](#-kitabını-yaz-kitaptikte-yayımla). `/kitaptik-yayimla` bitmiş romanınızı Türkçe okuma platformu [kitaptik.com](https://kitaptik.com)'un yazar ekranına hazırlar: kategori ve etiket önerisi, sınır ve içerik denetimi, toplu yüklemeye hazır DOCX, kitap bilgileri, karakter kartları ve kontrol listesi.
+>
 > **2.0'da yeni:** yapı yöntemleri ve kar tanesi, sahne kartları ve mantar pano, kurgu ansiklopedisi ve tutarlılık denetimi, ipucu defteri, katmanlı özetlerle uzun roman belleği, yazar onaylı yaz → eleştir → düzelt döngüsü, bölüm turnuvası, ses izi, anlık görüntü ve fark, yazım panosu, DOCX/ODT/baskı PDF'i, DOCX/ODT/EPUB içe aktarma, Osmanlı ve erken Cumhuriyet tür kartlarıyla dönem denetimi ve sekmeli çalışma masası. Ayrıntı: [CHANGELOG](CHANGELOG.md).
 
 ## 💡 Neden bu proje?
@@ -47,7 +52,7 @@
 - **Uzun romanda hafıza kaybolmaz.** Karakter, mekân, nesne, zaman çizelgesi ve sözlük dosyalarda; her bölüm için yalnızca o bölümde gereken bilgiyi toplayan bağlam paketi ve kitap → cilt → bölüm özet katmanları var. 100. bölümde de ölü karakter konuşmaz, ekilen ipucu unutulmaz.
 - **Yapay zekâ yazar, karar sizde.** Revizyon döngüsü her turu ölçülebilir puanla kaydeder, plato ve hedefte durur; bölüm dosyasına yazmak için açık yazar onayı ister ve önceki hâli her zaman anlık görüntüye alır.
 - **Ölçen, tahmin etmeyen denetçiler.** Plan konumu, ipucu vadesi, ad kayması, göz rengi çelişkisi, dönem uyumsuzluğu, okunabilirlik: hepsi satır numarasıyla, aynı girdide her seferinde aynı sonucu veren betiklerle.
-- **Tek araç, bütün yol.** Planlamadan yayın dosyasına kadar başka programa geçmeniz gerekmez; Word, LibreOffice ya da EPUB'daki eski taslağınızı da bölümlere bölerek içeri alır.
+- **Tek araç, bütün yol.** Planlamadan yayın dosyasına ve Kitaptik'teki okura kadar başka programa geçmeniz gerekmez; Word, LibreOffice ya da EPUB'daki eski taslağınızı da bölümlere bölerek içeri alır.
 - **Güvenilir.** Her gönderimde Ubuntu (Python 3.11–3.14), macOS ve Windows üzerinde testler, EPUBCheck ve LibreOffice doğrulamaları, bozuk girdi denemeleri. Kod MIT lisanslı ve bağımlılıksız.
 
 ## ✨ Öne çıkanlar
@@ -56,9 +61,32 @@
 |---|---|---|
 | **🧭 Planlama**<br>Üç perde, kahramanın yolculuğu, serim-düğüm-çözüm, yedi nokta ve kar tanesi; vuruşun doğru bölüme düşüp düşmediğini ölçen denetim; sahne kartları ve mantar pano. | **📖 Kurgu ansiklopedisi**<br>Karakter (mülakatıyla), mekân, nesne, grup, zaman çizelgesi, ilişki ve sözlük; kayıt–metin tutarlılığı, bölümlere dağılım ısı haritası, ilişki grafiği. | **🧵 100+ bölüm süreklilik**<br>Yazar gerçeği / okur bilgisi ayrımı, ipucu defteri (vade, son anılma, yığılma), katmanlı özetler, kayıttan sonra değişen bölüm uyarısı. |
 | **🔁 Yazar onaylı döngü**<br>Yaz → eleştir → düzelt turları; mekanik puan + `bolum-hakemi` ajanı, plato tespiti, revizyon talimatı, Elo bölüm turnuvası, ses izi karşılaştırması. | **🇹🇷 Türkçe denetçiler**<br>TDK yazımı, Türkçe yapay zekâ kalıpları, Ateşman okunabilirliği, cümle ritmi, yakın tekrar; Osmanlı ve erken Cumhuriyet için dönem uyumsuzluğu denetimi. | **📊 Yazım panosu ve sürümler**<br>Kitap ve günlük hedef, seri, bitiş tahmini; anlık görüntü, kelime düzeyinde fark, güvenli geri yükleme; sekmeli yerel çalışma masası. |
-| **📦 Yayına hazır çıktı**<br>EPUB 3 (EPUBCheck hatasız), DOCX ve ODT (LibreOffice ile doğrulanır), A5 baskı HTML'i ve PDF, TXT, Markdown; yayınevi paketi, seslendirme metni. | **📥 İçe aktarma**<br>DOCX, ODT, EPUB, TXT ve Markdown taslakları Türkçe bölüm başlıklarını tanıyarak böler; kelime sayısı %1'den fazla tutmazsa hiçbir şey yazmaz. | **🔒 Yerel ve bağımlılıksız**<br>Planlama, denetim ve derleme betikleri ağa çıkmaz (yalnızca pazar taraması, siz istediğinizde herkese açık sayfaları okur). Yalnızca Python standart kitaplığı; çalışma masası yalnızca `127.0.0.1` üzerinden açılır. |
+| **📦 Yayına hazır çıktı**<br>EPUB 3 (EPUBCheck hatasız), DOCX ve ODT (LibreOffice ile doğrulanır), A5 baskı HTML'i ve PDF, TXT, Markdown; yayınevi paketi, seslendirme metni; Kitaptik toplu yükleme paketi. | **📥 İçe aktarma**<br>DOCX, ODT, EPUB, TXT ve Markdown taslakları Türkçe bölüm başlıklarını tanıyarak böler; kelime sayısı %1'den fazla tutmazsa hiçbir şey yazmaz. | **🔒 Yerel ve bağımlılıksız**<br>Planlama, denetim ve derleme betikleri ağa çıkmaz (yalnızca pazar taraması, siz istediğinizde herkese açık sayfaları okur). Yalnızca Python standart kitaplığı; çalışma masası yalnızca `127.0.0.1` üzerinden açılır. |
 
-> **Wattpad notu:** Wattpad, Türkiye'de 12 Temmuz 2024'ten beri mahkeme kararıyla erişime kapalıdır (Eylül 2026 itibarıyla engel sürüyor). `wattpad-bolum-planla` ve `roman-tara` bu durumu bilir; ölçüler bütün bölümlü yayın platformlarında geçerlidir ve paket erişim engelini aşma yöntemi önermez.
+> **Wattpad notu:** Wattpad, Türkiye'de 12 Temmuz 2024'ten beri mahkeme kararıyla erişime kapalıdır (Eylül 2026 itibarıyla engel sürüyor). `wattpad-bolum-planla` ve `roman-tara` bu durumu bilir; ölçüler bütün bölümlü yayın platformlarında geçerlidir ve paket erişim engelini aşma yöntemi önermez. Türkiye'den bölüm bölüm yayımlamak için: [Kitaptik](#-kitabını-yaz-kitaptikte-yayımla).
+
+## 📣 Kitabını yaz, Kitaptik'te yayımla
+
+Bir romanı bitirmek yolun yarısı; öbür yarısı okur. **[Kitaptik](https://kitaptik.com)**, Türkiye'den erişilebilen, Türkçe kitap yazma ve okuma platformudur: web sitesi, iOS ve Android uygulaması var, üyelik ücretsiz, kitap ve bölüm eklemek için onay beklemezsiniz. Bu paket yazdığınız kitabı oraya götüren son adımı da yapar:
+
+```text
+Kitabımı Kitaptik'te yayımlamak istiyorum.
+```
+
+`/kitaptik-yayimla` şunları hazırlar, **size yalnızca yüklemek kalır**:
+
+- **Kitap bilgileri:** Kitaptik'in 10 ana kategorisinden doğru olan ve en çok 3 alt kategori, isabetli etiketler, 2.500 karakterlik açıklama ve 333 karakterlik "Neden okumalı?" metni (ajanla birlikte yazılır, onayınız olmadan yazılmaz).
+- **Toplu yükleme DOCX'i:** her bölüm bir Başlık 1; 10.000 kelimeyi aşan bölümler sahne ayracında bölünür, 77 karakteri aşan başlıklar kısaltılır. **Bölümler → Toplu Yükle** ekranına doğrudan verilir.
+- **Denetim:** kapak biçimi ve ölçüsü, bitmemiş metin, bölüm içi bağlantılar, Topluluk Kuralları'na göre 18+ işareti ve `[TW: İntihar]` uyarısı gerekebilecek yerler.
+- **Karakter kartları ve kontrol listesi:** spoiler vermeyen karakter tanıtımları; üyelikten **Yayınla** düğmesine kadar adım adım liste.
+
+<p align="center">
+  <img src="docs/gorseller/terminal-kitaptik.svg" alt="kitaptik_hazirla.py paket çıktısı: denetim özeti ve yazılan dosyalar" width="92%">
+</p>
+
+Kitaptik'te sizi bekleyenler (25 Eylül 2026'da doğrulandı): okunma, beğeni, yorum ve kütüphane sayılarını gösteren kitap istatistikleri; kategori ve "yükselen yıldızlar" gibi liste sıralamaları; paragraf paragraf okur yorumları; takipçilere yeni bölüm bildirimi; okur için ücretsiz çevrim içi okuma, PDF indirme, uygulamada çevrim dışı ve sesli okuma. İçeriğin sahipliği sizde kalır; Kitaptik, hikâyeleri üçüncü tarafların üretken yapay zekâ eğitimi için satmayacağını taahhüt eder. Aktif Premium üyelikle okur aboneliği, destek ve ücretli kitaptan yazar payı %40'tır ([koşullar](https://kitaptik.com/nasil-para-kazanilir)).
+
+Burada okunma ya da kazanç vaadi yok: okuru kitabınız ve düzenli yayınınız kazanır. Beceri **siteye giriş yapmaz, dosya yüklemez**; yükleme ve **Yayınla** düğmesi sizindir. Rehber, sınırlar ve kurallar: **[docs/KITAPTIK-ILE-YAYIMLAMA.md](docs/KITAPTIK-ILE-YAYIMLAMA.md)**.
 
 ## 🚀 Hızlı başlangıç
 
@@ -82,7 +110,7 @@ Kuzguncuk'ta geçen, amatör dedektifli bir polisiye roman başlatmak istiyorum.
 Önce yapıyı tartışalım: okur sözleşmesi, ana merak sorusu, ilk üç bölümde ne değişecek. Metin yazma.
 ```
 
-Gerisini `hikaye` yönlendiricisi halleder: yapı tartışması → genel plan → bölüm planı → yazım → denetim → takip kaydı.
+Gerisini `hikaye` yönlendiricisi halleder: yapı tartışması → genel plan → bölüm planı → yazım → denetim → takip kaydı → Kitaptik'te yayın.
 
 ## 📥 Kurulum
 
@@ -142,7 +170,7 @@ bash betikler/kur.sh            # Claude Code, Codex ve OpenCode kullanıcı kla
 ZCode için depo kökündeki `marketplace.json`, Reasonix için `reasonix-plugin.json` kullanılabilir.
 </details>
 
-**Kurulumu doğrulayın:** Claude Code'da `claude plugin details ai-hikaye-roman-olusturma@ai-hikaye-roman-olusturma`, OpenCode'da `opencode debug skill` 24 beceriyi listelemelidir. Sorun giderme ve ev sahibine göre ayrıntılar: [docs/ev-sahipleri.md](docs/ev-sahipleri.md).
+**Kurulumu doğrulayın:** Claude Code'da `claude plugin details ai-hikaye-roman-olusturma@ai-hikaye-roman-olusturma`, OpenCode'da `opencode debug skill` 25 beceriyi listelemelidir. Sorun giderme ve ev sahibine göre ayrıntılar: [docs/ev-sahipleri.md](docs/ev-sahipleri.md).
 
 **Yazım projesine kurulum (her proje için bir kez):** proje kökünde `/hikaye-kurulum` (Codex'te `$hikaye-kurulum`). Ajanları, kancaları, proje kurallarını ve ortak kaynakları güvenle kurar; kendi `CLAUDE.md`/`AGENTS.md` içeriğiniz korunur. Kurulumdan ve her sürüm yükseltmesinden sonra yeni bir oturum açın. Codex kancaları ilk kullanımda `/hooks` ile güven onayı ister.
 
@@ -267,6 +295,7 @@ flowchart LR
     classDef yaz fill:#24497a,stroke:#e0a84f,color:#f7eedb
     classDef denet fill:#5a3d12,stroke:#f3c77a,color:#fff7e6
     classDef yayin fill:#0f3d2e,stroke:#56d364,color:#eafff2
+    classDef okur fill:#56d364,stroke:#0f3d2e,color:#0a1830
 
     A([Fikir ya da eski taslak]) --> T[roman-tara · roman-cozumle<br/>hikaye-ice-aktar]:::tara
     T --> P[roman-planla<br/>yapı · kar tanesi · sahne kartları]:::plan
@@ -280,6 +309,8 @@ flowchart LR
     K --> S[yazim-panosu<br/>hedef · seri · sürümler]:::yayin
     K --> R
     K --> E[e-kitap-derle · yayinevi-dosyasi<br/>EPUB · DOCX · ODT · PDF]:::yayin
+    K --> KT[kitaptik-yayimla<br/>denetim · toplu yükleme DOCX'i · kontrol listesi]:::yayin
+    KT --> O([Kitaptik'te okurla buluşma<br/>kitaptik.com]):::okur
 ```
 
 ## 🧰 Beceriler
@@ -304,6 +335,7 @@ flowchart LR
 | | `sureklilik-denetle` | Ölü karakter, süresi geçen ipucu, gizli bilgi sızıntısı, ad kayması avı | **yeni** |
 | Takip | `yazim-panosu` | Kitap ve günlük kelime hedefi, seri, bitiş tahmini, bölüm ilerlemesi, HTML pano | **yeni (2.0)** |
 | Yayın | `e-kitap-derle` | EPUB 3, DOCX, ODT, A5 baskı HTML'i ve PDF, HTML okuma kopyası, TXT, Markdown; bitmemiş işaret kapısı | **yeni (1.1, 2.0'da genişledi)** |
+| | `kitaptik-yayimla` | Kitaptik (kitaptik.com) yayın paketi: kategori ve etiket, sınır ve içerik denetimi, toplu yükleme DOCX'i, kitap bilgileri, karakter kartları, kontrol listesi | **yeni (2.1)** |
 | | `yayinevi-dosyasi` | Yayınevi paketi: künye, örnek bölümler, sinopsis, üst yazı | **yeni** |
 | | `wattpad-bolum-planla` | Bölüm uzunluğu, bölme, telefonda okunurluk, yayın takvimi ve tampon | **yeni** |
 | | `sesli-kitap-hazirla` | Seslendirme metni, süre tahmini, telaffuz sözlüğü | **yeni** |
@@ -311,7 +343,7 @@ flowchart LR
 | | `kapak-tasarla` | Tür ve platforma göre kapak istemi, isteğe bağlı görsel üretim ve kırpma | özgün |
 | Araç | `tarayici-cdp` | Otomatik erişimi engelleyen sayfaları yazarın kendi tarayıcısıyla okuma | özgün |
 
-"özgün": oh-story-claudecode'daki karşılığından Türkçe için yeniden yazıldı. Doğal dil de tetikler: "roman yazalım" → `roman-yaz`, "bu çok yapay zekâ gibi" → `yz-tadi-gider`, "EPUB yap" → `e-kitap-derle`, "Defne şu an nerede?" → `proje-kasifi` ajanı, "kar tanesi yöntemiyle planlayalım" → `roman-planla`, "bu bölümü puanla" → `bolum-dongusu`, "bu ay kaç kelime yazdım?" → `yazim-panosu`.
+"özgün": oh-story-claudecode'daki karşılığından Türkçe için yeniden yazıldı. Doğal dil de tetikler: "roman yazalım" → `roman-yaz`, "bu çok yapay zekâ gibi" → `yz-tadi-gider`, "EPUB yap" → `e-kitap-derle`, "Kitaptik'te yayımla" → `kitaptik-yayimla`, "Defne şu an nerede?" → `proje-kasifi` ajanı, "kar tanesi yöntemiyle planlayalım" → `roman-planla`, "bu bölümü puanla" → `bolum-dongusu`, "bu ay kaç kelime yazdım?" → `yazim-panosu`.
 
 <details>
 <summary><b>İlk isteğiniz için üç hazır kalıp</b></summary>
@@ -336,7 +368,7 @@ Ayrıntılar: [docs/mimari.md](docs/mimari.md) · [docs/100-bolum-tutarlilik.md]
 
 ### Tipik araç türleriyle
 
-| Yetenek | Genel sohbet asistanı | Masaüstü yazım programı (manuskript, bibisco, novelWriter türü) | Yapay zekâ roman üreticisi (web/Electron) | **AI Hikaye & Roman Oluşturma 2.0** |
+| Yetenek | Genel sohbet asistanı | Masaüstü yazım programı (manuskript, bibisco, novelWriter türü) | Yapay zekâ roman üreticisi (web/Electron) | **AI Hikaye & Roman Oluşturma 2.1** |
 |---|---|---|---|---|
 | Kitap nerede yaşar? | Sohbet geçmişinde | Program dosyasında | Uygulama veritabanında | **Düz Markdown dosyalarında** |
 | Yapay zekâ ile yazım | ✓ | — | ✓ | ✓ (ajanınızın modeliyle) |
@@ -348,31 +380,32 @@ Ayrıntılar: [docs/mimari.md](docs/mimari.md) · [docs/100-bolum-tutarlilik.md]
 | Türkçe yazım kuralları ve Türkçe yapay zekâ kalıpları | — | — | — | ✓ |
 | Türkiye yayın pazarı (yayınevi, dergi, sesli kitap, dizi) | — | — | — | ✓ |
 | EPUB, DOCX, ODT, baskı PDF'i | — | ✓ | ◐ | ✓ |
+| Türkçe okur platformuna yayın paketi (Kitaptik) | — | — | — | ✓ |
 | Kurulacak ek bağımlılık | — | Program | Uygulama, çoğunlukla API anahtarı | **Yok** (Python standart kitaplığı) |
 
 `◐`: bu türdeki araçların bir kısmında ya da sınırlı biçimde var. Dokuz açık kaynak projeyle satır satır karşılaştırma, lisansları ve her projeden neyin esinlendiği: **[docs/OZELLIK-KARSILASTIRMA.md](docs/OZELLIK-KARSILASTIRMA.md)**.
 
 ### Özgün projeyle
 
-| | oh-story-claudecode 0.7.11 | AI Hikaye & Roman Oluşturma 2.0 |
+| | oh-story-claudecode 0.7.11 | AI Hikaye & Roman Oluşturma 2.1 |
 |---|---|---|
 | Dil ve pazar | Çince web romanı (Qidian, Fanqie) | Türkiye Türkçesi; yayınevi, dergi, bölümlü yayın, sesli kitap, dizi |
-| Beceri / ajan | 13 / 7 | 24 / 8 (13 yeniden yazılmış + 11 yeni beceri) |
+| Beceri / ajan | 13 / 7 | 25 / 8 (13 yeniden yazılmış + 12 yeni beceri) |
 | Planlama | genel plan, bölüm planı | + beş yapı yöntemi, kar tanesi, sahne kartları, plan denetimi |
 | Kurgu bilgisi | ayar dosyaları | + ansiklopedi, sözlük, zaman çizelgesi, tutarlılık ve dağılım, dönem denetimi |
 | Revizyon | inceleme | + puanlı, yazar onaylı döngü, Elo turnuvası, ses izi, anlık görüntü ve fark |
 | Yapay zekâ tadı denetimi | Çince kalıplar | Türkçe kalıplar, çeviri kalkları, konuşma çizgisi kuralları, kitaba özgü yasak listesi |
 | Yazım denetimi | yok | TDK kurallarıyla `yazim-denetle` |
-| Yayın | yok | EPUB 3 (EPUBCheck), DOCX, ODT, baskı HTML'i ve PDF, TXT, Markdown |
+| Yayın | yok | EPUB 3 (EPUBCheck), DOCX, ODT, baskı HTML'i ve PDF, TXT, Markdown; Kitaptik yayın paketi |
 | Bağımlılık | Node.js + Python | Yalnızca Python standart kitaplığı |
 
 ## 🛡️ Kalite güvencesi
 
-- **Testler:** 207 pytest testi her gönderimde Ubuntu (Python 3.11, 3.12, 3.13, 3.14), macOS ve Windows üzerinde çalışır. Uçtan uca senaryo testi bir romanı kurulumdan planlamaya, iki bölümün kapılardan ve revizyon döngüsünden geçirilmesine, turnuvaya, süreklilik ve dönem denetimine, anlık görüntü farkına, bütün biçimlerde dışa aktarmaya, DOCX'in geri içe aktarılmasına ve çalışma masası sunucusuna kadar tek akışta yürütür.
-- **Çıktı doğrulama:** EPUB'lar W3C EPUBCheck 5.1.0 ile hatasız; DOCX ve ODT dosyaları XML olarak ayrıştırılır ve LibreOffice ile başsız açılıp dönüştürülür (CI'da Ubuntu işinde).
-- **Sağlamlık:** 964 bozuk girdi denemesinde (boş, ikili, Windows-1254, BOM, bozuk JSON, bozuk DOCX/ODT/EPUB, DOCTYPE/ENTITY içeren XML, yol aşımı denemeleri, bozuk durum dosyaları) Python izi yok; bütün hata iletileri Türkçe. Ayrıntı için `HIKAYE_AYIKLA=1`.
+- **Testler:** 239 pytest testi her gönderimde Ubuntu (Python 3.11, 3.12, 3.13, 3.14), macOS ve Windows üzerinde çalışır. Uçtan uca senaryo testi bir romanı kurulumdan planlamaya, iki bölümün kapılardan ve revizyon döngüsünden geçirilmesine, turnuvaya, süreklilik ve dönem denetimine, anlık görüntü farkına, bütün biçimlerde dışa aktarmaya, DOCX'in geri içe aktarılmasına ve çalışma masası sunucusuna kadar tek akışta yürütür.
+- **Çıktı doğrulama:** EPUB'lar W3C EPUBCheck 5.1.0 ile hatasız; DOCX ve ODT dosyaları XML olarak ayrıştırılır ve LibreOffice ile başsız açılıp dönüştürülür; Kitaptik DOCX'i açık kaynak mammoth kitaplığıyla okunup bölüm başlıkları ve kelime sayıları raporla karşılaştırılır (CI'da Ubuntu işinde).
+- **Sağlamlık:** 1.084 bozuk girdi denemesinde (boş, ikili, Windows-1254, BOM, bozuk JSON, bozuk DOCX/ODT/EPUB, DOCTYPE/ENTITY içeren XML, yol aşımı denemeleri, bozuk durum dosyaları) Python izi yok; bütün hata iletileri Türkçe. Ayrıntı için `HIKAYE_AYIKLA=1`.
 - **Türkçe uyum:** `turkce_uyum_denetle.py` her gönderimde CJK karakteri, ASCII'leştirilmiş Türkçe, yaygın yazım yanlışları, bozuk kodlama ve düzyazıya sızan İngilizce için bütün depoyu tarar.
-- **Beceri değerlendirmeleri:** `evals/` altında 27 vaka: her beceri için tetiklenme ve sonuç vakaları, ayrıca ilgisiz isteklerde tetiklenmeme vakaları. Çalıştırmak için (Claude hesabı gerekir):
+- **Beceri değerlendirmeleri:** `evals/` altında 28 vaka: her beceri için tetiklenme ve sonuç vakaları, ayrıca ilgisiz isteklerde tetiklenmeme vakaları. Çalıştırmak için (Claude hesabı gerekir):
 
 ```bash
 claude plugin eval . --runs 1 --ablation none   # hızlı deneme
@@ -430,6 +463,12 @@ Eklentiyi güncelleyin (`claude plugin marketplace update …` ya da `npx skills
 </details>
 
 <details>
+<summary><b>Kitabımı Kitaptik'e benim yerime yükler mi?</b></summary>
+
+Hayır. `/kitaptik-yayimla` hesabınıza giriş yapmaz, şifre istemez, siteyle bağlantı kurmaz; dosyaları ve metinleri hazırlar. Kitaptik'te **Yeni Kitap** formunu doldurup **Toplu Yükle** ile DOCX'i verir, **Yayınla** düğmesine siz basarsınız. Adımlar: [docs/KITAPTIK-ILE-YAYIMLAMA.md](docs/KITAPTIK-ILE-YAYIMLAMA.md).
+</details>
+
+<details>
 <summary><b>Windows'ta çalışır mı?</b></summary>
 
 Evet; testler Windows üzerinde de çalışır. `python3` yoksa `py -3` kullanın. Klonladığınız depoda `.agents/skills` bağlantısı için `git config core.symlinks true` gerekir.
@@ -442,6 +481,7 @@ Evet; testler Windows üzerinde de çalışır. `python3` yoksa `py -3` kullanı
 - [x] Yapı yöntemleri, kar tanesi, sahne kartları; kurgu ansiklopedisi; ipucu defteri; özet katmanları (2.0)
 - [x] Yazar onaylı revizyon döngüsü, bölüm turnuvası, ses izi, anlık görüntü ve fark, yazım panosu (2.0)
 - [x] DOCX, ODT, baskı PDF'i; DOCX/ODT/EPUB içe aktarma; Osmanlı ve erken Cumhuriyet kartları, dönem denetimi (2.0)
+- [x] Kitaptik'te yayımla: denetim, toplu yükleme DOCX'i, kitap bilgileri ve kontrol listesi (2.1)
 - [ ] Karakter bazında ses izi: karakterlerin repliklerini birbirinden ayıran ölçüler
 - [ ] Beta okur geri bildirimlerini toplayan HTML okuma kopyası (yerel, sunucusuz)
 - [ ] Topluluk tür kartları: bilimkurgu alt türleri, köy romanı, 1980 sonrası kent romanı

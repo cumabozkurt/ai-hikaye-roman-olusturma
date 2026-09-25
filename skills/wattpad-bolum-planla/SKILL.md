@@ -3,14 +3,14 @@ name: wattpad-bolum-planla
 description: "Wattpad ve benzeri bölümlü çevrim içi yayın için bölüm planlaması: bölüm uzunluklarını 1.500–3.000 kelime aralığına göre denetler, uzun bölümleri sahne sınırlarından böler, telefonda okunurluğu ve bölüm sonu kancalarını kontrol eder, düzenli yayın takvimi ve tampon önerisi üretir; etiket, tanıtım ve yazar notu hazırlar. Tetikleyiciler: /wattpad-bolum-planla, \"Wattpad'e yükleyeceğim\", \"yayın takvimi\", \"bölümü böl\", \"Wattpad etiketleri\"."
 license: MIT
 compatibility: "Python 3.11+."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
 ---
 
 # wattpad-bolum-planla: Wattpad Bölüm ve Yayın Planı
 
 Kitabı Wattpad ve benzeri bölümlü yayın platformlarının okur alışkanlıklarına göre bölümlere ve bir yayın düzenine oturtursun. Metnin içeriğine dokunmazsın; bölme, sıralama ve yayın hazırlığı yaparsın.
 
-**Önemli:** Wattpad Türkiye'de Temmuz 2024'ten beri mahkeme kararıyla erişime kapalıdır (ayrıntı: `kaynaklar/wattpad-rehberi.md`). Yazar Türkiye'den yayın yapacaksa bunu ilk adımda hatırlat; erişim engelini aşma yöntemi önerme. Bu becerinin ölçüleri ve takvimi her bölümlü platformda geçerlidir.
+**Önemli:** Wattpad Türkiye'de Temmuz 2024'ten beri mahkeme kararıyla erişime kapalıdır (ayrıntı: `kaynaklar/wattpad-rehberi.md`). Yazar Türkiye'den yayın yapacaksa bunu ilk adımda hatırlat; erişim engelini aşma yöntemi önerme. Bu becerinin ölçüleri ve takvimi her bölümlü platformda geçerlidir. Türkiye'den erişilebilen Türkçe bölümlü platform Kitaptik'e (kitaptik.com) yükleme hazırlığı için takvimden sonra `/kitaptik-yayimla` öner.
 
 Yollar bu SKILL.md dosyasının klasörüne görelidir (Claude Code'da `${CLAUDE_SKILL_DIR}`). Python komutu `python3`; bulunamazsa `python`, Windows'ta `py -3`. Önce `kaynaklar/wattpad-rehberi.md` ve `kaynaklar/platformlar-turkiye.md` (§1) dosyalarını oku.
 
@@ -42,4 +42,4 @@ python3 betikler/wattpad_planla.py takvim --proje <kitap> --baslangic 2026-10-02
 En az 3 bölümlük tampon önerilir; tampon azsa uyar.
 
 4. **Yayın hazırlığı** (`kaynaklar/wattpad-rehberi.md` şablonları): kitap tanıtımı (ilk cümle kanca, 150–250 kelime), 10–20 etiket (Türkçe + yaygın İngilizce karşılıklar), içerik derecelendirmesi (Genel / Yetişkin), telif seçimi, kapak (`/kapak-tasarla`), bölüm başlıkları, isteğe bağlı kısa yazar notu.
-5. **Rapor:** denetim özeti, bölme önerileri, takvim, hazırlık listesi.
+5. **Rapor:** denetim özeti, bölme önerileri, takvim, hazırlık listesi. Yazar Kitaptik'te yayımlayacaksa sıradaki adım `/kitaptik-yayimla` (Kitaptik'in bölüm sınırı 10.000 kelime, başlık sınırı 77 karakterdir).

@@ -3,7 +3,7 @@ name: kurgu-ansiklopedisi
 description: "Romanın kurgu ansiklopedisini (story bible) tutar ve metinle karşılaştırır: karakter, mekân, nesne, grup, dünya kayıtları, karakter mülakatı, ilişki grafiği, zaman çizelgesi, terim sözlüğü; tutarlılık denetimi, bölümlere dağılım, bölüm bağlam paketi, Türkçe tam metin arama, ipucu defteri, dönem uyumsuzluğu. Tetikleyiciler: /kurgu-ansiklopedisi, \"karakter kartı\", \"story bible\", \"zaman çizelgesi\", \"şu olay nerede geçmişti\"."
 license: MIT
 compatibility: "Python 3.11+ (yalnızca standart kitaplık). Proje yapısı: kaynaklar/proje-yapisi.md."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
 ---
 
 # kurgu-ansiklopedisi: Kurgu Ansiklopedisi ve Bilgi Tabanı

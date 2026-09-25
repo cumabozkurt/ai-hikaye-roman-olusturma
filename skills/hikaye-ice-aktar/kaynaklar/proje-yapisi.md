@@ -36,6 +36,8 @@ Klasör ve dosya adları ASCII'dir (Türkçe karakter içermez); böylece Window
 ├── arastirma/                 # hikaye-arastirmaci notları
 ├── karsilastirma/{kitap}/     # örnek alınan kitaplardan seçilmiş çözümleme parçaları
 ├── yayin/                     # e_kitap_derle.py çıktıları (EPUB, DOCX, ODT, HTML, PDF)
+│   ├── kitaptik.md            # Kitaptik yayın bilgisi: kategori, etiket, açıklama (kitaptik_hazirla.py baslat)
+│   └── kitaptik/              # Kitaptik paketi: toplu yükleme DOCX'i, kitap bilgileri, karakterler, kontrol listesi
 ├── .yz-beyaz-liste            # bilinçli tercih edilen kalıplar (isteğe bağlı)
 ├── .yasak-kaliplar            # kitaba özgü yasak ifadeler: ifade => öneri (isteğe bağlı)
 ├── .donem-istisnalari         # donem_denetle.py'nin bilerek geçeceği sözcükler (isteğe bağlı)

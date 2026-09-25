@@ -30,16 +30,17 @@ except ImportError:  # pragma: no cover
 
 KOK = Path(__file__).resolve().parent.parent
 BECERI_SAYISI = len(list((KOK / "skills").glob("*/SKILL.md")))
-SURUM = "2.0.0"
+AJAN_SAYISI = len(list((KOK / "skills" / "hikaye-kurulum" / "varliklar" / "ajanlar").glob("*.md")))
+SURUM = "2.1.0"
 AD = "ai-hikaye-roman-olusturma"
 GORUNEN_AD = "AI Hikaye & Roman Oluşturma"
 DEPO = "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma"
 YAZAR = {"name": "Cuma Bozkurt", "url": "https://github.com/cumabozkurt"}
-KISA = "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı."
-UZUN = (f"{BECERI_SAYISI} Türkçe beceri, 7 ajan ve kancalarla fikirden yayına roman ve öykü yazımı: Wattpad ve Türkiye kitap pazarı taraması, "
+KISA = "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, e-kitap, yayınevi dosyası ve Kitaptik'te yayımlama."
+UZUN = (f"{BECERI_SAYISI} Türkçe beceri, {AJAN_SAYISI} ajan ve kancalarla fikirden yayına roman ve öykü yazımı: Wattpad ve Türkiye kitap pazarı taraması, "
         "roman/öykü çözümleme, bölüm bölüm yazım, 100+ bölümlük süreklilik takibi, TDK yazım denetimi, yapay zekâ tadı giderme, "
-        "kapak, Wattpad yayın takvimi, yayınevi dosyası, EPUB e-kitap, uyarlama sinopsisi ve sesli kitap hazırlığı.")
-ANAHTARLAR = ["turkce", "roman-yazimi", "oyku", "wattpad", "yazarlik", "agent-skills", "claude-code", "codex", "opencode", "tdk", "epub"]
+        "kapak, yayın takvimi, yayınevi dosyası, EPUB/DOCX/PDF e-kitap, Kitaptik (kitaptik.com) yayın paketi, uyarlama sinopsisi ve sesli kitap hazırlığı.")
+ANAHTARLAR = ["turkce", "roman-yazimi", "oyku", "wattpad", "yazarlik", "agent-skills", "claude-code", "codex", "opencode", "tdk", "epub", "kitaptik"]
 KANCA_YOLU = "skills/hikaye-kurulum/varliklar/kancalar/hikaye_kanca.py"
 ZCODE_KLASORU = "skills/hikaye-kurulum/varliklar/zcode"
 

@@ -3,7 +3,7 @@ name: yazim-panosu
 description: "Yazma alışkanlığını ve sürümleri yönetir: kitap, bitiş tarihi ve günlük kelime hedefi; yazma serisi, 7 günlük hız, tahmini bitiş, gereken günlük hız, bölüm ilerlemesi ve HTML pano; anlık görüntü, iki sürüm arasında satır ve kelime farkı, geri yükleme; nerede kaldım raporu. Tetikleyiciler: /yazim-panosu, \"günlük hedef\", \"ne kadar yazdım\", \"ne zaman biter\", \"sürüm al\", \"eski hâline döndür\"."
 license: MIT
 compatibility: "Python 3.11+ (yalnızca standart kitaplık)."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
 ---
 
 # yazim-panosu: Hedefler, İstatistikler ve Sürümler

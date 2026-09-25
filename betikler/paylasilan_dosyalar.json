@@ -1,7 +1,14 @@
 {
   "$aciklama": "paylasilan/ altındaki tek doğru kaynak dosyaların hangi becerilere kopyalanacağı. 'betikler' dosyalarının import bağımlılıkları otomatik eklenir. Düzenledikten sonra: python betikler/paylasilanlari_esitle.py",
   "betikler": {
+    "bolum-dongusu": [
+      "revizyon_dongusu.py",
+      "turnuva.py",
+      "ses_izi.py",
+      "anlik_goruntu.py"
+    ],
     "e-kitap-derle": [
+      "e_kitap_derle.py",
       "metin_analizi.py"
     ],
     "hikaye": [
@@ -29,6 +36,15 @@
       "metin_olcum.py"
     ],
     "kapak-tasarla": [],
+    "kitaptik-yayimla": [
+      "kitaptik_hazirla.py"
+    ],
+    "kurgu-ansiklopedisi": [
+      "kurgu_ansiklopedisi.py",
+      "bilgi_ara.py",
+      "ipucu_defteri.py",
+      "donem_denetle.py"
+    ],
     "metin-incele": [
       "ai_kalip_denetle.py",
       "bozulma_denetle.py",
@@ -59,6 +75,10 @@
     ],
     "roman-cozumle": [
       "metin_olcum.py"
+    ],
+    "roman-planla": [
+      "kurgu_plani.py",
+      "proje_durumu.py"
     ],
     "roman-tara": [
       "liste_tara.py"
@@ -106,6 +126,11 @@
       "ai_kalip_denetle.py",
       "metin_analizi.py"
     ],
+    "yazim-panosu": [
+      "yazim_istatistik.py",
+      "anlik_goruntu.py",
+      "proje_durumu.py"
+    ],
     "yz-tadi-gider": [
       "ai_kalip_denetle.py",
       "bozulma_denetle.py",
@@ -113,27 +138,6 @@
       "yazim_denetle.py",
       "yazar_hafizasi.py",
       "metin_analizi.py"
-    ],
-    "roman-planla": [
-      "kurgu_plani.py",
-      "proje_durumu.py"
-    ],
-    "kurgu-ansiklopedisi": [
-      "kurgu_ansiklopedisi.py",
-      "bilgi_ara.py",
-      "ipucu_defteri.py",
-      "donem_denetle.py"
-    ],
-    "bolum-dongusu": [
-      "revizyon_dongusu.py",
-      "turnuva.py",
-      "ses_izi.py",
-      "anlik_goruntu.py"
-    ],
-    "yazim-panosu": [
-      "yazim_istatistik.py",
-      "anlik_goruntu.py",
-      "proje_durumu.py"
     ]
   },
   "kaynaklar": {
@@ -193,7 +197,8 @@
       "yayinevi-dosyasi",
       "metin-incele",
       "hikaye",
-      "uyarlama-sinopsis"
+      "uyarlama-sinopsis",
+      "kitaptik-yayimla"
     ],
     "uslup-karari.md": [
       "roman-yaz",

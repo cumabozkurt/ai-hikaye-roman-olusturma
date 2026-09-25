@@ -1,5 +1,6 @@
 # Nuri Usta
 
+- Rol: Defne'nin dedesi; olayların kaynağı
 - Yaş: 78 (öldüğünde)
 - Doğum yılı: 1946
 - Göz rengi: mavi

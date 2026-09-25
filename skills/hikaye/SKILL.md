@@ -3,7 +3,7 @@ name: hikaye
 description: "Hikâye ve roman yazımının giriş noktası: isteği doğru beceriye yönlendirir, yazım projesinin durumunu özetler, birden fazla kitap arasında geçiş yapar, yazar hafızasını yönetir ve yerel çalışma masası panelini açar. Tetikleyiciler: /hikaye, \"hikâye yazmak istiyorum\", \"nereden başlasam\", \"kitaplarım\", \"projenin durumu ne\", \"çalışma masasını aç\", \"bunu hatırla\"."
 license: MIT
 compatibility: "Python 3.11+ (çalışma masası için tarayıcı). Claude Code, Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "oh-story-claudecode/story"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "oh-story-claudecode/story"}
 ---
 
 # hikaye: Giriş ve Yönlendirme
@@ -53,6 +53,7 @@ Kısa bir durum özeti ver:
 | Tutarlılık hatası avı | `/sureklilik-denetle` |
 | Elimdeki taslağı (Word, ODT, EPUB, TXT) sisteme almak | `/hikaye-ice-aktar` |
 | Kapak | `/kapak-tasarla` |
+| Kitabı okura ulaştırmak: Kitaptik'te (kitaptik.com) yayımlamak | `/kitaptik-yayimla` |
 | Wattpad yayın takvimi, bölüm bölme | `/wattpad-bolum-planla` |
 | Yayınevine gönderilecek dosya | `/yayinevi-dosyasi` |
 | Dizi / film uyarlaması için sinopsis | `/uyarlama-sinopsis` |

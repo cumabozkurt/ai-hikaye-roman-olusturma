@@ -2,9 +2,9 @@
 
 > Bu dosya depodaki özgün örnek projedir; yapıyı ve iş akışını göstermek için yazılmıştır.
 
-- Tür: Polisiye-romantik (Wattpad TR "Gizem/Gerilim" + "Romantik" etiketleri)
+- Tür: Polisiye-romantik (Kitaptik: Roman › "Polisiye ve Gizem" + "Aşk" alt kategorileri)
 - Hedef okur: 18–35 yaş, İstanbul atmosferini ve yavaş ısınan ilişkileri seven okur
-- Yayın biçimi: Wattpad'de haftada iki bölüm; bölüm başına 2.000–2.500 kelime (örnekte bölümler kısa tutulmuştur)
+- Yayın biçimi: Kitaptik'te haftada iki bölüm; bölüm başına 2.000–2.500 kelime (örnekte bölümler kısa tutulmuştur)
 - Toplam: 3 cilt, 60 bölüm, yaklaşık 130.000 kelime
 - Tek cümlelik öz: Dedesinin kırk yıllık saat dükkânını devralan Defne, bütün saatlerin aynı dakikada durduğu sabah, dedesinin sakladığı bir suçun izine düşer.
 

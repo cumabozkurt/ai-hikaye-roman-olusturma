@@ -3,7 +3,7 @@ name: yz-tadi-gider
 description: "Metindeki yapay zekâ tadını giderir: kalıp ifadeler, çeviri kokan yapılar, duygu adlandırma, benzetme yığını, üçlü sıralamalar, ders veren sonlar ve tekrar döngüleri. Yazarın üslubunu koruyarak yeniden yazar, önce/sonra raporu verir. Tetikleyiciler: /yz-tadi-gider, \"yapay zekâ yazmış gibi\", \"robotik duruyor\", \"daha doğal yap\", \"AI tadını gider\"."
 license: MIT
 compatibility: "Python 3.11+. Claude Code, Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "oh-story-claudecode/story-deslop"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "oh-story-claudecode/story-deslop"}
 ---
 
 # yz-tadi-gider: Yapay Zekâ Tadını Giderme

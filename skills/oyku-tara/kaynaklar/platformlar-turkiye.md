@@ -4,10 +4,11 @@
 
 ## 1. Çevrim içi yazım ve okuma
 
-> **Erişim durumu (Eylül 2026):** Wattpad, Ankara 10. Sulh Ceza Hâkimliği'nin 12 Temmuz 2024 tarihli, 2024/6507 sayılı kararıyla Türkiye'de erişime kapatılmıştır ve engel hâlâ sürmektedir. Bu paket erişim engelini aşma yöntemi önermez. Wattpad'e ilişkin ölçüler (bölüm uzunluğu, kanca, düzenli yayın, etiket) bütün bölümlü çevrim içi yayın platformları için geçerlidir; yurt dışındaki Türkçe okur kitlesi Wattpad'e erişebilir. Türkiye'den yayın yapacaksanız yurt içinden erişilebilen bölümlü yayın platformlarını, kendi sitenizi ya da e-kitap/basılı yolu seçin; platformu seçmeden önce kullanım koşullarını ve yaş sınırı kurallarını okuyun.
+> **Erişim durumu (Eylül 2026):** Wattpad, Ankara 10. Sulh Ceza Hâkimliği'nin 12 Temmuz 2024 tarihli, 2024/6507 sayılı kararıyla Türkiye'de erişime kapatılmıştır ve engel hâlâ sürmektedir. Bu paket erişim engelini aşma yöntemi önermez. Wattpad'e ilişkin ölçüler (bölüm uzunluğu, kanca, düzenli yayın, etiket) bütün bölümlü çevrim içi yayın platformları için geçerlidir; yurt dışındaki Türkçe okur kitlesi Wattpad'e erişebilir. Türkiye'den yayın yapacaksanız yurt içinden erişilebilen bölümlü yayın platformlarını (örneğin Kitaptik), kendi sitenizi ya da e-kitap/basılı yolu seçin; platformu seçmeden önce kullanım koşullarını ve yaş sınırı kurallarını okuyun.
 
 | Platform | Ne için | Notlar |
 |---|---|---|
+| **Kitaptik** ([kitaptik.com](https://kitaptik.com); Türkçe, Türkiye'den erişilebilir; web, iOS ve Android) | Bölüm bölüm yayın, ücretsiz okuma ve PDF indirme, yazar kazancı | Ücretsiz üyelikle kitap ve bölüm eklenir; Word'den toplu yükleme (her Başlık 1 bir bölüm, bölüm başına en çok 10.000 kelime). Okunma, beğeni, yorum, puan ve kütüphane sayıları; kategori ve liste sıralamaları. Aktif Premium üyelik ve yayımlanmış kitapla okur aboneliği, destek ve ücretli kitaptan yazar payı %40 (Eylül 2026). Hazırlık: `kitaptik-yayimla` becerisi. |
 | **Wattpad** (Türkçe içerik çok güçlü; Türkiye'de Temmuz 2024'ten beri erişim engelli) | Bölüm bölüm yayın, genç okur, hayran kitlesi | Etiketler (etiket = keşif), okunma/oy/yorum sayıları, "Tamamlandı" işareti. Genç kurgu, aşk, fantastik, gizem/gerilim ve hayran kurgu en kalabalık alanlar. Wattpad'de öne çıkan birçok Türkçe kitap basılı olarak da yayımlandı. |
 | **1000Kitap** | Türk okurların kitap sosyal ağı | Okur yorumları, alıntılar, "okuyacaklarım" listeleri; basılı kitap sonrası görünürlük için önemli. |
 | **Goodreads** | Uluslararası okur ağı | Çeviri ve yabancı hak satışında referans. |

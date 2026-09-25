@@ -52,7 +52,7 @@ jobs:
         run: python -m pytest -q
 
   cikti-dogrulama:
-    name: Çıktı doğrulama · EPUBCheck + LibreOffice
+    name: Çıktı doğrulama · EPUBCheck + LibreOffice + mammoth
     runs-on: ubuntu-latest
     env:
       PYTHONUTF8: "1"
@@ -77,5 +77,12 @@ jobs:
           curl -fsSL -o /tmp/epubcheck.zip https://github.com/w3c/epubcheck/releases/download/v5.1.0/epubcheck-5.1.0.zip
           unzip -q /tmp/epubcheck.zip -d /tmp
           echo "EPUBCHECK_JAR=/tmp/epubcheck-5.1.0/epubcheck.jar" >> "$GITHUB_ENV"
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: mammoth 1.11.0 (Kitaptik DOCX'ini bağımsız okumak için)
+        run: |
+          npm install --prefix /tmp/mammoth --no-audit --no-fund mammoth@1.11.0
+          echo "MAMMOTH_NODE_PATH=/tmp/mammoth/node_modules" >> "$GITHUB_ENV"
       - name: Dışa ve içe aktarma testleri (atlanmadan)
-        run: python -m pytest -q -rs testler/test_v2_disa_ve_ice_aktarim.py testler/test_v2_uctan_uca.py
+        run: python -m pytest -q -rs testler/test_v2_disa_ve_ice_aktarim.py testler/test_v2_uctan_uca.py testler/test_kitaptik.py

@@ -11,8 +11,8 @@ Bu rapor, üst kaynak [zenstory-ai/oh-story-claudecode](https://github.com/zenst
 | (a) İşlevsellik ve üst kaynağa göre bütünlük | 9 | 9 | 0 |
 | (b) Türkçe dil kalitesi ve tr-TR uyumu | 10 | 10 | 0 |
 | (c) Türkiye pazarı ve kültürel uygunluk | 8 | 8 | 0 |
-| (d) Güncel teknoloji ve ev sahibi uyumluluğu | 12 | 12 | 0 |
-| (e) Kod kalitesi, testler, güvenlik ve sağlamlık | 11 | 11 | 0 |
+| (d) Güncel teknoloji ve ev sahibi uyumluluğu | 13 | 13 | 0 |
+| (e) Kod kalitesi, testler, güvenlik ve sağlamlık | 12 | 12 | 0 |
 | (f) Belgeler ve kurulum deneyimi | 9 | 9 | 0 |
 
 Son durum: 90 test geçiyor (Python 3.11, 3.13 ve 3.14 ile yerelde denendi), statik denetim 0 hata, Türkçe uyum denetimi 0 bulgu, depoda CJK karakteri 0.
@@ -79,6 +79,7 @@ Kaynaklar: [İFÖD, Wattpad erişime engellendi](https://ifade.org.tr/engelliweb
 | d10 | Python sürümleri: güncel kararlı sürüm 3.14; en düşük desteklenen 3.11. | CI Ubuntu'da 3.11–3.14, Windows ve macOS'ta 3.13. Yerelde 3.11.16, 3.13.5 ve 3.14.7 ile bütün testler çalıştırıldı; bütün `.py` dosyaları 3.11 sözdizimiyle derleniyor. |
 | d11 | pytest 9: `--strict-markers`, `testpaths`. | `pytest.ini` bu ayarlarla; ağ gerektiren testler `ag` işaretiyle ayrılıyor. |
 | d12 | GitHub Actions eylemlerinin eski ana sürümleri Node 20 uyarısı veriyor. | `actions/checkout@v5`, `actions/setup-python@v6`. |
+| d13 | İlk CI koşusunda Windows'ta örnek takip dosyaları bayt bayt eşleşmedi: git depoyu CRLF ile açıyor, betikler ise platformun varsayılan satır sonuyla yazıyordu. | `.gitattributes` ile bütün metin dosyaları LF; üretilen dosyalar (takip, istem, takvim, dosya paketi, sesli kitap, kanca durumu) her platformda `newline="\n"` ile yazılıyor. Yazarın kendi dosyasını yerinde düzelten `noktalama_duzelt.py` platform varsayılanını korur. |
 
 ## (e) Kod kalitesi, testler, güvenlik ve sağlamlık
 
@@ -95,6 +96,7 @@ Kaynaklar: [İFÖD, Wattpad erişime engellendi](https://ifade.org.tr/engelliweb
 | e9 | Yeni betikler testsiz kalabilir. | "Kapsam bekçisi" testi, her betik adının testlerde geçtiğini denetliyor. |
 | e10 | Paylaşılan kopyalar zamanla birbirinden ayrışabilir. | `paylasilanlari_esitle.py --denetle` CI'da; içe aktarma bağımlılıkları da otomatik çözülüyor. |
 | e11 | Kurulum betikleri (`kur.sh`, `kur.ps1`) `__pycache__` ve bağlantılı hedefleri taşımamalı. | İkisi de önbellek klasörlerini atıyor, bağlantılı hedefleri atlıyor; `kur.sh` geçici `HOME` ile test ediliyor. |
+| e12 | CDP testi Windows'ta JSON çıktısındaki kaçışlı ters eğik çizgiler yüzünden yolu bulamıyordu. | Test çıktıyı JSON olarak çözüp karşılaştırıyor. |
 
 ## (f) Belgeler ve kurulum deneyimi
 

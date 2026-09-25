@@ -59,7 +59,7 @@ def olustur(kutuphane: Path) -> dict[str, Any]:
     kartlar = [k for kitap in sorted(p for p in kutuphane.iterdir() if p.is_dir() and not p.name.startswith("_"))
                for k in kartlari_oku(kitap)]
     veri = {"sema_surumu": 1, "kart_sayisi": len(kartlar), "kartlar": kartlar}
-    (kutuphane / "_ilham-dizini.json").write_text(json.dumps(veri, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (kutuphane / "_ilham-dizini.json").write_text(json.dumps(veri, ensure_ascii=False, indent=2) + "\n", encoding="utf-8", newline="\n")
     return {"tamam": True, "kart_sayisi": len(kartlar)}
 
 

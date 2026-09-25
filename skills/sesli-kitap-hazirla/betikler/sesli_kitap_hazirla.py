@@ -90,7 +90,7 @@ def hazirla(dosyalar: list[Path], cikti: Path, hiz: int, yeniden: bool) -> dict[
         hedef = cikti / "seslendirme" / (f"{d.stem}.txt" if d.stem != "metin" else f"{d.parent.name}.txt")
         if hedef.exists() and not yeniden:
             raise FileExistsError(f"{hedef} zaten var (yenilemek için --yeniden)")
-        hedef.write_text(seslendirme_metni(metin), encoding="utf-8")
+        hedef.write_text(seslendirme_metni(metin), encoding="utf-8", newline="\n")
         kelime = metin_olcum.kelime_say(metin)
         kayitlar.append({"sira": i, "dosya": d.name, "kelime": kelime, "dakika": sure_dk(kelime, hiz), "cikti": str(hedef)})
     toplam = sum(k["kelime"] for k in kayitlar)
@@ -101,7 +101,7 @@ def hazirla(dosyalar: list[Path], cikti: Path, hiz: int, yeniden: bool) -> dict[
         yol = cikti / ad
         if yol.exists() and not yeniden:
             raise FileExistsError(f"{yol} zaten var (yenilemek için --yeniden)")
-        yol.write_text(icerik, encoding="utf-8")
+        yol.write_text(icerik, encoding="utf-8", newline="\n")
     aday = telaffuz_adaylari(metinler)
     t = ["# Telaffuz Sözlüğü (aday)", "", "Seslendirmen ya da TTS için doğru okunuşu yazın. Örnek: `Kuzguncuk — kuz-gun-cuk (vurgu sonda)`.", ""]
     for baslik, anahtar in (("Özel adlar", "ozel_adlar"), ("Kısaltmalar", "kisaltmalar"), ("Sayılar ve saatler", "sayilar"), ("Yabancı görünümlü sözcükler", "yabanci_gorunumlu")):
@@ -109,7 +109,7 @@ def hazirla(dosyalar: list[Path], cikti: Path, hiz: int, yeniden: bool) -> dict[
     yol = cikti / "telaffuz.md"
     if yol.exists() and not yeniden:
         raise FileExistsError(f"{yol} zaten var (yenilemek için --yeniden)")
-    yol.write_text("\n".join(t), encoding="utf-8")
+    yol.write_text("\n".join(t), encoding="utf-8", newline="\n")
     return {"tamam": True, "toplam_kelime": toplam, "toplam_dakika": toplam_dk, "bolumler": kayitlar, "klasor": str(cikti)}
 
 

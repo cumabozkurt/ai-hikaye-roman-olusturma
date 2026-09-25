@@ -182,7 +182,7 @@ def main(argv: list[str] | None = None) -> int:
     if arg.cikti is not None:
         hedef = Path(arg.cikti) if arg.cikti else calisma_klasoru(arg.proje, arg.bolum) / "yazar-istemi.md"
         hedef.parent.mkdir(parents=True, exist_ok=True)
-        hedef.write_text(istem, encoding="utf-8")
+        hedef.write_text(istem, encoding="utf-8", newline="\n")
         rapor.append(f"istem kaydedildi: {hedef}")
     print(istem + "\n===\n" + "\n".join(rapor))
     return 0

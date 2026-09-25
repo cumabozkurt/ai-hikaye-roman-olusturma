@@ -141,7 +141,7 @@ def bol(dosya: Path, hedef: int, cikti: Path | None) -> dict[str, Any]:
             yol = cikti / f"{dosya.stem}_parca-{i + 1}.md"
             if yol.exists():
                 raise FileExistsError(f"{yol} zaten var; üzerine yazılmaz")
-            yol.write_text(parca, encoding="utf-8")
+            yol.write_text(parca, encoding="utf-8", newline="\n")
             yazilan.append({"dosya": str(yol), "kelime": metin_olcum.kelime_say(parca)})
         sonuc["yazilan"] = yazilan
     return sonuc
@@ -221,7 +221,7 @@ def main(argv: list[str] | None = None) -> int:
                 raise ValueError("en az bir gün verin")
             sonuc = takvim(arg.proje, datetime.strptime(arg.baslangic, "%Y-%m-%d").date(), sorted(set(gunler)), arg.saat, arg.tampon)
             if arg.cikti:
-                arg.cikti.write_text(takvim_md(sonuc), encoding="utf-8")
+                arg.cikti.write_text(takvim_md(sonuc), encoding="utf-8", newline="\n")
             if not arg.json:
                 print(takvim_md(sonuc), end="")
                 return 0

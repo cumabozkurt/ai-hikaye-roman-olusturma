@@ -106,7 +106,7 @@ def uret(istem: str, platform: str, cikti: Path, kuru: bool) -> dict[str, Any]:
     mevcut = sorted(cikti.glob("kapak-*.png"))
     yol = cikti / f"kapak-{len(mevcut) + 1:02d}.png"
     yol.write_bytes(base64.b64decode(veri["b64_json"]))
-    (cikti / f"{yol.stem}-istem.txt").write_text(istem, encoding="utf-8")
+    (cikti / f"{yol.stem}-istem.txt").write_text(istem, encoding="utf-8", newline="\n")
     return {"tamam": True, "dosya": str(yol), "model": model, "boyut": boyut}
 
 

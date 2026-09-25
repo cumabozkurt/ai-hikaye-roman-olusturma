@@ -80,7 +80,7 @@ def satir_ara(yol: Path, anahtar: str) -> str:
 def yaz(yol: Path, icerik: str, yazilan: list[str]) -> None:
     if yol.exists():
         raise PaketHatasi(f"{yol} zaten var; üzerine yazılmaz (klasörü silin ya da --cikti değiştirin)")
-    yol.write_text(icerik, encoding="utf-8")
+    yol.write_text(icerik, encoding="utf-8", newline="\n")
     yazilan.append(str(yol))
 
 

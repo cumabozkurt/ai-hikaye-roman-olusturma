@@ -142,7 +142,7 @@ def main(argv: list[str] | None = None) -> int:
         farkli.append(goreli)
         if not arg.denetle:
             yol.parent.mkdir(parents=True, exist_ok=True)
-            yol.write_text(icerik, encoding="utf-8")
+            yol.write_text(icerik, encoding="utf-8", newline="\n")
     komut_klasoru = KOK / ZCODE_KLASORU / "commands"
     fazla = [p for p in komut_klasoru.glob("*.md") if f"{ZCODE_KLASORU}/commands/{p.name}" not in uret] if komut_klasoru.is_dir() else []
     for p in fazla:

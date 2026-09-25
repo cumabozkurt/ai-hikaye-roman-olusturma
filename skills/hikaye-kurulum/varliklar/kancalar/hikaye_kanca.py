@@ -302,7 +302,7 @@ def devir_notu_yaz(kok: Path) -> str:
     icerik = "\n".join(satirlar) + "\n"
     hedef = kok / ".hikaye" / "devir-notu.md"
     hedef.parent.mkdir(parents=True, exist_ok=True)
-    hedef.write_text(icerik, encoding="utf-8")
+    hedef.write_text(icerik, encoding="utf-8", newline="\n")
     return icerik
 
 
@@ -351,7 +351,7 @@ def bekleyen_oku(girdi: dict[str, Any]) -> dict[str, Any]:
 def bekleyen_yaz(girdi: dict[str, Any], durum: dict[str, Any]) -> None:
     yol = bekleyen_yolu(girdi)
     if yol:
-        yol.write_text(json.dumps(durum, ensure_ascii=False), encoding="utf-8")
+        yol.write_text(json.dumps(durum, ensure_ascii=False), encoding="utf-8", newline="\n")
 
 
 # ------------------------------------------------------------------ çıktı biçimleri

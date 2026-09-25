@@ -166,7 +166,7 @@ def main(argv: list[str] | None = None) -> int:
     metin = json.dumps(ozet, ensure_ascii=False, indent=2) + "\n" if arg.json else rapor_metni(ozet)
     if arg.cikti:
         arg.cikti.parent.mkdir(parents=True, exist_ok=True)
-        arg.cikti.write_text(metin, encoding="utf-8")
+        arg.cikti.write_text(metin, encoding="utf-8", newline="\n")
         print(f"Yazıldı: {arg.cikti}")
     else:
         sys.stdout.write(metin)

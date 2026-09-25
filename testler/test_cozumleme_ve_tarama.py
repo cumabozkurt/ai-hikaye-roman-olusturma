@@ -141,7 +141,8 @@ def test_cdp_baslatici_kuru_calisir(tmp_path: Path) -> None:
     sonuc = calistir("cdp_chrome_baslat.py", "--kuru", "--profil", tmp_path / "profil", "--tarayici", sys.executable)
     assert sonuc.returncode == 0, sonuc.stdout + sonuc.stderr
     assert "--remote-debugging-port=9222" in sonuc.stdout and "127.0.0.1" in sonuc.stdout
-    assert str(tmp_path / "profil") in sonuc.stdout
+    komut = " ".join(json_cikti(sonuc)["komut"])  # JSON çözülür: Windows yolundaki ters eğik çizgiler kaçışlıdır
+    assert str(tmp_path / "profil") in komut
 
 
 def test_cdp_istemci_tarayici_yokken_anlasilir_hata() -> None:

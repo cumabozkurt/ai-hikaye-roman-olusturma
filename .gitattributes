@@ -1,0 +1,6 @@
+# Satır sonları her platformda LF: örnek takip dosyaları bayt bayt karşılaştırılır.
+* text=auto eol=lf
+*.ps1 text eol=crlf
+*.png binary
+*.jpg binary
+*.webp binary

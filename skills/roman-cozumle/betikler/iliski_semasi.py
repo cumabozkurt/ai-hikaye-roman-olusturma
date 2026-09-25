@@ -112,7 +112,7 @@ def main(argv: list[str] | None = None) -> int:
     if cikti == "-":
         sys.stdout.write(metin)
     else:
-        Path(cikti).write_text(metin, encoding="utf-8")
+        Path(cikti).write_text(metin, encoding="utf-8", newline="\n")
         print(f"Yazıldı: {cikti} ({len(iliskiler)} ilişki)")
     return 0
 

@@ -18,7 +18,7 @@ Kurulum güvenlidir: `CLAUDE.md`/`AGENTS.md` içinde yalnızca `<!-- ai-hikaye:b
 
 ## OpenAI Codex
 
-- Eklenti: `codex plugin marketplace add cumabozkurt/ai-hikaye-roman-olusturma`, ardından `/plugins`. Depo klonlandıysa `.agents/skills` bağlantısı becerileri doğrudan bulundurur (Windows'ta `git config core.symlinks true` gerekir).
+- Eklenti: `codex plugin marketplace add cumabozkurt/ai-hikaye-roman-olusturma`, ardından `codex plugin add ai-hikaye-roman-olusturma@ai-hikaye-roman-olusturma` ya da Codex içinde `/plugins`. Depo klonlandıysa `.agents/skills` bağlantısı becerileri doğrudan bulundurur (Windows'ta `git config core.symlinks true` gerekir).
 - `$hikaye-kurulum` şunları yazar: `AGENTS.md` bloğu, `.codex/agents/*.toml` (salt okunur ajanlarda `sandbox_mode = "read-only"`), `.codex/hooks.json` (`SessionStart`, `PreToolUse`, `PostToolUse`, `PreCompact`, `SessionEnd`; Windows için `commandWindows`; bağlam kartı diske taşmasın diye `additionalContextLimit`).
 - **Kancalar `/hooks` ile güven onayı verilene kadar sessizce atlanır**, plan kapısı dahil. İlk oturumda onay verin.
 
@@ -53,6 +53,10 @@ Kurulum güvenlidir: `CLAUDE.md`/`AGENTS.md` içinde yalnızca `<!-- ai-hikaye:b
 | Kancalar çalışmıyor | `.hikaye-kurulu` var mı? `kur.py --denetle` çıktısına bakın; Codex'te `/hooks` onayı |
 | "Python bulunamadı" | Python 3.11+ kurun; Windows'ta `py -3` kullanılabilir |
 | Plan kapısı yanlışlıkla engelliyor | Bölüm planı dosya adı `plan/bolum-plani_NNN.md` ve içinde `Hedef uzunluk: 2.200 kelime` satırı olmalı; önceki bölüm `hikayectl.py bolum kaydet` ile kaydedilmiş olmalı |
+| `npx skills add` çok sayıda "… does not support global skill installation" satırı yazıyor | Zararsızdır: araç bulduğu bütün ajanlara kurmayı dener. Yalnızca kullandıklarınızı seçmek için `-a claude-code codex opencode` ekleyin |
+| `claude plugin validate` "CLAUDE.md eklenti bağlamı olarak yüklenmez" uyarısı veriyor | Beklenen durumdur: depo kökündeki `CLAUDE.md` yalnızca geliştiriciler içindir; eklenti becerileri etkilenmez |
+| Bir betik kısa bir Türkçe hata verip duruyor | Ayrıntılı Python izini görmek için komutu `HIKAYE_AYIKLA=1` ortam değişkeniyle yeniden çalıştırın ve hata bildirimine ekleyin |
+| Türkçe karakterler bozuk görünüyor | Dosyayı UTF-8 olarak kaydedin. Betikler Windows-1254 dosyaları uyarıyla okur; Word belgelerini önce `.txt` ya da `.md` olarak dışa aktarın |
 | Wattpad taraması bağlantı hatası veriyor | Wattpad Türkiye'de erişime kapalıdır; `--girdi` ile kayıtlı yanıt kullanın ya da mağaza listelerine `tarayici-cdp` ile bakın |
 
 Ayrıntılı tanılama: [`skills/hikaye-kurulum/kaynaklar/tanilama.md`](../skills/hikaye-kurulum/kaynaklar/tanilama.md).

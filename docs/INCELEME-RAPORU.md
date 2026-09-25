@@ -145,3 +145,117 @@ Kaynaklar: [İFÖD, Wattpad erişime engellendi](https://ifade.org.tr/engelliweb
 - pytest: <https://docs.pytest.org/en/stable/>
 - GitHub Actions `setup-python`: <https://github.com/actions/setup-python>
 - TDK Yazım Kılavuzu: <https://sozluk.gov.tr/>
+
+---
+
+## İkinci Tur
+
+İnceleme tarihi: 25 Eylül 2026 · Sürüm: 1.0.0 → 1.1.0.
+
+Birinci turdan sonra bütün dosyalar (beceriler, ajanlar, kancalar, betikler, testler, bildirimler, belgeler, CI) üç bağımsız bakışla **yeniden ve baştan** okundu; her bakış bir öncekinin raporuna bakmadan kendi listesini çıkardı. Dördüncü, kısa bir bakış Türkiye pazarına göre ürün önceliklerini değerlendirdi.
+
+### Özet
+
+| Bakış | Bulgu | Düzeltilen | Açık kalan |
+|---|---|---|---|
+| (i) Kuşkucu kıdemli Python ve araç mühendisi | 9 | 9 | 0 |
+| (ii) Türk editör ve romancı | 13 | 13 | 0 |
+| (iii) İlk kez kullanan / geliştirici ilişkileri | 10 | 9 | 1 (sosyal önizleme görseli elle yüklenmeli) |
+| (iv) Türkiye pazarı ve ürün stratejisi | 4 | 3 | 1 (yol haritasında) |
+
+Son durum: 140 test geçiyor (Python 3.11, 3.13, 3.14 yerelde; CI'da Ubuntu 3.11–3.14, macOS, Windows), statik denetim 0 hata, Türkçe uyum 0 bulgu, CJK 0, 394 bozuk girdi denemesinde 0 Python izi, EPUBCheck 5.1.0 ile 0 hata / 0 uyarı.
+
+### (i) Kuşkucu kıdemli Python ve araç mühendisi
+
+Yöntem: Her betik ve her alt komut gerçekçi ve bozuk girdilerle çalıştırıldı. Depo dışında tutulan bir deneme düzeneği (boş dosya, ikili dosya, Windows-1254 kodlu metin, UTF-8 BOM, CRLF, klasör, bozuk JSON, kök düğümü liste/null olan JSON, bozuk takip durumu, eksi ve metin sayılar) 394 komut üretti; Python izi, 0/1/2 dışı çıkış kodu ya da İngilizce hata iletisi "sorun" sayıldı.
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| i1 | İlk çalıştırmada 357 komutta **60 Python izi** (traceback): kodlama, ikili dosya, klasör yolu, JSON kök türü. | Ortak `dosya_oku.py` (`metin_oku`, `json_nesne_oku`) ve `turkce_argparse.hata_iletisi()`; `sys.excepthook` beklenmeyen hatayı tek satır Türkçe iletiye çevirir (`HIKAYE_AYIKLA=1` ile tam iz). Şimdi 394 komutta 0. |
+| i2 | Word'den Windows-1254 olarak dışa aktarılmış metinler `UnicodeDecodeError` ile düşüyordu; BOM kelime sayımına giriyordu. | UTF-8 → BOM temizleme → Windows-1254 geri dönüşü (uyarıyla); ikili dosyada "Word belgesini önce .txt olarak kaydedin" iletisi. |
+| i3 | JSON kökü liste ya da `null` olduğunda `AttributeError`. | `json_nesne_oku` kök türünü doğrular; 9 betikte kullanılıyor. |
+| i4 | Ham `urlopen`, `json` ve `datetime` iletileri İngilizce sızıyordu. | `JSON_ILETILERI` ve `hata_iletisi` eşlemesi; `cdp_istemci` ham ağ hatasını göstermiyor. |
+| i5 | **122 komut satırı seçeneğinde yardım metni yoktu.** | `turkce_argparse`, eksik yardımı `ORTAK_YARDIM` sözlüğünden doldurur; bütün betiklerin bütün alt komutlarını gezen kapsama testi eklendi. |
+| i6 | Yerel çalışma masası sunucusu DNS yeniden bağlama (DNS rebinding) saldırısına açıktı. | `127.0.0.1`/`localhost` dışındaki `Host` başlıkları 403 alır; test eklendi. |
+| i7 | `turkce_uyum_denetle.py` var olmayan bir yolda **sessizce 0 bulgu** veriyordu (CI'da yanlış güven). | Var olmayan yol artık hata. |
+| i8 | `metin_olcum.py --hedef -5` eksi işaretini yutup 5 kabul ediyordu. | İşaret korunur, Türkçe iletiyle çıkış kodu 2. |
+| i9 | `liste_tara.py --girdi` liste biçimini doğrulamadan çöküyordu. | Biçim doğrulaması ve Türkçe ileti. |
+
+### (ii) Türk editör ve romancı
+
+Yöntem: SKILL.md dosyaları, tür kartları, örnek bölümler ve inceleme ölçütleri bir yayınevi editörünün gözüyle okundu; ayrıca paketin kendi TDK denetçisi deponun kendi belgelerinde çalıştırıldı ("kendi yemeğini yemek").
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| ii1 | Örnek romanın ilk bölümünde "yelkovanlar on dördün üstünde": saat kadranında 14 yoktur. | "yelkovanlar on dördüncü dakika çizgisinde"; takip durumu ve özet yeniden üretildi (test bayt bayt doğruluyor). |
+| ii2 | Tür kartlarındaki basılı uzunluklar İngilizce kelime normlarına göreydi; Türkçe sondan eklemeli olduğu için aynı kitap daha az kelimedir. | Dört kart düzeltildi (edebî kurgu, mizah, polisiye, romantik) ve "basılı sayfa ortalama 230–280 kelime" notu eklendi. |
+| ii3 | Tür kartları bölüm yazıldıktan sonra neye bakılacağını söylemiyordu. | 12 karta toplam 36 "öz denetim sorusu"; test her kartta en az 3 soru arar. |
+| ii4 | Polisiye kartı soruşturmayı yalnızca savcılık ve emniyetle anlatıyordu; kırsalda yetki jandarmadadır. | Jandarma eklendi. |
+| ii5 | `metin-incele` yalnızca editör puanı veriyordu; "okur nerede bırakır?" sorusu yoktu. | `kaynaklar/okur-paneli.md`: altı Türk okur profili (Wattpad okuru, tür tutkunu, yayınevi ilk okuru, dergi okuru, sesli kitap dinleyicisi, gönülsüz okur), bırakma noktası / tutan an / akılda kalan soru tablosu. |
+| ii6 | Yazarın "bu kitapta bunu bir daha görmek istemiyorum" dediği ifadeler için yer yoktu (yalnızca beyaz liste vardı). | Kitap kökünde `.yasak-kaliplar` (`ifade => öneri`); `ai_kalip_denetle` engelleyici `kitap-yasagi` bulgusu verir. |
+| ii7 | Türkçe için geçerli bir okunabilirlik ölçüsü yoktu. | `metin_analizi.py`: Ateşman (1997) formülü; hece sayısı ünlü sayısından. |
+| ii8 | Editörlerin en sık notu olan yakın tekrarlar ve art arda aynı kelimeyle başlayan cümleler yakalanmıyordu. | `metin_analizi.py`: 40 kelimelik pencerede kök tekrarı, cümle başı tekrarı, cümle uzunluğu sapması (tekdüze ritim), diyalog oranı, duyu dağılımı. |
+| ii9 | `[TK]`, `[DOLDUR]` ya da yazar istemindeki `⟦…⟧` yuvaları yayın çıktısına sızabilirdi. | `metin_analizi` çıkış kodu 1 verir; `e-kitap-derle` bu işaretlerle derlemeyi durdurur (`--taslak` hariç). |
+| ii10 | Beta okura gönderilecek okunabilir bir kopya üretilemiyordu (Wattpad Türkiye'de kapalıyken en önemli geri bildirim yolu). | Yeni `e-kitap-derle` becerisi: EPUB 3 ve tek dosyalık HTML okuma kopyası. |
+| ii11 | TDK denetçisi `Türkiye'deki`, `İzmir'deki` sözcüklerini "ki ayrı yazılır" diye **yanlış** işaretliyordu. | Kesme işaretinden sonra gelen `-ki` ilgi eki atlanır; regresyon testi. |
+| ii12 | TDK denetçisi `İstanbullu`, `Ankaralı` için "İstanbul'lu" öneriyordu; yapım eki kesme almaz, yani öneri **yanlıştı**. | `-lı/-li/-lu/-lü` çekim eki listesinden çıkarıldı; regresyon testi. |
+| ii13 | "ör." kısaltmasından ve "1–[N]." / "XIX." sıra sayılarından sonra küçük harf "cümle başı" uyarısı veriyordu. | Kısaltma ve sıra sayısı istisnaları; regresyon testi. |
+
+### (iii) İlk kez kullanan / geliştirici ilişkileri
+
+Yöntem: Kurulumlar bu makinede gerçekten yapıldı (geçici `HOME` ile, kullanıcı ayarlarına dokunmadan).
+
+| Ortam | Sürüm | Denenen | Sonuç |
+|---|---|---|---|
+| Claude Code | 2.1.282 | `claude plugin validate .`, `claude plugin validate skills`, `claude plugin marketplace add cumabozkurt/ai-hikaye-roman-olusturma`, `claude plugin install …@…`, `claude plugin details` | Doğrulama geçti (yalnızca geliştirici `CLAUDE.md` uyarısı), eklenti kuruldu ve etkin, beceriler yüklendi. |
+| Claude Code | 2.1.282 | `claude plugin eval . --runs 1 --ablation none` (oturum açmadan) | Vakalar yüklendi, eklenti 1.1.0 olarak çözüldü; çalıştırma kimlik doğrulama gerektirdiği için ilk vakada durdu (beklenen). |
+| OpenAI Codex CLI | 0.157.0 | `codex plugin marketplace add …`, `codex plugin add …@…` | Kuruldu, bütün beceriler listelendi. |
+| OpenCode | 1.18.32 | `opencode debug skill` (klon içinde ve `kur.sh opencode` sonrası), `kur.py --ev opencode`, `opencode debug agent hikaye-mimari` | Bütün beceriler, 7 ajan, komutlar ve eklenti; açılışta uyarı yok. |
+| npx skills | güncel | `npx skills add … -g -y` ve `… -g -a claude-code codex opencode -y` | Beceriler `~/.agents/skills` altına, Claude Code için `~/.claude/skills` bağlantılarıyla kuruldu. |
+
+| # | Bulgu | Düzeltme |
+|---|---|---|
+| iii1 | README Codex'te yalnızca `/plugins` menüsünü anlatıyordu; tek komutluk `codex plugin add` yoktu. | README ve `docs/ev-sahipleri.md` güncellendi. |
+| iii2 | `npx skills add … -y -g` bulunan her ajana kurmaya çalışıp çok sayıda "does not support global skill installation" satırı yazıyor; ilk kez kullanan bunu hata sanıyor. | Önerilen komut `-a claude-code codex opencode` ile; sorun giderme tablosuna açıklama. |
+| iii3 | `claude plugin validate` çıktısındaki `CLAUDE.md` uyarısı açıklanmamıştı. | Sorun giderme satırı. |
+| iii4 | Kurulumun doğru olduğunu anlamanın yolu yoktu. | "Kurulumu doğrulayın" adımı (`claude plugin details`, `opencode debug skill`). |
+| iii5 | Üç adımlık hızlı başlangıç yoktu; ilk istek örneği aşağıda kalıyordu. | "Hızlı başlangıç" bölümü. |
+| iii6 | Hata ayıklama ve kodlama sorunları için yönlendirme yoktu. | `HIKAYE_AYIKLA=1` ve Windows-1254 satırları. |
+| iii7 | **Depo sayfası özgün projeye göre sönüktü:** afiş, görsel, akış şeması, çıktı örneği, karşılaştırma, yol haritası yoktu; rozetler azdı. | README yeniden tasarlandı: özgün SVG afiş, 9 rozet, öne çıkanlar ızgarası, mermaid akış şeması, önce/sonra tablosu, örnek bölüm alıntısı, gerçek komut çıktısından üretilmiş 4 terminal görseli, beceri tablosu (aşamalara göre), özgün projeyle karşılaştırma, kalite güvencesi, açılır SSS, yol haritası, yıldız geçmişi, katkı ve teşekkür. |
+| iii8 | Becerilerin doğal isteklerle tetiklenip tetiklenmediği ölçülmüyordu. | `evals/`: `claude plugin eval` biçiminde 23 vaka (her beceri için tetiklenme + sonuç + Türkçe yanıt değerlendiricisi; 3 olumsuz vaka `min: 0, max: 0, arm: both`). Biçim testi her becerinin kapsandığını doğrular. |
+| iii9 | GitHub'da Tartışmalar kapalı, sürüm yoktu, konu etiketleri azdı. | `gh repo edit` ile Tartışmalar, ana sayfa ve konular; `v1.1.0` sürümü Türkçe notlarla. |
+| iii10 | Sosyal önizleme görseli yok. | `docs/gorseller/sosyal-onizleme.png` (1280×640) üretildi. **Açık:** GitHub API'si bu görseli ayarlamaya izin vermez; Ayarlar → Social preview üzerinden elle yüklenmeli. |
+
+### (iv) Türkiye pazarı ve ürün stratejisi
+
+| # | Bulgu | Durum |
+|---|---|---|
+| iv1 | Wattpad kapalıyken yazarların beta okura ulaşması zorlaştı; paylaşılabilir okuma kopyası değerli. | `e-kitap-derle` HTML kopyası (tek dosya, gece modu). |
+| iv2 | E-kitap mağazaları ve ISBN süreci belgelenmemişti. | `e-kitap-rehberi.md`: biçimler, teslim listesi, ISBN notu (güncel koşulları mağazadan doğrulama uyarısıyla). |
+| iv3 | Türkçe kelime normları (ii2) pazar beklentisini etkiliyor. | Düzeltildi. |
+| iv4 | Tarihî roman okurunun büyük kısmı Osmanlı ve Cumhuriyet'in ilk yıllarına ilgi duyuyor; dönem kartları yok. | Yol haritasında. |
+
+### Araştırma: incelenen kaynaklar ve alınan fikirler
+
+Üst kaynağın README sunumu (`README.md`, `README_EN.md`: ortalanmış logo ve başlık, bağlantı satırı, rozetler, demo videosu, "ne üretir" görselleri, akış şeması, SSS, katkıcılar, kardeş projeler) ayrıntılı incelendi ve yeni README bu iskeleti Türkçe ve özgün görsellerle izliyor. Aşağıdaki depolardan **kod alınmadı**; yalnızca yaklaşımlar Türkçe için yeniden tasarlandı.
+
+| Kaynak | İncelenen | Alınan fikir |
+|---|---|---|
+| [zenstory-ai/oh-story-claudecode](https://github.com/zenstory-ai/oh-story-claudecode) | README sunumu, demo klasörü | Sayfa iskeleti, "ne üretir" bölümü, rozet ve bağlantı satırı |
+| [anthropics/skills](https://github.com/anthropics/skills) | skill-creator, `evals/evals.json` | Beceri başına değerlendirme vakası fikri |
+| [Claude Code plugin eval](https://code.claude.com/docs/en/plugin-evals) | vaka ve değerlendirici biçimi | `evals/` paketi, `tool_used: Skill` tetiklenme denetimi, olumsuz vakalar |
+| [Skill yazım iyi uygulamaları](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) | açıklama yazımı, değerlendirme | Beceri başına en az bir gerçekçi istem, üçüncü şahıs açıklamalar |
+| [haowjy/creative-writing-skills](https://github.com/haowjy/creative-writing-skills) | okur simülasyonu, sorun takibi | Okur paneli |
+| [tchr-dev/autonovel](https://github.com/tchr-dev/autonovel) | okur paneli, bölüm turnuvası, ses parmak izi | Okur paneli; turnuva ve ses parmak izi yol haritasında |
+| [mrskwiw/claude-novel-writer](https://github.com/mrskwiw/claude-novel-writer) | belirlenimci düzyazı ölçümleri, [TK] taraması, revizyon öncesi anlık görüntü | `metin_analizi.py`, bitmemiş işaret kapısı; anlık görüntü yol haritasında |
+| [MintoTsukino/claude-novel-workflow](https://github.com/MintoTsukino/claude-novel-workflow) | `forbidden_patterns.md`, üslup rehberi | `.yasak-kaliplar` |
+| [howells/fiction](https://github.com/howells/fiction) | EPUB derleme, kelime yankısı düzeltmesi | `e-kitap-derle`, yakın tekrar ölçümü |
+| [PhosAQy/novel-skills](https://github.com/PhosAQy/novel-skills) | 5 boyutlu puanlama, duygu eğrisi | İnceleme ölçütleri zaten 8 boyutlu; değişiklik gerekmedi |
+| [GonsonInter/novel-writer-workflow](https://github.com/GonsonInter/novel-writer-workflow) | aşama yönlendirici, P0/P1/P2 önem düzeyi | Aşama kapısı ve engelleyici/uyarı düzeyleri zaten var |
+| [chianglianglin/novel-writer](https://github.com/chianglianglin/novel-writer) | HTML okuyucu çıktısı | HTML okuma kopyası |
+| Ateşman, E. (1997), "Türkçede okunabilirliğin ölçülmesi", *Dil Dergisi*, 58, 71–74 | okunabilirlik formülü | `metin_analizi.py` |
+| [W3C EPUBCheck](https://github.com/w3c/epubcheck) 5.1.0 | EPUB doğrulama | Üretilen EPUB'lar 0 hata / 0 uyarı ile doğrulandı |
+
+### İkinci turda eklenen testler
+
+`test_saglamlik.py` (33 test: bozuk girdiler, kodlamalar, JSON kökü, Türkçe hata iletileri, bütün seçeneklerde yardım metni), `test_yeni_ozellikler.py` (15 test: Ateşman hesabı, yankı ve cümle başı tekrarı, bitmemiş işaretler, `.yasak-kaliplar`, EPUB yapısı ve yeniden üretilebilirlik, kapak, hata yolları, değerlendirme paketi biçimi, tür kartı soruları, terminal görselleri, README görsel bağlantıları, TDK yanlış alarm regresyonları) ve çalışma masası `Host` testi.

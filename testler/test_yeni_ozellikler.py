@@ -245,3 +245,45 @@ def test_tur_kartlarinda_oz_denetim_sorulari() -> None:
         metin = kart.read_text(encoding="utf-8")
         assert "## Öz denetim soruları" in metin, kart.name
         assert len(re.findall(r"^\d\. .+\?$", metin, re.M)) >= 3, kart.name
+
+
+# ---------------------------------------------------------------- terminal_gorseli.py ve README görselleri
+
+
+def test_terminal_gorseli_svg_gecerli(tmp_path: Path) -> None:
+    tg = modul_yukle("terminal_gorseli.py")
+    satirlar = tg.satirlari_hazirla("python3 x.py <a&b>", "a.md:1:1\t[engelleyici] kural\t(alıntı)\n\t→ öneri\n" + "ş" * 250)
+    assert satirlar[0].startswith("$ ") and max(len(s) for s in satirlar) <= tg.GENISLIK_KARAKTER + 8
+    svg = tg.svg_uret("Başlık & deneme", satirlar)
+    kok = ET.fromstring(svg)
+    assert kok.tag.endswith("svg") and "&lt;a&amp;b&gt;" in svg
+    assert tg.renk("x [engelleyici] y") == tg.RENKLER["engelleyici"] and tg.renk("  ✓ tamam") == tg.RENKLER["✓"]
+    liste = calistir("terminal_gorseli.py", "--liste")
+    assert liste.returncode == 0 and "terminal-e-kitap.svg" in liste.stdout
+    uret = calistir("terminal_gorseli.py", "--cikti", tmp_path)
+    assert uret.returncode == 0, uret.stderr
+    yz = (tmp_path / "terminal-yz-tadi.svg").read_text(encoding="utf-8")
+    assert "Toplam 10 bulgu" in yz and "engelleyici" in yz
+    assert "saatcinin-kizi.epub" in (tmp_path / "terminal-e-kitap.svg").read_text(encoding="utf-8")
+
+
+def test_readme_gorselleri_var_ve_gecerli() -> None:
+    readme = (KOK / "README.md").read_text(encoding="utf-8")
+    yerel = re.findall(r'(?:src="|\]\()(docs/gorseller/[^")]+)', readme)
+    assert len(set(yerel)) >= 4, yerel
+    for yol in set(yerel):
+        dosya = KOK / yol
+        assert dosya.is_file(), yol
+        if dosya.suffix == ".svg":
+            ET.fromstring(dosya.read_text(encoding="utf-8"))
+
+
+def test_yazim_denetimi_yanlis_alarm_duzeltmeleri(tmp_path: Path) -> None:
+    """Kendi belgelerimizde bulunan yanlış alarmlar: özel ada gelen -ki, kısaltma ve sıra sayısından sonra küçük harf."""
+    dosya = tmp_path / "metin.md"
+    dosya.write_text("Türkiye'deki savcılık, İzmir’deki ev.\nBu doğru (ör. karakterin sesi) ve 1–[N]. bölümler hazır. XIX. yüzyıl.\n"
+                     "O dediki gel. bu yanlış.\nİstanbullu ve Ankaralı iki yazar İstanbulda buluştu.\n", encoding="utf-8")
+    veri = json_cikti(calistir("yazim_denetle.py", dosya, "--json"))
+    bulgular = veri["bulgular"] if isinstance(veri, dict) else veri
+    kurallar = sorted((b["satir"], b["kural"]) for b in bulgular)
+    assert kurallar == [(3, "cumle-basi-kucuk"), (3, "ki-bitisik"), (4, "kesme-isareti")], kurallar

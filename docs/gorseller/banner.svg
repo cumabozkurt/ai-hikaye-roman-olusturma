@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="400" viewBox="0 0 1280 400" role="img" aria-labelledby="baslik aciklama">
+  <title id="baslik">AI Hikaye &amp; Roman Oluşturma</title>
+  <desc id="aciklama">Açık bir kitap, kitaptan yükselen mürekkep çizgisi, bir saat kadranı ve lale motifiyle proje afişi.</desc>
+  <defs>
+    <linearGradient id="gok" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0a1830"/>
+      <stop offset="0.55" stop-color="#132a4f"/>
+      <stop offset="1" stop-color="#1d3a63"/>
+    </linearGradient>
+    <radialGradient id="isik" cx="0.24" cy="0.62" r="0.45">
+      <stop offset="0" stop-color="#f3c77a" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#f3c77a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="sayfa" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fbf4e2"/>
+      <stop offset="1" stop-color="#e9dcbc"/>
+    </linearGradient>
+    <linearGradient id="murekkep" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#e0a84f"/>
+      <stop offset="1" stop-color="#f6e3b4" stop-opacity="0.2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="400" fill="url(#gok)"/>
+  <rect width="1280" height="400" fill="url(#isik)"/>
+  <!-- yıldızlar -->
+  <g fill="#f6e3b4">
+    <circle cx="84" cy="62" r="1.6" opacity=".8"/><circle cx="190" cy="40" r="1.2" opacity=".6"/>
+    <circle cx="402" cy="70" r="1.8" opacity=".7"/><circle cx="520" cy="34" r="1.1" opacity=".5"/>
+    <circle cx="1180" cy="52" r="1.6" opacity=".7"/><circle cx="1232" cy="120" r="1.1" opacity=".5"/>
+    <circle cx="1090" cy="350" r="1.4" opacity=".5"/><circle cx="640" cy="372" r="1.2" opacity=".4"/>
+    <circle cx="60" cy="300" r="1.3" opacity=".5"/><circle cx="455" cy="330" r="1.5" opacity=".5"/>
+  </g>
+  <!-- saat kadranı -->
+  <g transform="translate(372 118)" opacity=".55" fill="none" stroke="#f6e3b4" stroke-width="2">
+    <circle r="46"/>
+    <g stroke-width="2.4">
+      <line x1="0" y1="-40" x2="0" y2="-33"/><line x1="40" y1="0" x2="33" y2="0"/>
+      <line x1="0" y1="40" x2="0" y2="33"/><line x1="-40" y1="0" x2="-33" y2="0"/>
+    </g>
+    <line x1="0" y1="0" x2="20" y2="4" stroke-width="3.2" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="25" y2="-33" stroke-width="2" stroke-linecap="round"/>
+    <circle r="3" fill="#f6e3b4"/>
+  </g>
+  <!-- mürekkep çizgisi -->
+  <path d="M250 262 C 240 210, 300 190, 285 140 S 330 70, 372 72" fill="none" stroke="url(#murekkep)" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 9"/>
+  <!-- açık kitap -->
+  <g transform="translate(250 300)">
+    <ellipse cx="0" cy="42" rx="185" ry="14" fill="#050d1b" opacity=".45"/>
+    <path d="M0 -20 C -60 -48, -120 -46, -170 -30 L -170 34 C -118 20, -60 20, 0 40 Z" fill="url(#sayfa)"/>
+    <path d="M0 -20 C 60 -48, 120 -46, 170 -30 L 170 34 C 118 20, 60 20, 0 40 Z" fill="url(#sayfa)"/>
+    <path d="M0 -20 L 0 40" stroke="#b99a62" stroke-width="2"/>
+    <g fill="none" stroke="#b3a27f" stroke-width="1.8" stroke-linecap="round" opacity=".8">
+      <path d="M-150 -18 C -110 -30, -60 -30, -22 -14"/><path d="M-150 -4 C -110 -16, -60 -16, -22 0"/>
+      <path d="M-150 10 C -110 -2, -60 -2, -22 14"/><path d="M-150 24 C -118 14, -80 12, -56 18"/>
+      <path d="M22 -14 C 60 -30, 110 -30, 150 -18"/><path d="M22 0 C 60 -16, 110 -16, 150 -4"/>
+      <path d="M22 14 C 60 -2, 110 -2, 150 10"/>
+    </g>
+    <!-- dolma kalem ucu -->
+    <g transform="translate(118 20) rotate(-38)">
+      <path d="M0 -44 L 9 -10 L 0 6 L -9 -10 Z" fill="#e0a84f"/>
+      <line x1="0" y1="-30" x2="0" y2="0" stroke="#7a5a22" stroke-width="1.6"/>
+      <circle cx="0" cy="-20" r="2.4" fill="#7a5a22"/>
+      <rect x="-9" y="-78" width="18" height="36" rx="3" fill="#2b4a78" stroke="#f6e3b4" stroke-width="1.2"/>
+    </g>
+  </g>
+  <!-- lale motifi -->
+  <g transform="translate(1212 318) scale(.85)" fill="none" stroke="#e0a84f" stroke-width="2.4" stroke-linecap="round" opacity=".8">
+    <path d="M0 60 L 0 0"/>
+    <path d="M0 0 C -26 -6, -28 -40, -14 -58 C -8 -40, -4 -30, 0 -24 C 4 -30, 8 -40, 14 -58 C 28 -40, 26 -6, 0 0 Z"/>
+    <path d="M0 -24 C -6 -40, -4 -54, 0 -64 C 4 -54, 6 -40, 0 -24"/>
+    <path d="M0 40 C -18 30, -30 34, -38 22 C -22 18, -8 24, 0 34"/>
+    <path d="M0 50 C 16 40, 28 44, 36 32 C 20 28, 8 34, 0 44"/>
+  </g>
+  <!-- metin -->
+  <g font-family="Georgia, 'Times New Roman', 'DejaVu Serif', serif" fill="#f7eedb">
+    <text x="520" y="150" font-size="60" font-weight="700" letter-spacing=".5">AI Hikaye &amp; Roman</text>
+    <text x="520" y="218" font-size="60" font-weight="700" letter-spacing=".5">Oluşturma</text>
+    <text x="522" y="262" font-size="22" font-style="italic" fill="#e9d6ab">Fikirden yayına: Türkçe roman ve öykü için yapay zekâ becerileri</text>
+  </g>
+  <g font-family="'Segoe UI', 'Helvetica Neue', Arial, 'DejaVu Sans', sans-serif" font-size="17" font-weight="600">
+    <g transform="translate(522 292)">
+      <rect width="112" height="34" rx="17" fill="#e0a84f"/><text x="56" y="23" text-anchor="middle" fill="#0a1830">20 beceri</text>
+    </g>
+    <g transform="translate(646 292)">
+      <rect width="96" height="34" rx="17" fill="none" stroke="#e0a84f" stroke-width="1.6"/><text x="48" y="23" text-anchor="middle" fill="#f7eedb">7 ajan</text>
+    </g>
+    <g transform="translate(754 292)">
+      <rect width="148" height="34" rx="17" fill="none" stroke="#e0a84f" stroke-width="1.6"/><text x="74" y="23" text-anchor="middle" fill="#f7eedb">TDK denetimi</text>
+    </g>
+    <g transform="translate(914 292)">
+      <rect width="176" height="34" rx="17" fill="none" stroke="#e0a84f" stroke-width="1.6"/><text x="88" y="23" text-anchor="middle" fill="#f7eedb">Süreklilik takibi</text>
+    </g>
+    <g transform="translate(522 338)">
+      <rect width="400" height="34" rx="17" fill="none" stroke="#6f8bb8" stroke-width="1.4"/><text x="200" y="23" text-anchor="middle" fill="#c9d6ec">Claude Code · Codex · OpenCode · npx skills</text>
+    </g>
+  </g>
+</svg>

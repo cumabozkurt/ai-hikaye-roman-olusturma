@@ -22,7 +22,7 @@
 
 ## Beta okur kopyası
 
-HTML kopyası, beta okurlara gönderilecek en pratik biçimdir. Gönderirken okurlara 3–5 somut soru ekleyin (ör. "Hangi bölümde okumayı bıraktınız?", "Katilin kim olduğunu ilk ne zaman tahmin ettiniz?"). `metin-incele` becerisinin okur paneli (`kaynaklar/okur-paneli.md`) soruları seçmek için kullanılabilir.
+HTML kopyası, beta okurlara gönderilecek en pratik biçimdir. Gönderirken okurlara 3–5 somut soru ekleyin (ör. "Hangi bölümde okumayı bıraktınız?", "Katilin kim olduğunu ilk ne zaman tahmin ettiniz?"). Soruları seçmek için `/metin-incele` becerisinin okur paneli kullanılabilir.
 
 ## Sınırlar
 

@@ -41,7 +41,8 @@ OZEL_ADLAR = (
     "Avrupa", "Asya", "Almanya", "Fransa", "İngiltere", "Amerika", "Rusya", "Yunanistan", "Atatürk",
     "Wattpad", "Instagram", "Netflix", "Google", "Ayşe", "Fatma", "Mehmet", "Ahmet", "Mustafa", "Zeynep",
 )
-_EKLER = r"(?:da|de|ta|te|dan|den|tan|ten|a|e|ya|ye|ı|i|u|ü|yı|yi|yu|yü|ın|in|un|ün|nın|nin|nun|nün|la|le|yla|yle|lı|li|lu|lü|daki|deki|dır|dir|dur|dür)"
+# Yalnızca çekim ekleri; yapım ekleri (-lı, -ca, -cı) kesme almaz: İstanbullu, Ankaralı.
+_EKLER = r"(?:da|de|ta|te|dan|den|tan|ten|a|e|ya|ye|ı|i|u|ü|yı|yi|yu|yü|ın|in|un|ün|nın|nin|nun|nün|la|le|yla|yle|daki|deki|dır|dir|dur|dür)"
 KESME_DESENI = re.compile(rf"\b({'|'.join(map(re.escape, OZEL_ADLAR))}){_EKLER}\b")
 KI_FIIL = re.compile(
     rf"^(?:[{H}]+(?:yor|yorum|yorsun|yoruz|dı|di|du|dü|tı|ti|tu|tü|mış|miş|muş|müş|malı|meli|acak|ecek|sın|sin|sun|sün)|öyle|şöyle|böyle|de|der|sanır|bil)ki$",
@@ -97,6 +98,8 @@ def denetle_metin(metin: str, dosya: str = "<metin>", *, yz_ozeti: bool = True) 
             ekle(m.start(), "hata", "de-da-bitisik", m.group(0), f"Bağlaç olan “de/da” ayrı yazılır: “{tk.DE_DA_HATALI.get(kelime, kelime)}”")
         for m in re.finditer(rf"[{H}]+", satir):
             kelime = tk.tr_kucuk(m.group(0))
+            if m.start() > 0 and satir[m.start() - 1] in "'’":
+                continue  # "Türkiye'deki": özel ada gelen -ki ilgi eki bitişik yazılır
             if (kelime.endswith("ki") and kelime not in tk.KI_BITISIK and not tk.KI_ILGI_EKI.match(kelime)
                     and not KI_ISTISNA.search(kelime) and KI_FIIL.match(kelime)):
                 ekle(m.start(), "hata", "ki-bitisik", m.group(0), f"Bağlaç olan “ki” ayrı yazılır: “{m.group(0)[:-2]} ki”")
@@ -122,9 +125,9 @@ def denetle_metin(metin: str, dosya: str = "<metin>", *, yz_ozeti: bool = True) 
             for m in re.finditer(rf"(?<![{H}]){re.escape(gayri)}(?![{H}])", anlati):
                 ekle(m.start(), "uyari", "gayriresmi", gayri, f"Anlatıda ölçünlü dil: “{dogru}” (diyalogda bilinçli kullanım serbesttir)")
         for m in re.finditer(r"(?<![.\d])[.!?]\s+([a-zçğıöşü])", satir):
-            onceki = satir[max(0, m.start() - 4):m.start() + 1]
-            if re.search(r"\b(?:vb|vs|bkz|Dr|Prof|Av|Sn|No)\.$", onceki):
-                continue
+            onceki = satir[max(0, m.start() - 5):m.start() + 1]
+            if re.search(r"\b(?:vb|vs|bkz|ör|örn|Dr|Prof|Doç|Av|Sn|No|s|sf|yy)\.$", onceki) or re.search(r"[\]IVXLC]\.$", onceki):
+                continue  # kısaltma ya da "[N]." / "XIX." gibi sıra sayısı
             if satir[m.start()] in "?!" and SOYLEME.match(satir[m.start(1):]):
                 continue
             ekle(m.start(1) - 1, "uyari", "cumle-basi-kucuk", satir[m.start():m.start() + 12], "Cümle büyük harfle başlar.")

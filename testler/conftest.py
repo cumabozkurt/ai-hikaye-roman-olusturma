@@ -24,11 +24,11 @@ KANCA = BECERILER / "hikaye-kurulum" / "varliklar" / "kancalar" / "hikaye_kanca.
 
 
 def betik_yolu(ad: str) -> Path:
-    """Betik adını (ör. ``takip_kaydet.py``) paylaşılan klasörde, yoksa becerilerde bulur."""
+    """Betik adını (ör. ``takip_kaydet.py``) paylaşılan klasörde, yoksa becerilerde, en son depo betiklerinde bulur."""
     aday = PAYLASILAN / ad
     if aday.is_file():
         return aday
-    bulunan = sorted(BECERILER.glob(f"*/betikler/{ad}"))
+    bulunan = sorted(BECERILER.glob(f"*/betikler/{ad}")) or sorted((KOK / "betikler").glob(ad))
     if not bulunan:
         raise FileNotFoundError(ad)
     return bulunan[0]

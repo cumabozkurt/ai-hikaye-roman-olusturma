@@ -209,7 +209,7 @@ def analiz_et(ham: str, pencere: int = VARSAYILAN_PENCERE) -> dict[str, Any]:
         uyarilar.append(f"Ortalama cümle {tk.tr_ondalik(ortalama)} kelime; telefonda okunan metin için uzun.")
     for yanki in sonuc["yankilar"]:
         if yanki["sayi"] >= 3:
-            uyarilar.append(f"'{yanki['ornekler'][0]}' kökü yakın aralıkla {yanki['sayi']} kez geçiyor (satır {', '.join(map(str, yanki['satirlar'][:5]))}).")
+            uyarilar.append(f"Yakın aralıkla {yanki['sayi']} kez tekrar: {', '.join(yanki['ornekler'])} (satır {', '.join(map(str, yanki['satirlar'][:5]))}).")
     for tekrar in sonuc["cumle_basi"]:
         uyarilar.append(f"{tekrar['sayi']} cümle art arda '{tekrar['kelime']}' ile başlıyor: “{tekrar['ilk_cumle']}…”")
     duyu = sonuc["duyular"]

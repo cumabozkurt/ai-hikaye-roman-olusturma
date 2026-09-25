@@ -28,6 +28,7 @@ from pathlib import Path
 from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dosya_oku  # noqa: E402
 import metin_olcum  # noqa: E402
 import turkce_kaliplar as tk  # noqa: E402
 
@@ -61,7 +62,7 @@ def karakter_nitelikleri(proje: Path) -> dict[str, dict[str, str]]:
     if not klasor.is_dir():
         return sonuc
     for yol in sorted(klasor.glob("*.md")):
-        metin = yol.read_text(encoding="utf-8")
+        metin = dosya_oku.metin_oku(yol)
         baslik = re.search(r"^#\s+(.+)$", metin, re.M)
         ad = (baslik.group(1) if baslik else yol.stem).split("—")[0].strip()
         nitelik: dict[str, str] = {}
@@ -104,7 +105,7 @@ def denetle(proje: Path, bolum: int | None = None) -> dict[str, Any]:
         bulgular.append({"duzey": duzey, "kural": kural, "satir": satir, "mesaj": mesaj, "kanit": kanit[:120]})
 
     durum_yolu = proje / "takip" / "_takip-durumu.json"
-    durum = json.loads(durum_yolu.read_text(encoding="utf-8")) if durum_yolu.exists() else {}
+    durum = dosya_oku.json_nesne_oku(durum_yolu, bos={})
     son = int(durum.get("son_kaydedilen_bolum", 0))
     if bolum is None:
         bolum = son + 1
@@ -114,11 +115,11 @@ def denetle(proje: Path, bolum: int | None = None) -> dict[str, Any]:
             bolum = max(son, 1)
     try:
         metin_yolu = metin_olcum.bolum_dosyasi_bul(proje / "metin", bolum, plan=False)
-        metin = metin_olcum.gorunur_govde(metin_yolu.read_text(encoding="utf-8"))
+        metin = metin_olcum.gorunur_govde(dosya_oku.metin_oku(metin_yolu))
     except metin_olcum.OlcumHatasi:
         metin_yolu, metin = None, ""
     try:
-        plan_metni = metin_olcum.bolum_dosyasi_bul(proje / "plan", bolum, plan=True).read_text(encoding="utf-8")
+        plan_metni = dosya_oku.metin_oku(metin_olcum.bolum_dosyasi_bul(proje / "plan", bolum, plan=True))
     except metin_olcum.OlcumHatasi:
         plan_metni = ""
     karakterler: dict[str, Any] = durum.get("karakterler", {})

@@ -33,10 +33,11 @@ import metin_olcum  # noqa: E402
 import plan_denetle  # noqa: E402
 import takip_kaydet  # noqa: E402
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 
 def cikti(belge: dict[str, Any], kod: int) -> int:
@@ -146,7 +147,7 @@ def main(argv: list[str] | None = None) -> int:
         sonuc, kod = bolum_kaydet(arg.proje, arg.bolum, arg.girdi, yazar_onayladi=arg.yazar_onayladi)
         return cikti(sonuc, kod)
     except (OSError, ValueError) as hata:
-        return cikti({"tamam": False, "hata": str(hata)}, 2)
+        return cikti({"tamam": False, "hata": hata_iletisi(hata)}, 2)
 
 
 if __name__ == "__main__":

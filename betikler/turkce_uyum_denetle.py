@@ -145,9 +145,12 @@ def denetle(yollar: list[Path]) -> list[dict[str, object]]:
 
 def main(argv: list[str] | None = None) -> int:
     ayr = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ayr.add_argument("yollar", nargs="*", type=Path)
-    ayr.add_argument("--json", action="store_true")
+    ayr.add_argument("yollar", nargs="*", type=Path, help="denetlenecek dosya ya da klasörler (varsayılan: depo kökü)")
+    ayr.add_argument("--json", action="store_true", help="bulguları JSON olarak yaz")
     arg = ayr.parse_args(argv)
+    eksik = [str(p) for p in arg.yollar if not p.exists()]
+    if eksik:
+        ayr.error("bulunamayan yol: " + ", ".join(eksik))
     yollar = [p.resolve() for p in arg.yollar] or [KOK]
     bulgular = denetle(yollar)
     if arg.json:

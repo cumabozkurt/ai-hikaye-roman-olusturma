@@ -22,6 +22,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dosya_oku  # noqa: E402
+
 try:  # argparse iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
 except ImportError:  # pragma: no cover
@@ -99,7 +102,7 @@ def main(argv: list[str] | None = None) -> int:
     arg = ayr.parse_args(argv)
     kaynak = arg.dosya or arg.kok / "karakterler" / "iliskiler.md"
     try:
-        iliskiler = iliskileri_oku(kaynak.read_text(encoding="utf-8"))
+        iliskiler = iliskileri_oku(dosya_oku.metin_oku(kaynak))
     except OSError:
         print(f"Dosya okunamadı: {kaynak}", file=sys.stderr)
         return 2

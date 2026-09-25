@@ -25,6 +25,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dosya_oku  # noqa: E402
 import turkce_kaliplar as tk  # noqa: E402
 
 try:  # argparse iletilerini Türkçeleştirir
@@ -150,7 +151,7 @@ def denetle_metin(metin: str, dosya: str = "<metin>", *, yz_ozeti: bool = True) 
 
 
 def denetle_dosya(yol: Path, **kw: bool) -> list[Bulgu]:
-    return denetle_metin(yol.read_text(encoding="utf-8"), str(yol), **kw)
+    return denetle_metin(dosya_oku.metin_oku(yol), str(yol), **kw)
 
 
 def main(argv: list[str] | None = None) -> int:

@@ -16,6 +16,9 @@ import json
 import re
 import sys
 from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dosya_oku  # noqa: E402
 from typing import Any
 
 try:  # argparse iletilerini Türkçeleştirir
@@ -69,9 +72,9 @@ def hedef_coz(deger: Any) -> int:
     if isinstance(deger, int):
         hedef = deger
     else:
-        m = re.search(r"\d{1,3}(?:[.\u00a0 ]\d{3})+(?!\d)|\d+", str(deger or ""))
-        gerekli(m is not None, "hedef uzunluk bulunamadı")
-        hedef = int(re.sub(r"\D", "", m.group(0)))
+        m = re.search(r"(-?)(\d{1,3}(?:[.\u00a0 ]\d{3})+(?!\d)|\d+)", str(deger or ""))
+        gerekli(m is not None, f"hedef uzunluk bulunamadı: {deger!r} (ör. 2200 ya da '2.200 kelime')")
+        hedef = int(re.sub(r"\D", "", m.group(2))) * (-1 if m.group(1) else 1)
     gerekli(100 <= hedef <= 50000, f"hedef uzunluk makul aralıkta değil: {hedef}")
     return hedef
 
@@ -140,8 +143,8 @@ def proje_uzunluk_kaydi(proje: Path, bolum: int, *, cozum: str = "hedef_bandinda
     """Bir bölüm için takip durumuna yazılacak uzunluk kaydını üretir."""
     plan = bolum_dosyasi_bul(proje / "plan", bolum, plan=True)
     metin_yolu = bolum_dosyasi_bul(proje / "metin", bolum, plan=False)
-    metin = metin_yolu.read_text(encoding="utf-8")
-    degerlendirme = uzunluk_degerlendir(kelime_say(metin), plandan_hedef(plan.read_text(encoding="utf-8")))
+    metin = dosya_oku.metin_oku(metin_yolu)
+    degerlendirme = uzunluk_degerlendir(kelime_say(metin), plandan_hedef(dosya_oku.metin_oku(plan)))
     gerekli(cozum in {"hedef_bandinda", "yazar_onayladi"}, "çözüm türü bilinmiyor")
     if degerlendirme["durum"] != "ic_gecti":
         gerekli(cozum == "yazar_onayladi", f"uzunluk bandın dışında ({degerlendirme['durum']}); yazar onayı gerekli")
@@ -171,12 +174,16 @@ def main(argv: list[str] | None = None) -> int:
     ayr.add_argument("--json", action="store_true")
     arg = ayr.parse_args(argv)
     sonuc = []
-    for yol in arg.dosyalar:
-        sayi = kelime_say(yol.read_text(encoding="utf-8"))
-        kayit: dict[str, Any] = {"dosya": str(yol), "kelime": sayi}
-        if arg.hedef:
-            kayit.update(uzunluk_degerlendir(sayi, arg.hedef))
-        sonuc.append(kayit)
+    try:
+        for yol in arg.dosyalar:
+            sayi = kelime_say(dosya_oku.metin_oku(yol))
+            kayit: dict[str, Any] = {"dosya": str(yol), "kelime": sayi}
+            if arg.hedef:
+                kayit.update(uzunluk_degerlendir(sayi, arg.hedef))
+            sonuc.append(kayit)
+    except (OlcumHatasi, dosya_oku.DosyaHatasi) as hata:
+        print(f"hata: {hata}", file=sys.stderr)
+        return 2
     if arg.json:
         print(json.dumps(sonuc, ensure_ascii=False, indent=2))
     else:

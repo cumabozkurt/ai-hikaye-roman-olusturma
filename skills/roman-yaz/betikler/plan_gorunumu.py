@@ -28,6 +28,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dosya_oku  # noqa: E402
+
 try:  # argparse iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
 except ImportError:  # pragma: no cover
@@ -92,7 +95,7 @@ def main(argv: list[str] | None = None) -> int:
     if not arg.yol.is_file():
         print(f"dosya yok: {arg.yol}", file=sys.stderr)
         return 2
-    parcalar = ayristir(arg.yol.read_text(encoding="utf-8"))
+    parcalar = ayristir(dosya_oku.metin_oku(arg.yol))
     if arg.icindekiler:
         for p in parcalar:
             etiket = p["tur"] + (f" {p['birim']}" if p["birim"] else "") + ("" if p["durum"] == "kullanımda" else f" ({p['durum']})")

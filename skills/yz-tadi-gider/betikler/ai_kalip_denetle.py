@@ -24,6 +24,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dosya_oku  # noqa: E402
 import turkce_kaliplar as tk  # noqa: E402
 
 try:  # argparse iletilerini Türkçeleştirir
@@ -61,7 +62,7 @@ def beyaz_liste_yukle(dosya: Path) -> list[str]:
     for klasor in [dosya.parent, *dosya.parents][:4]:
         aday = klasor / ".yz-beyaz-liste"
         if aday.is_file():
-            return [s.strip() for s in aday.read_text(encoding="utf-8").splitlines() if s.strip() and not s.startswith("#")]
+            return [s.strip() for s in dosya_oku.metin_oku(aday).splitlines() if s.strip() and not s.startswith("#")]
     return []
 
 
@@ -222,7 +223,7 @@ def denetle_metin(metin: str, dosya: str = "<metin>", beyaz: list[str] | None = 
 
 
 def denetle_dosya(yol: Path) -> list[Bulgu]:
-    return denetle_metin(yol.read_text(encoding="utf-8"), str(yol), beyaz_liste_yukle(yol))
+    return denetle_metin(dosya_oku.metin_oku(yol), str(yol), beyaz_liste_yukle(yol))
 
 
 def ozet(bulgular: list[Bulgu]) -> dict[str, int]:

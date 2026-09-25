@@ -30,10 +30,11 @@ from contextlib import contextmanager
 from pathlib import Path
 from typing import Any, Iterator
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 _OLCUM_YOLU = Path(__file__).with_name("metin_olcum.py")
 _spec = importlib.util.spec_from_file_location("hikaye_metin_olcum", _OLCUM_YOLU)
@@ -139,7 +140,7 @@ def json_oku(yol: Path) -> object:
     try:
         return json.loads(yol.read_text(encoding="utf-8"))
     except json.JSONDecodeError as hata:
-        raise TakipHatasi(f"{yol} geçerli JSON değil: {hata}") from hata
+        raise TakipHatasi(f"{yol}: {hata_iletisi(hata)}") from hata
 
 
 def json_metni(belge: object) -> str:

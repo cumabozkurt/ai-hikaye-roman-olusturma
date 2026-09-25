@@ -27,10 +27,11 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import metin_olcum  # noqa: E402
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 AYRAC = re.compile(r"^\s*(\*\s*\*\s*\*|⁂|\*{3,}|-{3,})\s*$")
 OZEL_AD = re.compile(r"(?<![.!?…—]\s)(?<!^)\b([A-ZÇĞİÖŞÜ][a-zçğıöşüâîû]+(?:['’][a-zçğıöşü]+)?)")
@@ -134,7 +135,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         sonuc = hazirla(dosyalar, cikti, arg.hiz, arg.yeniden)
     except (OSError, UnicodeDecodeError) as hata:
-        print(f"Hata: {hata}", file=sys.stderr)
+        print(f"Hata: {hata_iletisi(hata)}", file=sys.stderr)
         return 2
     if arg.json:
         print(json.dumps(sonuc, ensure_ascii=False, indent=2))

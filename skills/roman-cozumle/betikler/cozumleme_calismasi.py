@@ -29,10 +29,11 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import bolum_dizini as bd  # noqa: E402
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 EN_COK_GRUP_KELIME = 12000
 ASAMALAR = {
@@ -129,7 +130,7 @@ def kaydet(kok: Path, girdi: Path, beklenen_ozet: str | None) -> dict[str, Any]:
     try:
         veri = json.loads(girdi.read_text(encoding="utf-8"))
     except (OSError, ValueError) as hata:
-        raise CalismaHatasi(f"girdi okunamadı: {hata}") from hata
+        raise CalismaHatasi(f"girdi okunamadı: {hata_iletisi(hata)}") from hata
     sorunlar = bd.grup_dogrula(veri)
     if sorunlar:
         return {"tamam": False, "sorunlar": sorunlar}

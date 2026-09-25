@@ -40,10 +40,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 SEMA_SURUMU = 1
 SORGU_AZAMI_BAYT = 2048
@@ -371,7 +372,7 @@ def main(argv: list[str] | None = None) -> int:
         else:
             sonuc = denetle(arg.calisma_alani, arg.kitap)
     except (HafizaHatasi, OSError, ValueError) as hata:
-        print(json.dumps({"tamam": False, "hata": str(hata)}, ensure_ascii=False))
+        print(json.dumps({"tamam": False, "hata": hata_iletisi(hata)}, ensure_ascii=False))
         return 2
     print(json.dumps(sonuc, ensure_ascii=False, indent=2))
     return 0 if sonuc.get("tamam") else 1

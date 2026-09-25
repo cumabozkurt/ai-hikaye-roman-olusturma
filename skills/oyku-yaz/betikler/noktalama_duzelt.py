@@ -21,6 +21,9 @@ import re
 import sys
 from pathlib import Path
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dosya_oku  # noqa: E402
+
 try:  # argparse iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
 except ImportError:  # pragma: no cover
@@ -113,7 +116,7 @@ def main(argv: list[str] | None = None) -> int:
     toplam = 0
     rapor = {}
     for yol in arg.dosyalar:
-        eski = yol.read_text(encoding="utf-8")
+        eski = dosya_oku.metin_oku(yol)
         yeni, degisiklikler = duzelt(eski, tirnak=arg.tipografik_tirnak, diyalog_tiresi=not arg.diyalog_tiresi_yok)
         toplam += sum(int(d["adet"]) for d in degisiklikler)
         rapor[str(yol)] = degisiklikler

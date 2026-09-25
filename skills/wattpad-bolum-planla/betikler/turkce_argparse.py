@@ -12,6 +12,9 @@ olduğu gibi kalır; böylece yeni bir Python sürümü çalışmayı bozmaz.
 from __future__ import annotations
 
 import argparse
+import json
+import os
+import sys
 
 CEVIRI: dict[str, str] = {
     "usage: ": "kullanım: ",
@@ -60,3 +63,63 @@ def _ngettext(tekil: str, cogul: str, sayi: int) -> str:
 
 argparse._ = cevir  # type: ignore[attr-defined]
 argparse.ngettext = _ngettext  # type: ignore[attr-defined]
+
+
+JSON_ILETILERI: dict[str, str] = {
+    "Expecting value": "değer bekleniyordu",
+    "Expecting property name enclosed in double quotes": "çift tırnak içinde alan adı bekleniyordu",
+    "Expecting ',' delimiter": "virgül bekleniyordu",
+    "Expecting ':' delimiter": "iki nokta bekleniyordu",
+    "Extra data": "fazladan veri var",
+    "Unterminated string starting at": "kapanmamış tırnak",
+    "Invalid control character at": "geçersiz denetim karakteri",
+    "Invalid \\escape": "geçersiz kaçış dizisi",
+    "Illegal trailing comma before end of object": "nesnenin sonunda fazladan virgül",
+    "Illegal trailing comma before end of array": "dizinin sonunda fazladan virgül",
+}
+
+
+def json_iletisi(hata: json.JSONDecodeError) -> str:
+    """JSON ayrıştırma hatasını Türkçe konum bilgisiyle anlatır."""
+    return f"geçersiz JSON (satır {hata.lineno}, sütun {hata.colno}): {JSON_ILETILERI.get(hata.msg, 'sözdizimi hatası')}"
+
+
+def hata_iletisi(hata: BaseException) -> str:
+    """Yakalanmamış bir hatayı kullanıcıya dönük Türkçe tek satıra çevirir."""
+    ad = getattr(hata, "filename", None) or ""
+    if isinstance(hata, FileNotFoundError):
+        return f"dosya ya da klasör bulunamadı: {ad}"
+    if isinstance(hata, IsADirectoryError):
+        return f"dosya bekleniyordu, klasör verildi: {ad}"
+    if isinstance(hata, NotADirectoryError):
+        return f"klasör bekleniyordu, dosya verildi: {ad}"
+    if isinstance(hata, PermissionError):
+        return f"erişim izni yok: {ad}"
+    if isinstance(hata, UnicodeDecodeError):
+        return "dosya UTF-8 metin değil (ikili ya da başka bir kodlamada olabilir); dosyayı UTF-8 olarak kaydedin"
+    if isinstance(hata, json.JSONDecodeError):
+        return json_iletisi(hata)
+    if isinstance(hata, OSError):
+        return f"dosya işlemi başarısız: {hata.strerror or hata} {ad}".rstrip()
+    if type(hata).__module__ != "builtins" and str(hata):
+        return str(hata)  # betiklerin kendi Türkçe hata sınıfları
+    ileti = str(hata)
+    if isinstance(hata, (ValueError, RuntimeError)) and any(h in ileti for h in "çğıöşüÇĞİÖŞÜ"):
+        return ileti  # betiğin kendi Türkçe iletisi
+    if isinstance(hata, ValueError):
+        if "time data" in ileti or "out of range" in ileti or "must be in" in ileti:
+            return "geçersiz tarih ya da saat (ör. 2026-10-01 ve 20:00)"
+        return "geçersiz değer; girdiyi ve seçenekleri denetleyin"
+    return f"beklenmeyen hata ({type(hata).__name__}). Ayrıntı için HIKAYE_AYIKLA=1 ile yeniden çalıştırın ve hata bildirin."
+
+
+def _hata_kancasi(tur, hata, iz):  # type: ignore[no-untyped-def]
+    if os.environ.get("HIKAYE_AYIKLA") or not isinstance(hata, Exception):
+        sys.__excepthook__(tur, hata, iz)
+        return
+    program = os.path.basename(sys.argv[0]) if sys.argv and sys.argv[0] else "betik"
+    print(f"{program}: hata: {hata_iletisi(hata)}", file=sys.stderr)
+
+
+# Yakalanmamış hatalarda İngilizce yığın izi yerine Türkçe tek satır (çıkış kodu 1).
+sys.excepthook = _hata_kancasi

@@ -30,10 +30,11 @@ import bozulma_denetle  # noqa: E402
 import metin_olcum  # noqa: E402
 import plan_denetle  # noqa: E402
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 KURGU_BASLIKLARI = ("Hedef duygu", "Öncül", "Karakterler", "Dönüm noktası", "Anlatıcı ve zaman", "Hedef uzunluk")
 SAHNE_ALANLARI = ("Amaç", "Duygu", "Olay", "Kanca")
@@ -148,7 +149,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         sonuc = tasarim_denetle(arg.klasor) if arg.komut == "tasarim" else teslim_denetle(arg.klasor)
     except (OSError, UnicodeDecodeError) as hata:
-        print(f"Dosya okunamadı: {hata}", file=sys.stderr)
+        print(f"Dosya okunamadı: {hata_iletisi(hata)}", file=sys.stderr)
         return 2
     kalan = [k for k in sonuc if not k["tamam"]]
     if arg.json:

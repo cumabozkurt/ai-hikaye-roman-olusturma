@@ -31,10 +31,11 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 SURUM = "1.0.0"
 AJAN_SURUMU = 1
@@ -57,7 +58,7 @@ CAGIRMA = {
     "reasonix": "beceri adını doğal dille anarak",
     "genel": "ilgili `skills/<ad>/SKILL.md` dosyasını okuyup adımları izleyerek",
 }
-KANCA_MODULLERI = ("turkce_kaliplar.py", "ai_kalip_denetle.py", "bozulma_denetle.py", "metin_olcum.py", "turkce_argparse.py")
+KANCA_MODULLERI = ("turkce_kaliplar.py", "ai_kalip_denetle.py", "bozulma_denetle.py", "metin_olcum.py", "turkce_argparse.py", "dosya_oku.py")
 BLOK_BASLA = "<!-- ai-hikaye:basla -->"
 BLOK_BITIR = "<!-- ai-hikaye:bitir -->"
 GITIGNORE_BLOK = ("# ai-hikaye:basla", ".hikaye/calisma/", ".hikaye/devir-notu.md", ".hikaye/oturum-gunlugu.md", "# ai-hikaye:bitir")
@@ -158,7 +159,7 @@ def json_oku(yol: Path) -> dict[str, Any]:
     try:
         veri = json.loads(yol.read_text(encoding="utf-8"))
     except ValueError as hata:
-        raise KurulumHatasi(f"{yol} geçerli JSON değil; elle düzeltin ya da yedekleyip silin: {hata}") from hata
+        raise KurulumHatasi(f"{yol} geçerli JSON değil; elle düzeltin ya da yedekleyip silin: {hata_iletisi(hata)}") from hata
     if not isinstance(veri, dict):
         raise KurulumHatasi(f"{yol} bir JSON nesnesi değil")
     return veri

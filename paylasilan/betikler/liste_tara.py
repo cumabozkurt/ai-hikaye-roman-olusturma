@@ -29,10 +29,11 @@ from collections import Counter
 from pathlib import Path
 from typing import Any
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 API = "https://www.wattpad.com/api/v3/stories"
 ALANLAR = "stories(id,title,readCount,voteCount,commentCount,numParts,tags,user(name),completed,url,mature),total"
@@ -155,12 +156,15 @@ def main(argv: list[str] | None = None) -> int:
         if arg.girdi:
             ham = json.loads(arg.girdi.read_text(encoding="utf-8"))
             oykuler = ham.get("stories", []) if isinstance(ham, dict) else ham
+            if not isinstance(oykuler, list):
+                raise TaramaHatasi("--girdi bir öykü listesi ya da {\"stories\": [...]} nesnesi olmalı")
+            oykuler = [o for o in oykuler if isinstance(o, dict)]
         else:
             oykuler = []
             for s in arg.sorgu:
                 oykuler.extend(api_getir(s, adet))
     except (OSError, ValueError, TaramaHatasi) as hata:
-        print(f"Hata: {hata}", file=sys.stderr)
+        print(f"Hata: {hata_iletisi(hata)}", file=sys.stderr)
         return 2
     ozet = ozetle(oykuler, arg.sorgu or [arg.girdi.stem], arg.tum_diller)
     metin = json.dumps(ozet, ensure_ascii=False, indent=2) + "\n" if arg.json else rapor_metni(ozet)

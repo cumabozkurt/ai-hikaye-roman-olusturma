@@ -27,10 +27,11 @@ import urllib.request
 from pathlib import Path
 from typing import Any
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 PLATFORMLAR: dict[str, dict[str, Any]] = {
     "wattpad": {"ad": "Wattpad", "boyut": (512, 800), "oran": "16:25 (dikey)", "uretim": "1024x1536"},
@@ -157,7 +158,7 @@ def main(argv: list[str] | None = None) -> int:
         else:
             sonuc = kirp(arg.girdi, arg.platform, arg.cikti)
     except (KapakHatasi, OSError) as hata:
-        print(json.dumps({"tamam": False, "hata": str(hata)}, ensure_ascii=False))
+        print(json.dumps({"tamam": False, "hata": hata_iletisi(hata)}, ensure_ascii=False))
         return 2
     print(json.dumps(sonuc, ensure_ascii=False, indent=2))
     return 0

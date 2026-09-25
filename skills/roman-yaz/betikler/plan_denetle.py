@@ -29,6 +29,7 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import dosya_oku  # noqa: E402
 import metin_olcum  # noqa: E402
 import turkce_kaliplar as tk  # noqa: E402
 
@@ -63,7 +64,7 @@ def sozlesme_denetle(yol: Path) -> list[dict[str, object]]:
     dosya = str(yol)
     if not yol.is_file():
         return [kontrol("plan-var", False, dosya, "dosya yok", "Bölüm planını plan/bolum-plani_NNN.md olarak yazın.")]
-    metin = yol.read_text(encoding="utf-8").lstrip("\ufeff")
+    metin = dosya_oku.metin_oku(yol).lstrip("\ufeff")
     sonuc = []
     for ad in ALANLAR:
         m = alan_deseni(ad).search(metin)
@@ -101,10 +102,10 @@ def _parcalar(metin: str) -> set[tuple[str, ...]]:
 
 
 def kopya_denetle(plan: Path, metin_yolu: Path) -> dict[str, object]:
-    plan_metni = plan.read_text(encoding="utf-8")
+    plan_metni = dosya_oku.metin_oku(plan)
     plan_metni = "\n".join(re.sub(r"^\s*[-*+|]\s*\**[^:|]{0,40}\**\s*[:|]", "", s) for s in plan_metni.splitlines()
                            if not s.lstrip().startswith("#"))
-    govde = metin_olcum.gorunur_govde(metin_yolu.read_text(encoding="utf-8"))
+    govde = metin_olcum.gorunur_govde(dosya_oku.metin_oku(metin_yolu))
     ortak = _parcalar(plan_metni) & _parcalar(govde)
     ornekler = sorted(" ".join(p) for p in ortak)[:5]
     tamam = len(ortak) < KOPYA_ESIGI

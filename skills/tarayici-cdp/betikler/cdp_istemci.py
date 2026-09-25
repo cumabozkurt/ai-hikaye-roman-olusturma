@@ -27,10 +27,11 @@ import urllib.parse
 import urllib.request
 from typing import Any
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 
 class CdpHatasi(RuntimeError):
@@ -43,7 +44,7 @@ def http_json(port: int, yol: str, yontem: str = "GET") -> Any:
         with urllib.request.urlopen(istek, timeout=5) as y:  # noqa: S310 - yalnızca localhost
             govde = y.read().decode("utf-8")
     except OSError as hata:
-        raise CdpHatasi(f"127.0.0.1:{port} yanıt vermiyor; önce cdp_chrome_baslat.py çalıştırın ({hata})") from hata
+        raise CdpHatasi(f"127.0.0.1:{port} yanıt vermiyor; önce cdp_chrome_baslat.py ile tarayıcıyı başlatın") from hata
     try:
         return json.loads(govde)
     except ValueError:
@@ -201,7 +202,7 @@ def main(argv: list[str] | None = None) -> int:
             finally:
                 kapat(arg.port, s["kimlik"])
     except (CdpHatasi, KeyError, ValueError, OSError) as hata:
-        print(json.dumps({"tamam": False, "hata": str(hata)}, ensure_ascii=False))
+        print(json.dumps({"tamam": False, "hata": hata_iletisi(hata)}, ensure_ascii=False))
         return 2
     print(json.dumps(sonuc, ensure_ascii=False, indent=2))
     return 0

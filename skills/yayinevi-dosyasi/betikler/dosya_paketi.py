@@ -32,10 +32,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 import metin_olcum  # noqa: E402
 import yazim_denetle  # noqa: E402
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 SAYFA_KELIME = 280  # 13,5×21 cm, 11 punto kitap sayfası için kaba ortalama
 
@@ -160,7 +161,7 @@ def main(argv: list[str] | None = None) -> int:
     try:
         sonuc = paket(arg.proje, arg.yazar, arg.kelime_siniri, arg.tam, arg.docx, arg.cikti or arg.proje / "yayinevi")
     except (PaketHatasi, OSError, subprocess.CalledProcessError) as hata:
-        print(json.dumps({"tamam": False, "hata": str(hata)}, ensure_ascii=False))
+        print(json.dumps({"tamam": False, "hata": hata_iletisi(hata)}, ensure_ascii=False))
         return 2
     print(json.dumps(sonuc, ensure_ascii=False, indent=2))
     return 0

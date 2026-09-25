@@ -28,10 +28,11 @@ from typing import Any
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import metin_olcum  # noqa: E402
 
-try:  # argparse iletilerini Türkçeleştirir
+try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
+    from turkce_argparse import hata_iletisi
 except ImportError:  # pragma: no cover
-    pass
+    hata_iletisi = str
 
 GUNLER = {"pazartesi": 0, "salı": 1, "sali": 1, "çarşamba": 2, "carsamba": 2, "perşembe": 3, "persembe": 3,
           "cuma": 4, "cumartesi": 5, "pazar": 6}
@@ -229,7 +230,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"Tanınmayan gün: {hata}. Seçenekler: {', '.join(GUN_ADLARI).lower()}", file=sys.stderr)
         return 2
     except (OSError, ValueError) as hata:
-        print(f"Hata: {hata}", file=sys.stderr)
+        print(f"Hata: {hata_iletisi(hata)}", file=sys.stderr)
         return 2
     print(json.dumps(sonuc, ensure_ascii=False, indent=2))
     return 0

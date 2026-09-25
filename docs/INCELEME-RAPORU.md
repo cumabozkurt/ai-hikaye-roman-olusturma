@@ -415,6 +415,15 @@ Son durum: 239 test geçiyor (yerelde Python 3.11, 3.13, 3.14; `HIKAYE_DOGRULAMA
 
 - **Çıktı doğrulama:** Kitaptik DOCX'i `zipfile` + XML ile ayrıştırılıyor, LibreOffice ile metne dönüştürülüyor ve mammoth ile bölümlere ayrılıyor; aynı girdi bayt düzeyinde aynı DOCX'i veriyor (`SOURCE_DATE_EPOCH`).
 - **Gizlilik:** Depoya yalnızca kitaptik.com'un herkese açık sayfalarında ve yazar ekranında görünen bilgiler girdi.
+- **CI:** `main` üzerindeki 2.1.0 işlemesi için tüm işler yeşil: Ubuntu (Python 3.11, 3.12, 3.13, 3.14), Windows ve macOS (Python 3.13), çıktı doğrulama işi (EPUBCheck + LibreOffice + mammoth 1.11.0, Node 22).
+- **Kurulum:** Her ev sahibinde geçici, boş bir ana dizinde doğrudan GitHub'dan kuruldu:
+
+| Ev sahibi | Sürüm | Sonuç |
+|---|---|---|
+| Claude Code | 2.1.282 | `plugin validate` geçti; eklenti 2.1.0, 25 beceri (`kitaptik-yayimla` dahil); kurulu betik çalışıyor |
+| Codex CLI | 0.157.0 | Eklenti 2.1.0, 25 beceri |
+| `npx skills` | — | `~/.agents/skills` altında 25 beceri, Claude Code bağlantısı var |
+| OpenCode | 1.18.32 | `opencode debug skill`: 25 proje becerisi (+1 yerleşik) |
 
 ### Açık kalan
 

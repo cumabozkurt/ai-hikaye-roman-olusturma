@@ -49,6 +49,12 @@ GORSELLER = [
     ("terminal-e-kitap.svg", "EPUB ve okuma kopyası derleme",
      "python3 betikler/e_kitap_derle.py --proje saatcinin-kizi --yazar \"Örnek Yazar\"",
      ["skills/e-kitap-derle/betikler/e_kitap_derle.py", "--proje", "saatcinin-kizi", "--yazar", "Örnek Yazar"], True),
+    ("terminal-ipucu-defteri.svg", "İpucu defteri: ekilen ipuçları ve çözüm planı",
+     "python3 betikler/ipucu_defteri.py rapor --proje saatcinin-kizi",
+     ["paylasilan/betikler/ipucu_defteri.py", "rapor", "--proje", "saatcinin-kizi"], True),
+    ("terminal-kurgu-dagilim.svg", "Kurgu ansiklopedisi: kim hangi bölümde",
+     "python3 betikler/kurgu_ansiklopedisi.py dagilim --proje saatcinin-kizi",
+     ["paylasilan/betikler/kurgu_ansiklopedisi.py", "dagilim", "--proje", "saatcinin-kizi"], True),
 ]
 
 

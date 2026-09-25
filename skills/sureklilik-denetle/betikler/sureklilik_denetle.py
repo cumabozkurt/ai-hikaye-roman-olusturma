@@ -29,6 +29,7 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import dosya_oku  # noqa: E402
+import kitap_proje  # noqa: E402
 import metin_olcum  # noqa: E402
 import turkce_kaliplar as tk  # noqa: E402
 
@@ -67,7 +68,7 @@ def karakter_nitelikleri(proje: Path) -> dict[str, dict[str, str]]:
         ad = (baslik.group(1) if baslik else yol.stem).split("—")[0].strip()
         nitelik: dict[str, str] = {}
         for anahtar, desen in (("goz", r"göz(?:\s+rengi)?"), ("sac", r"saç(?:\s+rengi)?"), ("yas", r"yaş")):
-            m = re.search(rf"^\s*[-*]\s*\**{desen}\**\s*:\s*(.+)$", metin, re.M | re.I)
+            m = re.search(rf"^[ \t]*[-*][ \t]+\**{desen}\**[ \t]*:[ \t]*(.+)$", metin, re.M | re.I)
             if m:
                 nitelik[anahtar] = tk.tr_kucuk(m.group(1).strip())
         sonuc[ad] = nitelik
@@ -115,7 +116,10 @@ def denetle(proje: Path, bolum: int | None = None) -> dict[str, Any]:
             bolum = max(son, 1)
     try:
         metin_yolu = metin_olcum.bolum_dosyasi_bul(proje / "metin", bolum, plan=False)
-        metin = metin_olcum.gorunur_govde(dosya_oku.metin_oku(metin_yolu))
+        # Satır numaraları dosyadakiyle aynı kalsın diye başlık ve ön bilgi silinmez, boşaltılır.
+        metin = kitap_proje.satir_koruyan_govde(metin_olcum.satir_sonlarini_duzelt(dosya_oku.metin_oku(metin_yolu)))
+        if not metin.strip():
+            metin = ""
     except metin_olcum.OlcumHatasi:
         metin_yolu, metin = None, ""
     try:
@@ -131,8 +135,9 @@ def denetle(proje: Path, bolum: int | None = None) -> dict[str, Any]:
     for ad, k in karakterler.items():
         if k.get("yasam_durumu") != "öldü" or not metin:
             continue
-        for no, c in cumle_listesi:
-            kucuk = tk.tr_kucuk(c)
+        for i, (no, c) in enumerate(cumle_listesi):
+            # Anı bağlamı çoğu zaman bir önceki cümlede kurulur: "Fotoğrafta ... Nuri Usta'nın elinde bir saat vardı."
+            kucuk = tk.tr_kucuk(c + " " + (cumle_listesi[i - 1][1] if i else ""))
             if ad_gecer(ad, c, list(karakterler)) and not any(s in kucuk for s in ANI_SOZCUKLERI) and not tk.diyalog_satiri_mi(c):
                 if bolum > son:
                     ekle("hata", "olu-karakter", f"{ad} öldü olarak kayıtlı ama sahnede görünüyor (anı/rüya ise bunu metinde belirginleştirin).", no, c)

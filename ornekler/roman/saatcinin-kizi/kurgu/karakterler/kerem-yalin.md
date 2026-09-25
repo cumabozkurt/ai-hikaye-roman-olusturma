@@ -1,6 +1,7 @@
 # Kerem Yalın
 
 - Yaş: 31
+- Doğum yılı: 1993
 - Göz rengi: gri
 - Saç rengi: siyah
 - Meslek: Araştırmacı gazeteci (ilk ciltte gizli)

@@ -3,7 +3,7 @@ name: roman-yaz
 description: "Uzun soluklu roman ve Wattpad dizisi yazımı: yapı tartışması, genel plan, cilt ve bölüm planı, bölüm bölüm yazım, günlük yazım ve revizyon. Bölüm kaydı, 100+ bölümlük süreklilik takibi ve yapay zekâ tadı denetimiyle çalışır. Tetikleyiciler: /roman-yaz, \"roman yazalım\", \"yeni bölüm yaz\", \"sıradaki bölüm\", \"planı güncelle\", \"bugün 2 bölüm yaz\"."
 license: MIT
 compatibility: "Python 3.11+. Claude Code, OpenAI Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix ve SKILL.md okuyabilen her ajan."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-long-write"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "oh-story-claudecode/story-long-write"}
 ---
 
 # roman-yaz: Uzun Soluklu Roman Yazımı
@@ -39,24 +39,27 @@ Her aşamada ayrıca `kaynaklar/uslup-karari.md` uygulanır: istek > kitabın ü
 
 ## Ajanlar
 
-Kurulumdan sonra (`/hikaye-kurulum`) proje içinde şu ajanlar bulunur: `hikaye-mimari` (yapı ve plan), `anlati-yazari` (bölüm düzyazısı), `tutarlilik-denetcisi` (süreklilik), `karakter-tasarimcisi`, `hikaye-arastirmaci` (tarih, meslek, mekân doğrulaması), `proje-kasifi` (mevcut dosyaları tarar), `bolum-cikarici`.
+Kurulumdan sonra (`/hikaye-kurulum`) proje içinde şu ajanlar bulunur: `hikaye-mimari` (yapı ve plan), `anlati-yazari` (bölüm düzyazısı), `tutarlilik-denetcisi` (süreklilik), `karakter-tasarimcisi`, `hikaye-arastirmaci` (tarih, meslek, mekân doğrulaması), `proje-kasifi` (mevcut dosyaları tarar), `bolum-cikarici`, `bolum-hakemi` (rubrikle puanlama, turnuva maçları).
 
 - Claude Code: Agent aracıyla `subagent_type`; Codex: `.codex/agents/*.toml`; OpenCode: `@ajan-adı` ya da görev aracı; Antigravity: `.agents/agents/`.
 - Ajan dosyası yoksa ya da çalışma zamanı özel ajan desteklemiyorsa görevi ana oturumda yürüt ve raporda **"Yedek: tek başına yürütüldü"** yaz.
-- `.hikaye-kurulu` içindeki `ajan_surumu` bu sürümün beklediği `1` değerinden farklıysa yine devam et, ama yazara `/hikaye-kurulum` komutunu yeniden çalıştırmasını öner.
+- `.hikaye-kurulu` içindeki `ajan_surumu` bu sürümün beklediği `2` değerinden farklıysa yine devam et, ama yazara `/hikaye-kurulum` komutunu yeniden çalıştırmasını öner.
 
 ## Bölüm yazımının özeti
 
 Ayrıntı `kaynaklar/is-akisi-bolum.md` dosyasındadır; kısa sıra:
 
-1. Aktif kitabı bul (`.aktif-kitap` ya da tek kitap), `takip/baglam.md` bağlam kartını oku.
+1. Aktif kitabı bul (`.aktif-kitap` ya da tek kitap), `takip/baglam.md` bağlam kartını oku. Kesintiden sonra dönülüyorsa önce `python3 betikler/proje_durumu.py durum --proje <kitap>` ile yarım kalan ya da kaydedilmemiş bölüm var mı bak; 30+ bölümlük kitapta `python3 betikler/proje_durumu.py ozet --proje <kitap>` özet katmanlarını da oku.
+   - Kurgu ansiklopedisi (`kurgu/karakterler/`, `kurgu/mekanlar/`...) varsa `python3 betikler/kurgu_ansiklopedisi.py baglam --proje <kitap> --bolum N --cikti <kitap>/.hikaye/calisma/bolum-NNN/baglam.md` ile bölüme özel bağlam paketini üret ve yazar istemine ekle. Geçmiş bir ayrıntıyı hatırlaman gerekirse (`o mektupta ne yazıyordu?`) metni baştan okumak yerine `python3 betikler/bilgi_ara.py --proje <kitap> --sorgu "..."` kullan.
 2. `python3 betikler/plan_gorunumu.py plan/bolum-plani_NNN.md --sozlesme` ile bölüm sözleşmesini al; eksikse önce planı tamamla.
 3. `python3 betikler/yazar_istemi_olustur.py --proje <kitap> --bolum N --cikti` ile yazar istemi iskeletini üret; "⟦ana oturum doldurur⟧" yuvalarını doldur.
 4. `anlati-yazari` ajanına istemi ver; metni doğrudan `metin/bolum-NNN_baslik.md` dosyasına yazdır (kayıt yapılana kadar taslak sayılır, yazım sonrası kancası anında uyarı verir).
 5. `python3 betikler/hikayectl.py bolum denetle --proje <kitap> --bolum N` ile kapıları geçir (sözleşme, bozulma, yapay zekâ kalıpları, uzunluk, plan kopyası, önceki bölümün kaydı).
 6. `python3 betikler/yazim_denetle.py` ve `python3 betikler/sureklilik_denetle.py --proje <kitap> --bolum N` ile yazım ve süreklilik denetimi.
 7. Takip işlemini `<kitap>/.hikaye/calisma/bolum-NNN/islem.json` olarak hazırla (`kaynaklar/takip-protokolu.md`) ve `python3 betikler/hikayectl.py bolum kaydet --proje <kitap> --bolum N --girdi <kitap>/.hikaye/calisma/bolum-NNN/islem.json` çalıştır. Kayıt başarılıysa çalışma klasörü silinir.
-8. Yazara `kaynaklar/yazar-raporu.md` biçiminde rapor ver.
+8. Yazara `kaynaklar/yazar-raporu.md` biçiminde rapor ver. Birkaç bölümde bir `python3 betikler/ipucu_defteri.py rapor --proje <kitap>` ile unutulmaya yüz tutan ipuçlarını rapora ekle.
+
+Revizyondan önce `python3 betikler/anlik_goruntu.py al --proje <kitap> --not "..."` ile sürüm al. Yazar bir bölümü puanlayarak tur tur iyileştirmek ya da birden çok taslağı karşılaştırmak isterse `/bolum-dongusu` becerisine geç.
 
 ## Uzunluk
 
@@ -76,6 +79,11 @@ python3 betikler/yazar_hafizasi.py sorgula --calisma-alani . --kitap <kitap> --t
 
 | Durum | Beceri |
 |---|---|
+| Yapı yöntemi, sahne kartları, plan denetimi | `/roman-planla` |
+| Karakter, mekân, zaman çizelgesi, sözlük | `/kurgu-ansiklopedisi` |
+| Bölümü puanla, taslak turnuvası, ses izi | `/bolum-dongusu` |
+| Günlük hedef, istatistik, sürümler | `/yazim-panosu` |
+| EPUB, DOCX, ODT, PDF | `/e-kitap-derle` |
 | Pazar ve tür yönü lazım | `/roman-tara` |
 | Örnek bir romanı çözümlemek | `/roman-cozumle` |
 | Metinde yapay zekâ tadı var | `/yz-tadi-gider` |

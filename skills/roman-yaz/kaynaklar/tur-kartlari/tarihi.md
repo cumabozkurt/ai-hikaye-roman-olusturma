@@ -28,6 +28,11 @@ Kalıp kullanmak sorun değildir; okur onu bilir ve yeni bir yorum bekler.
 - Günümüz değerlerini dönem karakterine sorgusuz yüklemek.
 - Tarihî kişiyi karalayıcı kurgu (hukuki risk).
 
+## Ayrıntılı dönem kartları ve denetim
+
+- Son dönem Osmanlı (1839–1922) için `osmanli-donemi.md`, 1920–1950 arası için `erken-cumhuriyet.md` kartını da oku.
+- `plan/genel-plan.md` dosyasına `- Dönem: 1919–1923` satırını yaz; `donem_denetle.py --proje <kitap>` bu yıla göre henüz var olmayan ya da kaldırılmış şeyleri (soyadı 1934, Latin harfleri 1928, fes 1925...) yasa ve yıl kaynağıyla bildirir. Bilinçli istisnaları `<kitap>/.donem-istisnalari` dosyasına yaz.
+
 ## Bölüm sonu kancası seçenekleri
 
 tarihî olayın kapıya dayanması, mektup, ihanet, ayrılık.

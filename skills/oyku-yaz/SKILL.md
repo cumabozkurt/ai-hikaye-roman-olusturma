@@ -3,7 +3,7 @@ name: oyku-yaz
 description: "Kısa öykü yazımı (1.500–10.000 kelime): hedef duygu, tek dönüm noktası, sahne planı, sahne sahne yazım ve son okuma. Wattpad tek bölümlük öyküler, dergi ve öykü yarışmaları için. Tetikleyiciler: /oyku-yaz, \"kısa öykü yaz\", \"bir öykü yazalım\", \"yarışma için öykü\"."
 license: MIT
 compatibility: "Python 3.11+. Claude Code, Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-short-write"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "oh-story-claudecode/story-short-write"}
 ---
 
 # oyku-yaz: Kısa Öykü Yazımı

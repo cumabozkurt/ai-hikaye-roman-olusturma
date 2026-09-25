@@ -23,6 +23,11 @@ def tr_ondalik(sayi: float, basamak: int = 1) -> str:
     return f"{sayi:.{basamak}f}".replace(".", ",")
 
 
+def tr_sayi(sayi: int) -> str:
+    """Tam sayıyı Türkçe binlik ayırıcıyla yazar: 12500 -> '12.500'."""
+    return f"{int(sayi):,}".replace(",", ".")
+
+
 def tr_buyuk(metin: str) -> str:
     return metin.replace("i", "İ").replace("ı", "I").upper()
 

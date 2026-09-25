@@ -37,8 +37,8 @@ try:  # argparse iletilerini ve hata iletilerini Türkçeleştirir
 except ImportError:  # pragma: no cover
     hata_iletisi = str
 
-SURUM = "1.1.0"
-AJAN_SURUMU = 1
+SURUM = "2.0.0"
+AJAN_SURUMU = 2
 BETIKLER = Path(__file__).resolve().parent
 BECERI_KOKU = BETIKLER.parent
 BECERILER_KLASORU = BECERI_KOKU.parent
@@ -285,7 +285,7 @@ def ortak_kur(y: Yazici, ev_listesi: list[str]) -> None:
 
 def yonlendirme_metni(ev: str) -> str:
     sablon = (VARLIK / "sablonlar" / "yonlendirme.md.sablon").read_text(encoding="utf-8")
-    ajan_notu = ("hikaye-mimari, anlati-yazari, tutarlilik-denetcisi, karakter-tasarimcisi, hikaye-arastirmaci, proje-kasifi, bolum-cikarici. "
+    ajan_notu = ("hikaye-mimari, anlati-yazari, tutarlilik-denetcisi, karakter-tasarimcisi, hikaye-arastirmaci, proje-kasifi, bolum-cikarici, bolum-hakemi. "
                  "Ajan kullanılamıyorsa (dosya yok, çalışma zamanı özel ajan desteklemiyor) görevi ana oturumda yürüt ve 'Yedek: tek başına yürütüldü' diye bildir.")
     if ev in {"zcode", "openclaw", "reasonix", "genel"}:
         ajan_notu = "bu ortamda özel ajan kurulmaz; bütün uzman görevleri ana oturumda yürütülür."

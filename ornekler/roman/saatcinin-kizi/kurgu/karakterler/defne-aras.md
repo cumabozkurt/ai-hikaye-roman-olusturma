@@ -1,6 +1,7 @@
 # Defne Aras
 
 - Yaş: 27
+- Doğum yılı: 1997
 - Göz rengi: ela
 - Saç rengi: kestane
 - Meslek: Saatçi (dedesinin çırağı), yarı zamanlı restorasyon işleri

@@ -7,6 +7,11 @@ Kullanım::
 
 Yalnızca 127.0.0.1 adresine bağlanır, dosya yazmaz. ``--json`` paneli açmadan
 durum özetini yazdırır (testler ve betik kullanımı için).
+
+Her kitap için sekmeler: Genel (sıradaki adım, yazım istatistikleri, bölümler),
+Kurgu (ansiklopedi kayıtları ve bölüm dağılımı), Sahneler (mantar pano), İpuçları
+(ipucu defteri), Döngü (revizyon turlarının puanları) ve Sürümler (anlık görüntüler).
+Bir bölümün verisi okunamazsa panel çökmez; o sekmede hata iletisi görünür.
 """
 
 from __future__ import annotations
@@ -21,6 +26,18 @@ from typing import Any
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import metin_olcum  # noqa: E402
+
+try:  # ayrıntı sekmeleri; eksik modül paneli bozmaz
+    import anlik_goruntu
+    import ipucu_defteri
+    import kurgu_ansiklopedisi
+    import kurgu_plani
+    import proje_durumu
+    import revizyon_dongusu
+    import yazim_istatistik
+except ImportError:  # pragma: no cover
+    anlik_goruntu = ipucu_defteri = kurgu_ansiklopedisi = kurgu_plani = None  # type: ignore[assignment]
+    proje_durumu = revizyon_dongusu = yazim_istatistik = None  # type: ignore[assignment]
 
 try:  # argparse iletilerini Türkçeleştirir
     import turkce_argparse  # noqa: F401
@@ -74,11 +91,11 @@ def kitap_ozeti(kok: Path, kitap: Path) -> dict[str, Any]:
     planlar = sorted(p.name for p in (kitap / "plan").glob("bolum-plani_*.md"))
     ipuclari = [
         {"id": k, "ozet": v.get("ozet", ""), "durum": v.get("durum", "")}
-        for k, v in sorted((durum.get("ipuclari") or {}).items())
+        for k, v in sorted((durum.get("ipuclari") if isinstance(durum.get("ipuclari"), dict) else {}).items())
         if isinstance(v, dict) and v.get("durum") == "ekili"
     ]
     karakterler = []
-    for ad, kayit in sorted((durum.get("karakterler") or {}).items()):
+    for ad, kayit in sorted((durum.get("karakterler") if isinstance(durum.get("karakterler"), dict) else {}).items()):
         if isinstance(kayit, dict):
             karakterler.append({"ad": ad, "yasam": kayit.get("yasam_durumu", ""), "konum": kayit.get("konum", "")})
     return {
@@ -95,11 +112,63 @@ def kitap_ozeti(kok: Path, kitap: Path) -> dict[str, Any]:
     }
 
 
+def _guvenli(islev: Any, *arg: Any) -> Any:
+    """Ayrıntı verisini toplar; kullanıcı dosyası bozuksa paneli düşürmek yerine hata iletisi döndürür."""
+    if islev is None:
+        return {"hata": "modül bulunamadı"}
+    try:
+        return islev(*arg)
+    except Exception as hata:  # noqa: BLE001 - panel salt okunur, her hata kullanıcıya gösterilir
+        return {"hata": f"{type(hata).__name__}: {hata}"}
+
+
+def _ansiklopedi(kitap: Path) -> dict[str, Any]:
+    kayitlar = [{"ad": k.ad, "tur": k.tur, "rol": k.alanlar.get("rol", ""), "ozet": k.alanlar.get("özet", "")}
+                for k in kurgu_ansiklopedisi.kayitlari_oku(kitap)]
+    return {"kayitlar": kayitlar, "dagilim": kurgu_ansiklopedisi.dagilim(kitap),
+            "sozluk": len(kurgu_ansiklopedisi.sozluk(kitap)), "zaman": len(kurgu_ansiklopedisi.zaman_cizelgesi(kitap)),
+            "iliski": len(kurgu_ansiklopedisi.iliskiler(kitap))}
+
+
+def _surumler(kitap: Path) -> list[dict[str, Any]]:
+    return [{"kimlik": k["kimlik"], "zaman": k.get("zaman", ""), "not": k.get("not", ""),
+             "kelime": k.get("metin_kelime", 0), "dosya": k.get("dosya_sayisi", 0)}
+            for k in anlik_goruntu.kayitlar(kitap)][-15:][::-1]
+
+
+def _donguler(kitap: Path) -> list[dict[str, Any]]:
+    sonuc = []
+    klasor = kitap / ".hikaye" / "dongu"
+    for alt in sorted(klasor.glob("bolum-*")) if klasor.is_dir() else []:
+        if not alt.name[6:].isdigit():
+            continue
+        turlar = revizyon_dongusu.turlar(kitap, int(alt.name[6:]))
+        if turlar:
+            sonuc.append({"bolum": int(alt.name[6:]), "karar": turlar[-1].get("karar", ""),
+                          "en_iyi_tur": max(turlar, key=lambda t: t.get("toplam") or 0).get("tur"),
+                          "turlar": [{"tur": t.get("tur"), "toplam": t.get("toplam"), "mekanik": t.get("mekanik"),
+                                      "hakem": (t.get("hakem") or {}).get("hakem") if isinstance(t.get("hakem"), dict) else None,
+                                      "kelime": t.get("kelime"), "not": t.get("not", "")} for t in turlar]})
+    return sonuc
+
+
+def kitap_ayrintisi(kitap: Path) -> dict[str, Any]:
+    return {
+        "durum": _guvenli(getattr(proje_durumu, "durum_raporu", None), kitap),
+        "istatistik": _guvenli(getattr(yazim_istatistik, "pano_verisi", None), kitap),
+        "ansiklopedi": _guvenli(_ansiklopedi if kurgu_ansiklopedisi else None, kitap),
+        "sahneler": _guvenli(getattr(kurgu_plani, "sahneleri_oku", None), kitap),
+        "ipuclari": _guvenli(getattr(ipucu_defteri, "rapor", None), kitap),
+        "donguler": _guvenli(_donguler if revizyon_dongusu else None, kitap),
+        "surumler": _guvenli(_surumler if anlik_goruntu else None, kitap),
+    }
+
+
 def durum_ozeti(kok: Path) -> dict[str, Any]:
     kok = kok.resolve()
     aktif = (kok / ".aktif-kitap").read_text(encoding="utf-8").strip() if (kok / ".aktif-kitap").is_file() else ""
     kurulum = _json(kok / ".hikaye-kurulu")
-    kitaplar = [kitap_ozeti(kok, k) for k in kitaplari_bul(kok)]
+    kitaplar = [kitap_ozeti(kok, k) | {"ayrinti": kitap_ayrintisi(k)} for k in kitaplari_bul(kok)]
     for k in kitaplar:
         k["aktif"] = bool(aktif) and k["yol"] == aktif
     oykuler = sorted(p.name for p in (kok / "oyku").glob("*") if p.is_dir()) if (kok / "oyku").is_dir() else []
@@ -132,7 +201,7 @@ def sunucu_olustur(kok: Path, port: int) -> ThreadingHTTPServer:
             self.send_header("Content-Length", str(len(govde)))
             self.send_header("Cache-Control", "no-store")
             self.send_header("X-Content-Type-Options", "nosniff")
-            self.send_header("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'")
+            self.send_header("Content-Security-Policy", "default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'self'")
             self.end_headers()
             self.wfile.write(govde)
 
@@ -144,9 +213,11 @@ def sunucu_olustur(kok: Path, port: int) -> ThreadingHTTPServer:
 
 def main(argv: list[str] | None = None) -> int:
     ayr = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ayr.add_argument("--calisma-alani", type=Path, default=Path.cwd())
-    ayr.add_argument("--port", type=int, default=8765)
-    ayr.add_argument("--json", action="store_true")
+    ayr.add_argument("--calisma-alani", type=Path, default=Path.cwd(),
+                     help="yazım çalışma alanının kök klasörü (varsayılan: bulunulan klasör)")
+    ayr.add_argument("--port", type=int, default=8765,
+                     help="panelin 127.0.0.1 üzerindeki bağlantı noktası (varsayılan 8765)")
+    ayr.add_argument("--json", action="store_true", help="paneli açmadan durum özetini JSON olarak yaz")
     arg = ayr.parse_args(argv)
     if not arg.calisma_alani.is_dir():
         print(f"Çalışma alanı bulunamadı: {arg.calisma_alani}", file=sys.stderr)

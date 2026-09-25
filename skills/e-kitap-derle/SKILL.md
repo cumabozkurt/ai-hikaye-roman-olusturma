@@ -1,12 +1,12 @@
 ---
 name: e-kitap-derle
-description: "Roman ya da öykü bölümlerini EPUB 3 e-kitaba ve tek dosyalık HTML okuma kopyasına derler: kapak, künye, içindekiler, sahne ayraçları, diyalog biçimi; bitmemiş metin işaretlerini ([TK], [DOLDUR]) yakalar ve Google Play Kitaplar, Kindle, Apple Books ve beta okur paylaşımı için teslim listesi verir. Pandoc gerekmez. Tetikleyiciler: /e-kitap-derle, \"EPUB yap\", \"e-kitap hazırla\", \"okuma kopyası\", \"beta okurlara gönder\"."
+description: "Roman ya da öykü bölümlerini EPUB 3 e-kitaba, yayınevine gönderilecek DOCX ve ODT dosyasına (A4, TNR 12, 1,5 aralık, sayfa numarası), A5 baskıya hazır HTML ve PDF'ye, HTML okuma kopyasına, TXT ve tek Markdown'a derler; bitmemiş metin işaretlerini yakalar, teslim listesi verir. Pandoc gerekmez. Tetikleyiciler: /e-kitap-derle, \"EPUB yap\", \"Word dosyası\", \"PDF hazırla\", \"okuma kopyası\", \"beta okurlara gönder\"."
 license: MIT
 compatibility: "Python 3.11+ (yalnızca standart kütüphane)."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
 ---
 
-# e-kitap-derle: EPUB ve Okuma Kopyası
+# e-kitap-derle: EPUB, DOCX, ODT, PDF ve Okuma Kopyası
 
 Bitmiş ya da beta okura gidecek metni okunabilir bir e-kitaba dönüştürürsün. Metni değiştirmezsin; derler, denetler ve teslim için eksikleri gösterirsin.
 
@@ -27,13 +27,25 @@ Bitmemiş metin işareti ya da çok yakın tekrarlar varsa yazara listele.
 
 ```bash
 python3 betikler/e_kitap_derle.py --proje <kitap> --yazar "Ad Soyad" [--kapak <kitap>/kapak/kapak.jpg]
+python3 betikler/e_kitap_derle.py --proje <kitap> --yazar "Ad Soyad" --bicim docx pdf
 python3 betikler/e_kitap_derle.py --dosya oyku/<ad>/metin.md --baslik "Öykü Adı" --yazar "Ad Soyad" --bicim html
 ```
 
-Çıktılar varsayılan olarak `<kitap>/yayin/<kitap-adi>.epub` ve `.html` olur. Bölüm sırası dosya adındaki numaradır (`bolum-001_…`); bölüm başlığı dosyadaki ilk `#` başlığıdır.
+| `--bicim` | Çıktı | Ne için |
+|---|---|---|
+| `epub` | `<ad>.epub` (EPUB 3, EPUBCheck uyumlu) | Google Play Kitaplar, Kobo, Apple Books, Kindle (Send to Kindle EPUB kabul eder) |
+| `html` | `<ad>.html` | Beta okur, tarayıcıda okuma |
+| `docx` | `<ad>.docx` | Yayınevi ve editör: A4, Times New Roman 12, 1,5 satır aralığı, 2,5 cm kenar, iki yana yaslı ve girintili paragraflar, her bölüm yeni sayfada, kapak sayfasında yaklaşık kelime sayısı, üst bilgide "Soyad / Kitap adı", altta sayfa numarası, dil tr-TR |
+| `odt` | `<ad>.odt` | Aynı gönderim biçimi, LibreOffice için |
+| `yazdir` | `<ad>-baski.html` | A5 baskıya hazır sayfa (tarayıcıdan "PDF olarak kaydet") |
+| `pdf` | `<ad>.pdf` | `yazdir` çıktısının yüklü Chrome/Chromium/Edge ile PDF'si; tarayıcı yoksa hata verir, `yazdir` kullan |
+| `txt`, `md` | `<ad>.txt`, `<ad>-tam.md` | Düz metin, tek dosya Markdown |
+| `hepsi` (varsayılan) | epub, html, docx, odt, yazdir | |
+
+Çıktılar varsayılan olarak `<kitap>/yayin/` klasörüne yazılır (`--cikti` ile değişir). Bölüm sırası dosya adındaki numaradır (`bolum-001_…`); bölüm başlığı dosyadaki ilk `#` başlığıdır. Yayınevine gönderim kuralları için `/yayinevi-dosyasi` becerisine bak; her yayınevinin kendi şartı önce gelir.
 
 4. **Bitmemiş işaretler:** Betik `[TK]`, `[DOLDUR]`, `⟦…⟧`, `TODO` bulursa çıkış kodu 1 ile durur ve satırları listeler. Yazar yalnızca beta okuma kopyası istiyorsa `--taslak` ile derle ve raporda "taslak" olarak belirt.
-5. **Doğrulama:** Mümkünse W3C EPUBCheck ile doğrula (`java -jar epubcheck.jar <dosya>.epub`); yoksa HTML kopyasını tarayıcıda açıp içindekiler bağlantılarını ve Türkçe karakterleri kontrol et.
+5. **Doğrulama:** Mümkünse W3C EPUBCheck ile doğrula (`java -jar epubcheck.jar <dosya>.epub`); yoksa HTML kopyasını tarayıcıda açıp içindekiler bağlantılarını ve Türkçe karakterleri kontrol et. DOCX/ODT dosyasını Word ya da LibreOffice'te açıp ilk sayfayı, üst bilgiyi ve sayfa numaralarını göz ile denetle.
 6. **Rapor:** üretilen dosyalar ve boyutları, bölüm sayısı, uyarılar, `kaynaklar/e-kitap-rehberi.md` içindeki teslim listesinden eksik kalanlar (ISBN, kapak ölçüsü, künye bilgileri).
 
 ## Dikkat

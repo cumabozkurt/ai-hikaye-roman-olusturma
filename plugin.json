@@ -1,7 +1,7 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "ai-hikaye-roman-olusturma",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı.",
   "author": {
     "name": "Cuma Bozkurt",
@@ -28,7 +28,7 @@
       "interface": {
         "displayName": "AI Hikaye & Roman Oluşturma",
         "shortDescription": "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı.",
-        "longDescription": "20 Türkçe beceri, 7 ajan ve kancalarla fikirden yayına roman ve öykü yazımı: Wattpad ve Türkiye kitap pazarı taraması, roman/öykü çözümleme, bölüm bölüm yazım, 100+ bölümlük süreklilik takibi, TDK yazım denetimi, yapay zekâ tadı giderme, kapak, Wattpad yayın takvimi, yayınevi dosyası, EPUB e-kitap, uyarlama sinopsisi ve sesli kitap hazırlığı.",
+        "longDescription": "24 Türkçe beceri, 7 ajan ve kancalarla fikirden yayına roman ve öykü yazımı: Wattpad ve Türkiye kitap pazarı taraması, roman/öykü çözümleme, bölüm bölüm yazım, 100+ bölümlük süreklilik takibi, TDK yazım denetimi, yapay zekâ tadı giderme, kapak, Wattpad yayın takvimi, yayınevi dosyası, EPUB e-kitap, uyarlama sinopsisi ve sesli kitap hazırlığı.",
         "developerName": "Cuma Bozkurt",
         "category": "Productivity",
         "capabilities": [

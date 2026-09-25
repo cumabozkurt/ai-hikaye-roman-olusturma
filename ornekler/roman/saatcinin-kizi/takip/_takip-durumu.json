@@ -21,7 +21,7 @@
       },
       {
         "bolum": 2,
-        "ozet": "Defne gizli kapağı açtı ve '14.03.1987 — N.' yazısını buldu. Kerem, Tahsin'in ağabeyi olduğunu söyledi. Sabah çekmece kilidinde taze çizikler vardı."
+        "ozet": "Defne gizli kapağı açtı ve '14.03.1987 — N.' yazısını buldu. Kerem, Tahsin'in yeğeni olduğunu söyledi. Sabah çekmece kilidinde taze çizikler vardı."
       }
     ],
     "sonraki_bolum_sozleri": [
@@ -79,7 +79,7 @@
       "bildikleri": [
         "Dedesi her mart ortasında dükkânı bir gün kapatırdı",
         "Saatte 14.03.1987 — N. yazıyor",
-        "Kerem, Tahsin'in ağabeyi"
+        "Kerem, Tahsin'in yeğeni"
       ],
       "durum": "Tedirgin; dükkânı satma kararını erteledi",
       "hedef": "Tarihin anlamını ve çekmeceyi zorlayanı bulmak",
@@ -97,7 +97,7 @@
       "iliskiler": [
         "Defne: temkinli ortak"
       ],
-      "kimlik": "31 yaşında, Tahsin Yalın'ın ağabeyi",
+      "kimlik": "31 yaşında, Tahsin Yalın'ın yeğeni",
       "konum": "Bilinmiyor",
       "yasam_durumu": "hayatta",
       "yetenek_ve_kaynaklar": []
@@ -130,7 +130,7 @@
       "cozum": "hedef_bandinda",
       "durum": "ic_gecti",
       "gercek": 311,
-      "govde_sha256": "a47602a1f0130e154ddee00e7d88ebc6036924be76e45a39f872d9854b113ddf",
+      "govde_sha256": "38b16aa24589ee0b492a298e9d3238db850e1fb66510849f27e966d3274feb1f",
       "hedef": 310,
       "olcu": "gorunur_kelime_v1"
     }

@@ -3,7 +3,7 @@ name: sureklilik-denetle
 description: "Uzun romanda tutarlılık hatası avı: ölü ya da kayıp karakterin sahnede görünmesi, süresi geçmiş ipuçları, henüz açılmamış sırların erken sızması, karakter adı kayması ve benzer adlar, göz rengi, saç, yaş gibi nitelik çelişkileri. Takip kayıtlarına dayanır. Tetikleyiciler: /sureklilik-denetle, \"tutarlılık hatası var mı\", \"karakter çelişkisi\", \"100 bölümü tara\", \"ipuçlarım unutuldu mu\"."
 license: MIT
 compatibility: "Python 3.11+. Takip kaydı (takip/_takip-durumu.json) olan romanlar için."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
 ---
 
 # sureklilik-denetle: Süreklilik Denetimi
@@ -38,6 +38,22 @@ python3 betikler/sureklilik_denetle.py --proje <kitap> --json
 | isim-benzerligi | Okuru karıştıracak kadar benzer adlar (Levenshtein ≤ 1–2) |
 | isim-kaymasi | Kayıtlı ada çok yakın ama farklı yazımlar (Defne / Defna) |
 | nitelik-celiskisi | `kurgu/karakterler/*.md` içindeki `Göz:`, `Saç:`, `Yaş:` bilgisiyle çelişen ifadeler |
+
+**Ek taramalar** (varsa):
+
+```bash
+python3 betikler/kurgu_ansiklopedisi.py tutarlilik --proje <kitap>   # kurgu ansiklopedisiyle karşılaştırma
+python3 betikler/kurgu_ansiklopedisi.py dogrula --proje <kitap>      # ansiklopedi kendi içinde tutarlı mı
+python3 betikler/ipucu_defteri.py rapor --proje <kitap>              # unutulan, yığılan, plan dışı ipuçları
+python3 betikler/donem_denetle.py --proje <kitap>                    # tarihî romanda dönem uyumsuzluğu
+```
+
+| Tarama | Ne yakalar |
+|---|---|
+| ansiklopedi `tutarlilik` | Sözlükteki yanlış yazımlar, `İlk görünüş` bölümünden önce görünme, `Öldüğü bölüm` sonrasında anı bağlamı olmadan görünme, kayıtsız sık özel adlar |
+| ansiklopedi `dogrula` | Çift ad, doğumdan önce ya da ölümden sonra olay, ilişki ve zaman çizelgesinde kayıtsız ad |
+| `ipucu_defteri.py` | Metinde uzun süredir anılmayan açık ipucu (okur unutur), aynı bölüme yığılan çözümler, planlanan bölüm sayısını aşan çözüm |
+| `donem_denetle.py` | Plan dosyasındaki `- Dönem:` yılına göre henüz var olmayan (soyadı, radyo, Latin harfleri...) ya da kaldırılmış (fes, hilafet, rumi takvim...) şeyler; yasa ve yıl kaynağıyla |
 
 2. **Doğrula:** Her bulguyu metinde bağlamıyla oku. Anı sahnesi, rüya, yanlış inanç ya da bilinçli yanıltma olabilir; o zaman "yanlış alarm" olarak işaretle.
 3. **Anlam düzeyi:** Betiğin göremediklerini `tutarlilik-denetcisi` ajanıyla ya da okuyarak ara: karakterin bilmediği bir şeyi bilmesi, mekân ve yolculuk süreleri, mevsim ve hava, yaralanmaların iyileşme süresi, para ve fiyatlar (dönem ve enflasyon).

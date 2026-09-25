@@ -15,7 +15,7 @@
 
 ## Ana Karakterlerin Durumu
 - Defne Aras | 27 yaşında saatçi, Nuri Usta'nın torunu | Tedirgin; dükkânı satma kararını erteledi | hedef: Tarihin anlamını ve çekmeceyi zorlayanı bulmak
-- Kerem Yalın | 31 yaşında, Tahsin Yalın'ın ağabeyi | Açıklamanın yarısını yaptı; mesleğini saklıyor | hedef: Tahsin'in katilini bulmak
+- Kerem Yalın | 31 yaşında, Tahsin Yalın'ın yeğeni | Açıklamanın yarısını yaptı; mesleğini saklıyor | hedef: Tahsin'in katilini bulmak
 
 ## Açık İpuçları
 - F001 | Bütün saatler 03.14'te durmuştu | ekildiği: 1. bölüm | çözüm: 18. bölüm | önem: yüksek
@@ -25,7 +25,7 @@
 
 ## Son Üç Bölüm
 - 1. bölüm | Defne dükkânı açtı; bütün saatler 03.14'te durmuştu. Kerem 1987 fotoğrafını gösterdi ve fotoğraftaki ikinci adamın öldürüldüğünü söyledi.
-- 2. bölüm | Defne gizli kapağı açtı ve '14.03.1987 — N.' yazısını buldu. Kerem, Tahsin'in ağabeyi olduğunu söyledi. Sabah çekmece kilidinde taze çizikler vardı.
+- 2. bölüm | Defne gizli kapağı açtı ve '14.03.1987 — N.' yazısını buldu. Kerem, Tahsin'in yeğeni olduğunu söyledi. Sabah çekmece kilidinde taze çizikler vardı.
 
 ## Sonraki Bölüm Sözleri
 - Çekmeceyi kim zorladı?

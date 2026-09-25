@@ -1,7 +1,7 @@
 {
   "name": "ai-hikaye-roman-olusturma",
   "displayName": "AI Hikaye & Roman Oluşturma",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, Wattpad ve yayınevi hazırlığı.",
   "author": {
     "name": "Cuma Bozkurt",

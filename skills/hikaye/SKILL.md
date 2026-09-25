@@ -3,7 +3,7 @@ name: hikaye
 description: "Hikâye ve roman yazımının giriş noktası: isteği doğru beceriye yönlendirir, yazım projesinin durumunu özetler, birden fazla kitap arasında geçiş yapar, yazar hafızasını yönetir ve yerel çalışma masası panelini açar. Tetikleyiciler: /hikaye, \"hikâye yazmak istiyorum\", \"nereden başlasam\", \"kitaplarım\", \"projenin durumu ne\", \"çalışma masasını aç\", \"bunu hatırla\"."
 license: MIT
 compatibility: "Python 3.11+ (çalışma masası için tarayıcı). Claude Code, Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "oh-story-claudecode/story"}
 ---
 
 # hikaye: Giriş ve Yönlendirme
@@ -20,6 +20,11 @@ Yollar bu SKILL.md dosyasının klasörüne görelidir (Claude Code'da `${CLAUDE
 - Kitaplar: `plan/genel-plan.md` içeren klasörler (uzun roman), `oyku/<ad>/` klasörleri (kısa öykü). Yapı: `kaynaklar/proje-yapisi.md`.
 - `.aktif-kitap` → aktif kitap.
 - Her kitap için `takip/_takip-durumu.json` içindeki `son_kaydedilen_bolum`.
+- Aktif kitabın nerede kaldığı ve sıradaki adım (yarım kalmış bölüm, kaydedilmemiş bölüm, süresi geçen ipucu):
+
+```bash
+python3 betikler/proje_durumu.py durum --proje <kitap>
+```
 
 Kısa bir durum özeti ver:
 
@@ -36,19 +41,23 @@ Kısa bir durum özeti ver:
 |---|---|
 | Ne yazsam, hangi tür tutuyor, Wattpad'de ne okunuyor | `/roman-tara` (uzun), `/oyku-tara` (kısa) |
 | Bir romanı ya da öyküyü inceleyip tekniğini öğrenmek | `/roman-cozumle`, `/oyku-cozumle` |
+| Romanın yapısını kurmak: üç perde, kar tanesi, sahne kartları | `/roman-planla` |
 | Roman / dizi yazmak, sıradaki bölüm | `/roman-yaz` |
+| Karakter, mekân, zaman çizelgesi, sözlük; "şu olay nerede geçmişti" | `/kurgu-ansiklopedisi` |
+| Bir bölümü puanlayarak iyileştirmek, taslakları karşılaştırmak, üslup sapması | `/bolum-dongusu` |
+| Günlük hedef, istatistik, sürüm alma, eski hâline döndürme | `/yazim-panosu` |
 | Kısa öykü (1.500–10.000 kelime) | `/oyku-yaz` |
 | "Yapay zekâ yazmış gibi duruyor" | `/yz-tadi-gider` |
 | Puanlama, eleştiri, editör gözü | `/metin-incele` |
 | Yazım ve noktalama denetimi (TDK) | `/yazim-denetle` |
 | Tutarlılık hatası avı | `/sureklilik-denetle` |
-| Elimdeki taslağı sisteme almak | `/hikaye-ice-aktar` |
+| Elimdeki taslağı (Word, ODT, EPUB, TXT) sisteme almak | `/hikaye-ice-aktar` |
 | Kapak | `/kapak-tasarla` |
 | Wattpad yayın takvimi, bölüm bölme | `/wattpad-bolum-planla` |
 | Yayınevine gönderilecek dosya | `/yayinevi-dosyasi` |
 | Dizi / film uyarlaması için sinopsis | `/uyarlama-sinopsis` |
 | Sesli kitap hazırlığı | `/sesli-kitap-hazirla` |
-| EPUB e-kitap ya da beta okur kopyası | `/e-kitap-derle` |
+| EPUB, Word (DOCX), ODT, baskıya hazır PDF ya da beta okur kopyası | `/e-kitap-derle` |
 | Kancaları, ajanları kurmak | `/hikaye-kurulum` |
 | Tarayıcıyla bir sayfayı okumak | `/tarayici-cdp` |
 
@@ -77,7 +86,7 @@ Kayıttan sonra makbuzu yazara göster. Çelişen bir tercih varsa hangisinin ge
 python3 betikler/calisma_masasi.py --calisma-alani . [--port 8765]
 ```
 
-Yalnızca `127.0.0.1` üzerinde çalışır, salt okunurdur: kitaplar, bölüm ilerlemesi, kelime sayıları, açık ipuçları, karakter durumları. Adresi yazara ver; kapatmak için Ctrl+C.
+Yalnızca `127.0.0.1` üzerinde çalışır, salt okunurdur. Her kitap için sekmeler: **Genel** (sıradaki adım, yazım istatistikleri, 30 günlük grafik, bölüm ilerlemesi, karakter durumları), **Kurgu** (ansiklopedi kayıtları, bölümlere dağılım ısı haritası), **Sahneler** (bakış açısına göre renkli sahne kartları), **İpuçları** (ekilme, son anılma ve çözüm şeridi), **Döngü** (revizyon turlarının puanları) ve **Sürümler** (anlık görüntüler). "Yenile" düğmesi dosyaları yeniden okur. Adresi yazara ver; kapatmak için Ctrl+C.
 
 ## 6. Sürüm kontrolü
 

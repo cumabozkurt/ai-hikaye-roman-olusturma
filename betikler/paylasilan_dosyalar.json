@@ -6,13 +6,21 @@
     ],
     "hikaye": [
       "yazar_hafizasi.py",
-      "metin_olcum.py"
+      "metin_olcum.py",
+      "anlik_goruntu.py",
+      "ipucu_defteri.py",
+      "kurgu_ansiklopedisi.py",
+      "kurgu_plani.py",
+      "proje_durumu.py",
+      "revizyon_dongusu.py",
+      "yazim_istatistik.py"
     ],
     "hikaye-ice-aktar": [
       "takip_kaydet.py",
       "metin_olcum.py",
       "plan_denetle.py",
-      "plan_gorunumu.py"
+      "plan_gorunumu.py",
+      "belge_ice_aktar.py"
     ],
     "hikaye-kurulum": [
       "turkce_kaliplar.py",
@@ -29,7 +37,9 @@
       "takip_kaydet.py",
       "metin_olcum.py",
       "yazar_hafizasi.py",
-      "metin_analizi.py"
+      "metin_analizi.py",
+      "ses_izi.py",
+      "donem_denetle.py"
     ],
     "oyku-cozumle": [
       "metin_olcum.py"
@@ -61,14 +71,22 @@
       "yazim_denetle.py",
       "noktalama_duzelt.py",
       "yazar_hafizasi.py",
-      "metin_analizi.py"
+      "metin_analizi.py",
+      "proje_durumu.py",
+      "kurgu_ansiklopedisi.py",
+      "bilgi_ara.py",
+      "anlik_goruntu.py",
+      "ipucu_defteri.py"
     ],
     "sesli-kitap-hazirla": [
       "metin_olcum.py"
     ],
     "sureklilik-denetle": [
       "sureklilik_denetle.py",
-      "takip_kaydet.py"
+      "takip_kaydet.py",
+      "donem_denetle.py",
+      "kurgu_ansiklopedisi.py",
+      "ipucu_defteri.py"
     ],
     "tarayici-cdp": [],
     "uyarlama-sinopsis": [
@@ -95,6 +113,27 @@
       "yazim_denetle.py",
       "yazar_hafizasi.py",
       "metin_analizi.py"
+    ],
+    "roman-planla": [
+      "kurgu_plani.py",
+      "proje_durumu.py"
+    ],
+    "kurgu-ansiklopedisi": [
+      "kurgu_ansiklopedisi.py",
+      "bilgi_ara.py",
+      "ipucu_defteri.py",
+      "donem_denetle.py"
+    ],
+    "bolum-dongusu": [
+      "revizyon_dongusu.py",
+      "turnuva.py",
+      "ses_izi.py",
+      "anlik_goruntu.py"
+    ],
+    "yazim-panosu": [
+      "yazim_istatistik.py",
+      "anlik_goruntu.py",
+      "proje_durumu.py"
     ]
   },
   "kaynaklar": {
@@ -104,7 +143,8 @@
       "yz-tadi-gider",
       "metin-incele",
       "hikaye-kurulum",
-      "yazim-denetle"
+      "yazim-denetle",
+      "bolum-dongusu"
     ],
     "tdk-yazim-rehberi.md": [
       "roman-yaz",
@@ -121,7 +161,9 @@
       "metin-incele",
       "hikaye-kurulum",
       "roman-tara",
-      "oyku-tara"
+      "oyku-tara",
+      "roman-planla",
+      "kurgu-ansiklopedisi"
     ],
     "yazar-hafizasi.md": [
       "hikaye",
@@ -141,7 +183,8 @@
       "roman-yaz",
       "hikaye-ice-aktar",
       "wattpad-bolum-planla",
-      "hikaye-kurulum"
+      "hikaye-kurulum",
+      "roman-planla"
     ],
     "platformlar-turkiye.md": [
       "roman-tara",
@@ -165,7 +208,11 @@
       "oyku-yaz",
       "hikaye-ice-aktar",
       "hikaye-kurulum",
-      "sureklilik-denetle"
+      "sureklilik-denetle",
+      "roman-planla",
+      "kurgu-ansiklopedisi",
+      "bolum-dongusu",
+      "yazim-panosu"
     ]
   }
 }

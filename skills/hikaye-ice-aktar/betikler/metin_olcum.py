@@ -31,7 +31,7 @@ KELIME_DESENI = re.compile(r"[0-9A-Za-zÇĞİÖŞÜçğıöşüÂÎÛâîû]+(?:
 ON_BILGI = re.compile(r"\A---\n.*?\n---\n", re.S)
 HTML_YORUM = re.compile(r"<!--.*?-->", re.S)
 HEDEF_DESENI = re.compile(
-    r"^\s*[-*]?\s*\**\s*Hedef uzunluk\s*\**\s*:\s*\**\s*([0-9][0-9.]*)\s*(?:kelime)?",
+    r"^\s*[-*]?\s*\**\s*Hedef uzunluk[ \t]*\**[ \t]*:[ \t]*\**[ \t]*([0-9][0-9.]*)\s*(?:kelime)?",
     re.I | re.M,
 )
 # Bant oranları: hedefin yüzde kaçı hangi sonuca düşer.

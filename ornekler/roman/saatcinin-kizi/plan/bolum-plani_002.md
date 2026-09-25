@@ -47,7 +47,7 @@ Defne ince bir tornavidayla ikinci kapağı açar.
 Kapağın içinde "14.03.1987 — N." yazısı.
 
 ### Doruk
-Kerem, ölen adamın kardeşi olduğunu söyler; gerisini söylemez.
+Kerem, ölen adamın yeğeni olduğunu söyler; gerisini söylemez.
 
 ### Kapanış
 Sabah dükkânı açan Defne çekmece kilidindeki çizikleri görür.

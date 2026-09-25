@@ -1,6 +1,7 @@
 # Nuri Usta
 
 - Yaş: 78 (öldüğünde)
+- Doğum yılı: 1946
 - Göz rengi: mavi
 - Meslek: Saatçi, Kuzguncuk'ta kırk yıllık dükkân
 - Durum: Hikâye başlamadan kırk gün önce öldü

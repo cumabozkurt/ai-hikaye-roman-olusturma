@@ -3,7 +3,7 @@ name: metin-incele
 description: "Roman bölümü ya da öykü için editör gözüyle kalite incelemesi: açılış, kanca, karakter, diyalog, tempo, tutarlılık, dil ve yapay zekâ tadı üzerinden 100 puanlık değerlendirme, öncelikli düzeltme listesi ve Türkiye yayın yoluna uygunluk. Tetikleyiciler: /metin-incele, \"metnimi değerlendir\", \"puanla\", \"editör gibi oku\", \"bu bölüm nasıl olmuş\"."
 license: MIT
 compatibility: "Python 3.11+. Claude Code, Codex, OpenCode, Antigravity, ZCode, OpenClaw, Reasonix."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-review"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "oh-story-claudecode/story-review"}
 ---
 
 # metin-incele: Editör Gözüyle İnceleme

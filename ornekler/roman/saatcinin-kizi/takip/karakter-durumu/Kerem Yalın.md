@@ -2,7 +2,7 @@
 
 > 2. bölüm itibarıyla. Durum revizyonu: 2. Elle düzenlemeyin.
 
-- Kimlik: 31 yaşında, Tahsin Yalın'ın ağabeyi
+- Kimlik: 31 yaşında, Tahsin Yalın'ın yeğeni
 - Yaşam durumu: hayatta
 - Şu anki durum: Açıklamanın yarısını yaptı; mesleğini saklıyor
 - Hedef: Tahsin'in katilini bulmak

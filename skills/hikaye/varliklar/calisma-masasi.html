@@ -5,36 +5,192 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Çalışma Masası · {{BASLIK}}</title>
 <style>
-  body { font-family: system-ui, sans-serif; margin: 2rem auto; max-width: 960px; padding: 0 1rem; color: #222; background: #faf8f4; }
-  h1 { font-size: 1.6rem; } h2 { margin-top: 2rem; border-bottom: 1px solid #ddd; }
-  .kart { background: #fff; border: 1px solid #e5e0d8; border-radius: 8px; padding: 1rem 1.25rem; margin: 1rem 0; }
-  .aktif { border-color: #b5651d; } table { border-collapse: collapse; width: 100%; } td, th { text-align: left; padding: .3rem .5rem; border-bottom: 1px solid #eee; }
-  .etiket { font-size: .8rem; background: #f0e6d8; border-radius: 4px; padding: 0 .4rem; }
+  :root { --kagit: #faf7f1; --kart: #fff; --cizgi: #e7e0d4; --murekkep: #2b2622; --soluk: #7a6f64; --vurgu: #a4501c; --yesil: #4f7d4a; --kirmizi: #b23b2e; --sari: #c99a2e; }
+  * { box-sizing: border-box; }
+  body { font-family: system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; color: var(--murekkep); background: var(--kagit); }
+  header { background: #2b2622; color: #f6efe4; padding: 1rem 2rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  header h1 { font-size: 1.3rem; margin: 0; font-weight: 600; } header p { margin: 0; color: #cbbfae; font-size: .85rem; flex: 1; }
+  button { font: inherit; cursor: pointer; border: 1px solid var(--cizgi); background: var(--kart); border-radius: 6px; padding: .35rem .8rem; color: inherit; }
+  header button { background: transparent; color: #f6efe4; border-color: #5a4f45; }
+  main { max-width: 1180px; margin: 0 auto; padding: 1.5rem 2rem 3rem; }
+  .kitap { background: var(--kart); border: 1px solid var(--cizgi); border-radius: 12px; margin: 0 0 2rem; overflow: hidden; }
+  .kitap.aktif { border-color: var(--vurgu); box-shadow: 0 0 0 1px var(--vurgu); }
+  .kitap > h2 { margin: 0; padding: 1rem 1.25rem .25rem; font-size: 1.35rem; } .alt { color: var(--soluk); font-size: .85rem; padding: 0 1.25rem .75rem; margin: 0; }
+  .sekmeler { display: flex; gap: .25rem; padding: 0 1rem; border-bottom: 1px solid var(--cizgi); flex-wrap: wrap; }
+  .sekmeler button { border: 0; border-bottom: 3px solid transparent; border-radius: 0; background: none; padding: .6rem .8rem; color: var(--soluk); }
+  .sekmeler button.secili { color: var(--murekkep); border-bottom-color: var(--vurgu); font-weight: 600; }
+  .panel { padding: 1.25rem; display: none; } .panel.secili { display: block; }
+  .kutular { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .75rem; margin-bottom: 1rem; }
+  .kutu { border: 1px solid var(--cizgi); border-radius: 10px; padding: .7rem .9rem; background: #fdfbf7; }
+  .kutu b { display: block; font-size: 1.45rem; font-variant-numeric: tabular-nums; } .kutu span { color: var(--soluk); font-size: .8rem; }
+  h3 { font-size: 1rem; margin: 1.4rem 0 .5rem; } table { border-collapse: collapse; width: 100%; font-size: .9rem; }
+  td, th { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid #f0ebe3; vertical-align: top; } th { color: var(--soluk); font-weight: 600; font-size: .8rem; }
+  td.sayi, th.sayi { text-align: right; font-variant-numeric: tabular-nums; }
+  .etiket { font-size: .75rem; background: #f0e6d8; border-radius: 4px; padding: .05rem .4rem; white-space: nowrap; }
+  .etiket.hata { background: #f6d7d2; color: var(--kirmizi); } .etiket.uyari { background: #f7ecd0; color: #7a5a10; } .etiket.tamam { background: #dde9d9; color: var(--yesil); }
+  .cubuk { background: #f0ebe3; border-radius: 4px; height: 8px; min-width: 80px; overflow: hidden; } .cubuk i { display: block; height: 100%; background: var(--vurgu); }
+  .ilerleme { height: 12px; } .adim { background: #fff7ec; border-left: 4px solid var(--vurgu); padding: .6rem .9rem; border-radius: 6px; margin: .4rem 0; }
+  .uyari-kutu { background: #fdf3e2; border-left: 4px solid var(--sari); padding: .5rem .9rem; border-radius: 6px; margin: .3rem 0; font-size: .9rem; }
+  .hata-kutu { color: var(--kirmizi); font-size: .9rem; }
+  .pano { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .8rem; }
+  .kartcik { border-radius: 8px; padding: .6rem .75rem; border-top: 5px solid var(--renk, #999); background: #fffdf8; box-shadow: 0 1px 3px #0001; font-size: .85rem; }
+  .kartcik h4 { margin: 0 0 .3rem; font-size: .95rem; } .kartcik p { margin: .15rem 0; } .kartcik small { color: var(--soluk); }
+  .isi td { text-align: center; padding: .2rem; font-size: .75rem; min-width: 26px; } .isi td.ad { text-align: left; white-space: nowrap; }
+  .cip { display: inline-block; margin: .15rem; padding: .15rem .55rem; border-radius: 999px; background: #f3ede4; font-size: .85rem; }
+  .bos { color: var(--soluk); font-style: italic; } svg text { font-family: inherit; }
 </style>
 </head>
 <body>
-<h1>📚 Çalışma Masası</h1>
-<p id="alan"></p>
-<div id="kitaplar"></div>
+<header><h1>📚 Çalışma Masası</h1><p id="alan"></p><button id="yenile" type="button" title="Dosyaları yeniden oku">↻ Yenile</button></header>
+<main id="kitaplar"></main>
 <script>
-const veri = {{VERI}};
+let veri = {{VERI}};
 const e = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
 const sayi = (n) => Number(n || 0).toLocaleString("tr-TR");
-document.getElementById("alan").textContent = "Çalışma alanı: " + veri.calisma_alani + (veri.kurulum.surum ? " · kurulum sürümü " + veri.kurulum.surum : " · kurulum yok");
-const kutu = document.getElementById("kitaplar");
-if (!veri.kitaplar.length) kutu.innerHTML = "<p>Henüz kitap yok. /roman-yaz ile başlayabilirsiniz.</p>";
-for (const k of veri.kitaplar) {
-  const ipucu = k.acik_ipuclari.map(i => `<tr><td>${e(i.id)}</td><td>${e(i.ozet)}</td><td>${e(i.durum)}</td></tr>`).join("") || "<tr><td colspan=3>Açık ipucu yok</td></tr>";
-  const kar = k.karakterler.map(c => `<tr><td>${e(c.ad)}</td><td>${e(c.yasam)}</td><td>${e(c.konum)}</td></tr>`).join("");
-  const bol = k.bolumler.map(b => `<tr><td>${e(b.dosya)}</td><td>${sayi(b.kelime)}</td></tr>`).join("");
-  kutu.insertAdjacentHTML("beforeend", `<div class="kart ${k.aktif ? "aktif" : ""}">
-    <h2>${e(k.ad)} ${k.aktif ? '<span class="etiket">aktif</span>' : ""}</h2>
-    <p>${e(k.yol)} · son kayıt: Bölüm ${e(k.son_kaydedilen_bolum)} · ${sayi(k.bolum_sayisi)} bölüm · ${sayi(k.plan_sayisi)} plan · ${sayi(k.toplam_kelime)} kelime</p>
-    <h3>Bölümler</h3><table><tr><th>Dosya</th><th>Kelime</th></tr>${bol}</table>
-    <h3>Açık ipuçları</h3><table><tr><th>No</th><th>Özet</th><th>Durum</th></tr>${ipucu}</table>
-    <h3>Karakterler</h3><table><tr><th>Ad</th><th>Yaşam</th><th>Konum</th></tr>${kar}</table></div>`);
+const ondalik = (n, b = 1) => (n === null || n === undefined || n === "") ? "—" : Number(n).toLocaleString("tr-TR", {minimumFractionDigits: b, maximumFractionDigits: b});
+const trTarih = (iso) => { const d = new Date(String(iso) + "T12:00:00"); return isNaN(d) ? String(iso) : d.toLocaleDateString("tr-TR", {day: "numeric", month: "long", year: "numeric"}); };
+const renk = (s) => { let h = 0; for (const c of String(s || "?")) h = (h * 31 + c.codePointAt(0)) % 360; return `hsl(${h} 55% 48%)`; };
+const hataMi = (x) => x && typeof x === "object" && !Array.isArray(x) && "hata" in x;
+const hataKutusu = (x) => `<p class="hata-kutu">Bu bölüm okunamadı: ${e(x.hata)}</p>`;
+const bos = (m) => `<p class="bos">${e(m)}</p>`;
+
+function sutunGrafik(noktalar) {
+  if (!noktalar || !noktalar.length) return "";
+  const en = Math.max(1, ...noktalar.map(n => n.kelime)), g = 600, y = 90, w = g / noktalar.length;
+  const cubuk = noktalar.map((n, i) => { const h = Math.round((n.kelime / en) * (y - 18));
+    return `<rect x="${(i * w + 1).toFixed(1)}" y="${y - 14 - h}" width="${(w - 2).toFixed(1)}" height="${h}" rx="2" fill="${n.kelime ? "#a4501c" : "#e7e0d4"}"><title>${e(trTarih(n.tarih))}: ${sayi(n.kelime)} kelime</title></rect>`; }).join("");
+  return `<svg viewBox="0 0 ${g} ${y}" width="100%" role="img" aria-label="Son 30 günde yazılan kelime">${cubuk}<text x="0" y="${y - 2}" font-size="10" fill="#7a6f64">${e(trTarih(noktalar[0].tarih))}</text><text x="${g}" y="${y - 2}" font-size="10" fill="#7a6f64" text-anchor="end">bugün</text></svg>`;
 }
-if (veri.oykuler.length) kutu.insertAdjacentHTML("beforeend", `<div class="kart"><h2>Öyküler</h2><p>${veri.oykuler.map(e).join(" · ")}</p></div>`);
+
+function genel(k) {
+  const a = k.ayrinti || {}, st = a.istatistik, d = a.durum;
+  let h = "";
+  if (hataMi(d)) h += hataKutusu(d);
+  else if (d) {
+    h += `<h3>Sıradaki adım</h3>` + d.adimlar.map(x => `<div class="adim">${e(x)}</div>`).join("");
+    h += d.uyarilar.map(x => `<div class="uyari-kutu">${e(x)}</div>`).join("");
+  }
+  if (hataMi(st)) h += hataKutusu(st);
+  else if (st) {
+    h += `<h3>Yazım istatistikleri</h3><div class="kutular">
+      <div class="kutu"><b>${sayi(st.toplam_kelime)}</b><span>toplam kelime</span></div>
+      <div class="kutu"><b>${sayi(st.bolum_sayisi)}</b><span>bölüm</span></div>
+      <div class="kutu"><b>${sayi(st.sayfa_tahmini)}</b><span>sayfa (tahmini)</span></div>
+      <div class="kutu"><b>${sayi(st.okuma_dakikasi)} dk</b><span>okuma süresi</span></div>
+      <div class="kutu"><b>${sayi(st.bugun_yazilan)}</b><span>bugün yazılan</span></div>
+      <div class="kutu"><b>${sayi(st.seri_gun)} gün</b><span>yazma serisi</span></div></div>`;
+    if (st.ilerleme_yuzde !== undefined) h += `<p>Hedef: ${sayi(st.hedef.toplam_kelime)} kelime · %${e(ondalik(st.ilerleme_yuzde).replace(/,0$/, ""))} tamam${st.tahmini_bitis ? " · bu hızla bitiş " + e(trTarih(st.tahmini_bitis)) : (st.tahmini_bitis_uzak ? " · bu hızla on yıldan uzun sürer" : "")}${st.gereken_gunluk ? " · gereken günlük hız " + sayi(st.gereken_gunluk) : ""}</p><div class="cubuk ilerleme"><i style="width:${Math.min(100, Number(st.ilerleme_yuzde) || 0)}%"></i></div>`;
+    h += st.kayitli_gun ? sutunGrafik(st.grafik) : bos("Günlük kayıt yok: yazim_istatistik.py kaydet ile günlük ilerleme tutulur.");
+    const bol = st.bolumler.map(b => `<tr><td>${e(b.no)}</td><td>${e(b.baslik)}</td><td class="sayi">${sayi(b.kelime)}</td><td class="sayi">${b.hedef ? sayi(b.hedef) : "—"}</td><td>${b.hedef ? `<div class="cubuk"><i style="width:${Math.min(100, b.yuzde)}%"></i></div>` : ""}</td></tr>`).join("");
+    h += `<h3>Bölümler</h3>` + (bol ? `<table><tr><th>No</th><th>Başlık</th><th class="sayi">Kelime</th><th class="sayi">Hedef</th><th>İlerleme</th></tr>${bol}</table>` : bos("Henüz bölüm yok."));
+  }
+  const kar = k.karakterler.map(c => `<tr><td>${e(c.ad)}</td><td>${e(c.yasam)}</td><td>${e(c.konum)}</td></tr>`).join("");
+  if (kar) h += `<h3>Karakter durumları (takip)</h3><table><tr><th>Ad</th><th>Yaşam</th><th>Konum</th></tr>${kar}</table>`;
+  return h;
+}
+
+function kurgu(a) {
+  const x = a.ansiklopedi;
+  if (hataMi(x)) return hataKutusu(x);
+  if (!x.kayitlar.length) return bos("Kurgu ansiklopedisi boş: kurgu_ansiklopedisi.py olustur ile karakter, mekân, nesne ekleyin.");
+  const turAd = {karakter: "Karakterler", mekan: "Mekânlar", nesne: "Nesneler", grup: "Gruplar", dunya: "Dünya"};
+  let h = `<div class="kutular"><div class="kutu"><b>${sayi(x.kayitlar.length)}</b><span>kayıt</span></div><div class="kutu"><b>${sayi(x.iliski)}</b><span>ilişki</span></div><div class="kutu"><b>${sayi(x.zaman)}</b><span>zaman çizelgesi olayı</span></div><div class="kutu"><b>${sayi(x.sozluk)}</b><span>sözlük terimi</span></div></div>`;
+  for (const [tur, ad] of Object.entries(turAd)) {
+    const liste = x.kayitlar.filter(k => k.tur === tur);
+    if (liste.length) h += `<h3>${ad}</h3>` + liste.map(k => `<span class="cip" title="${e(k.ozet)}">${e(k.ad)}${k.rol ? ` <small>· ${e(k.rol)}</small>` : ""}</span>`).join("");
+  }
+  const dg = x.dagilim;
+  if (dg.bolumler.length) {
+    const en = Math.max(1, ...dg.kayitlar.flatMap(k => Object.values(k.gorunumler)));
+    const bas = dg.bolumler.map(b => `<th>${e(b)}</th>`).join("");
+    const bakis = dg.bolumler.map(b => `<td title="${e(dg.bakis_acisi[b] || "")}" style="background:${dg.bakis_acisi[b] ? renk(dg.bakis_acisi[b]) : "transparent"}"></td>`).join("");
+    const satir = dg.kayitlar.map(k => `<tr><td class="ad">${e(k.ad)}</td>` + dg.bolumler.map(b => { const n = k.gorunumler[b] || 0;
+      return `<td style="background:rgba(164,80,28,${n ? (0.15 + 0.85 * n / en).toFixed(2) : 0})" title="${e(k.ad)} · ${e(b)}. bölüm: ${n}">${n || ""}</td>`; }).join("") + "</tr>").join("");
+    h += `<h3>Bölümlere dağılım</h3><table class="isi"><tr><th></th>${bas}</tr>${Object.keys(dg.bakis_acisi || {}).length ? `<tr><td class="ad"><small>Bakış açısı</small></td>${bakis}</tr>` : ""}${satir}</table>`;
+  }
+  h += dg.uyarilar.map(u => `<div class="uyari-kutu">${e(u)}</div>`).join("");
+  return h;
+}
+
+function sahneler(a) {
+  const s = a.sahneler;
+  if (hataMi(s)) return hataKutusu(s);
+  if (!s.length) return bos("Sahne kartı yok: kurgu_plani.py sahneler ile plan/sahneler.md tablosunu oluşturun.");
+  const durumSinif = (d) => d.startsWith("yaz") && d !== "yazılacak" ? "tamam" : d.includes("taslak") ? "uyari" : "";
+  return `<div class="pano">` + s.map(k => `<div class="kartcik" style="--renk:${renk(k.bakis)}">
+    <small>${k.bolum ? e(k.bolum) + ". bölüm" : "bölümsüz"} · #${e(k.sira)}</small><h4>${e(k.sahne || "(adsız sahne)")}</h4>
+    <p><b>Bakış:</b> ${e(k.bakis || "—")} · <b>Mekân:</b> ${e(k.mekan || "—")}</p>
+    <p><b>Amaç:</b> ${e(k.amac || "—")}</p><p><b>Çatışma:</b> ${e(k.catisma || "—")}</p><p><b>Sonuç:</b> ${e(k.sonuc || "—")}</p>
+    <p>${k.deger ? `<span class="etiket">${e(k.deger)}</span> ` : ""}${k.durum ? `<span class="etiket ${durumSinif(k.durum)}">${e(k.durum)}</span>` : ""}</p></div>`).join("") + `</div>`;
+}
+
+function ipuclari(a) {
+  const r = a.ipuclari;
+  if (hataMi(r)) return hataKutusu(r);
+  if (!r.ipuclari.length) return bos("Takip kaydında ipucu yok.");
+  const son = Math.max(r.son_yazilan_bolum || 1, r.planlanan_bolum || 0, ...r.ipuclari.flatMap(i => [i.ekildigi_bolum || 0, i.planlanan_cozum_bolumu || 0]));
+  const g = 560, x = (b) => 10 + (g - 20) * (b - 1) / Math.max(1, son - 1);
+  const serit = r.ipuclari.map((i, n) => { const y = 14 + n * 18, a1 = i.ekildigi_bolum, b1 = i.planlanan_cozum_bolumu;
+    return `<text x="0" y="${y + 4}" font-size="10">${e(i.id)}</text><g transform="translate(40 0)">${a1 && b1 ? `<line x1="${x(a1)}" x2="${x(b1)}" y1="${y}" y2="${y}" stroke="#d8cbb8" stroke-width="3"/>` : ""}${a1 ? `<circle cx="${x(a1)}" cy="${y}" r="5" fill="#a4501c"><title>${e(i.id)} ekildi: ${e(a1)}. bölüm</title></circle>` : ""}${i.son_anilma ? `<rect x="${x(i.son_anilma) - 4}" y="${y - 4}" width="8" height="8" transform="rotate(45 ${x(i.son_anilma)} ${y})" fill="#4f7d4a"><title>son anılma: ${e(i.son_anilma)}. bölüm</title></rect>` : ""}${b1 ? `<circle cx="${x(b1)}" cy="${y}" r="5" fill="#fff" stroke="#a4501c" stroke-width="2"><title>planlanan çözüm: ${e(b1)}. bölüm</title></circle>` : ""}</g>`; }).join("");
+  const cizgi = r.son_yazilan_bolum ? `<line x1="${40 + x(r.son_yazilan_bolum)}" x2="${40 + x(r.son_yazilan_bolum)}" y1="2" y2="${10 + r.ipuclari.length * 18}" stroke="#2b2622" stroke-dasharray="3 3"/>` : "";
+  let h = `<svg viewBox="0 0 ${g + 50} ${20 + r.ipuclari.length * 18}" width="100%" role="img" aria-label="İpucu şeridi">${cizgi}${serit}</svg><p class="alt" style="padding:0">● ekildi · ◆ son anılma · ○ planlanan çözüm · kesikli çizgi: yazılan son bölüm</p>`;
+  h += `<table><tr><th>No</th><th>Özet</th><th>Önem</th><th>Durum</th><th class="sayi">Ekildi</th><th class="sayi">Son anılma</th><th class="sayi">Çözüm</th></tr>` + r.ipuclari.map(i => `<tr><td>${e(i.id)}</td><td>${e(i.ozet)}</td><td>${e(i.onem)}</td><td>${e(i.durum)}</td><td class="sayi">${e(i.ekildigi_bolum ?? "—")}</td><td class="sayi">${e(i.son_anilma ?? "—")}</td><td class="sayi">${e(i.planlanan_cozum_bolumu ?? "—")}</td></tr>`).join("") + `</table>`;
+  return h + r.bulgular.map(b => `<div class="uyari-kutu"><span class="etiket ${e(b.duzey)}">${e(b.duzey)}</span> ${e(b.mesaj)}</div>`).join("");
+}
+
+function donguler(a) {
+  const d = a.donguler;
+  if (hataMi(d)) return hataKutusu(d);
+  if (!d.length) return bos("Revizyon döngüsü kaydı yok: revizyon_dongusu.py kaydet ile tur tur puan tutulur.");
+  return d.map(b => { const g = 300, y = 80, n = b.turlar.length, px = (i) => n === 1 ? g / 2 : 20 + (g - 40) * i / (n - 1), py = (v) => y - 10 - (y - 20) * (Number(v) || 0) / 10;
+    const yol = b.turlar.map((t, i) => `${px(i)},${py(t.toplam)}`).join(" ");
+    return `<h3>${e(b.bolum)}. bölüm · karar: <span class="etiket">${e(b.karar)}</span></h3><svg viewBox="0 0 ${g} ${y}" width="320" role="img" aria-label="Tur puanları"><polyline points="${yol}" fill="none" stroke="#a4501c" stroke-width="2"/>${b.turlar.map((t, i) => `<circle cx="${px(i)}" cy="${py(t.toplam)}" r="4" fill="#a4501c"><title>${e(t.tur)}. tur: ${e(ondalik(t.toplam, 2))}</title></circle><text x="${px(i)}" y="${y - 1}" font-size="9" text-anchor="middle">${e(t.tur)}. tur</text>`).join("")}<text x="2" y="12" font-size="8" fill="#7a6f64">10</text><text x="2" y="${y - 12}" font-size="8" fill="#7a6f64">0</text></svg>
+      <table><tr><th>Tur</th><th>Not</th><th class="sayi">Kelime</th><th class="sayi">Mekanik</th><th class="sayi">Hakem</th><th class="sayi">Toplam</th></tr>${b.turlar.map(t => `<tr><td>${e(t.tur)}${t.tur === b.en_iyi_tur ? ' <span class="etiket">en iyi</span>' : ""}</td><td>${e(t.not || "")}</td><td class="sayi">${t.kelime == null ? "—" : sayi(t.kelime)}</td><td class="sayi">${e(ondalik(t.mekanik, 2))}</td><td class="sayi">${e(ondalik(t.hakem, 2))}</td><td class="sayi"><b>${e(ondalik(t.toplam, 2))}</b></td></tr>`).join("")}</table>`; }).join("");
+}
+
+function surumler(a) {
+  const s = a.surumler;
+  if (hataMi(s)) return hataKutusu(s);
+  if (!s.length) return bos("Anlık görüntü yok: anlik_goruntu.py al ile sürüm alın.");
+  return `<table><tr><th>Kimlik</th><th>Zaman</th><th>Not</th><th class="sayi">Metin kelimesi</th><th class="sayi">Dosya</th></tr>` + s.map(k => `<tr><td><code>${e(k.kimlik)}</code></td><td>${e(String(k.zaman).replace("T", " "))}</td><td>${e(k.not)}</td><td class="sayi">${sayi(k.kelime)}</td><td class="sayi">${sayi(k.dosya)}</td></tr>`).join("") + `</table>`;
+}
+
+const SEKMELER = [["genel", "Genel", (k) => genel(k)], ["kurgu", "Kurgu", (k) => kurgu(k.ayrinti)], ["sahneler", "Sahneler", (k) => sahneler(k.ayrinti)],
+  ["ipuclari", "İpuçları", (k) => ipuclari(k.ayrinti)], ["dongu", "Döngü", (k) => donguler(k.ayrinti)], ["surumler", "Sürümler", (k) => surumler(k.ayrinti)]];
+const seciliSekme = {};
+// Adres çubuğundaki #sekme=sahneler gibi bir bağlantı, açılışta o sekmeyi seçer (yer imine eklenebilir).
+const adrestekiSekme = () => { const id = new URLSearchParams(location.hash.slice(1)).get("sekme"); return SEKMELER.some(([s]) => s === id) ? id : "genel"; };
+
+function ciz() {
+  document.getElementById("alan").textContent = "Çalışma alanı: " + veri.calisma_alani + (veri.kurulum.surum ? " · kurulum sürümü " + veri.kurulum.surum : " · kurulum yok");
+  const kutu = document.getElementById("kitaplar");
+  kutu.innerHTML = veri.kitaplar.length ? "" : "<p>Henüz kitap yok. /roman-yaz ile başlayabilirsiniz.</p>";
+  veri.kitaplar.forEach((k, n) => {
+    const secili = seciliSekme[k.yol] || adrestekiSekme();
+    const icerik = (f) => { try { return f(k); } catch (hata) { return hataKutusu({hata: String(hata)}); } };
+    kutu.insertAdjacentHTML("beforeend", `<section class="kitap ${k.aktif ? "aktif" : ""}" data-yol="${e(k.yol)}">
+      <h2>${e(k.ad)} ${k.aktif ? '<span class="etiket">aktif</span>' : ""}</h2>
+      <p class="alt">${e(k.yol)} · son kayıt: ${e(k.son_kaydedilen_bolum)}. bölüm · ${sayi(k.bolum_sayisi)} bölüm · ${sayi(k.plan_sayisi)} plan · ${sayi(k.toplam_kelime)} kelime</p>
+      <nav class="sekmeler" role="tablist">${SEKMELER.map(([id, ad]) => `<button type="button" role="tab" data-sekme="${id}" class="${id === secili ? "secili" : ""}">${ad}</button>`).join("")}</nav>
+      ${SEKMELER.map(([id, , f]) => `<div class="panel ${id === secili ? "secili" : ""}" data-panel="${id}">${icerik(f)}</div>`).join("")}</section>`);
+  });
+  if (veri.oykuler.length) kutu.insertAdjacentHTML("beforeend", `<section class="kitap"><h2>Öyküler</h2><p class="alt">${veri.oykuler.map(e).join(" · ")}</p></section>`);
+}
+
+document.addEventListener("click", (olay) => {
+  const dugme = olay.target.closest("[data-sekme]");
+  if (!dugme) return;
+  const kitap = dugme.closest(".kitap");
+  seciliSekme[kitap.dataset.yol] = dugme.dataset.sekme;
+  kitap.querySelectorAll("[data-sekme]").forEach(b => b.classList.toggle("secili", b === dugme));
+  kitap.querySelectorAll("[data-panel]").forEach(p => p.classList.toggle("secili", p.dataset.panel === dugme.dataset.sekme));
+  history.replaceState(null, "", "#sekme=" + encodeURIComponent(dugme.dataset.sekme));
+});
+document.getElementById("yenile").addEventListener("click", async () => {
+  try { const yanit = await fetch("/api/durum", {cache: "no-store"}); if (yanit.ok) { veri = await yanit.json(); ciz(); } }
+  catch (hata) { alert("Yenilenemedi: " + hata); }
+});
+ciz();
 </script>
 </body>
 </html>

@@ -1,9 +1,9 @@
 ---
 name: hikaye-ice-aktar
-description: "Mevcut taslağı, Word/TXT/Markdown dosyasını ya da Wattpad'de yayımlanmış bölümleri sistemin proje yapısına aktarır: bölümlere böler, plan ve kurgu dosyalarını tersine çıkarır, karakter durumlarını ve ipuçlarını takip kaydına işler, sonra /roman-yaz ile devam edilebilir hâle getirir. Tetikleyiciler: /hikaye-ice-aktar, \"elimde yazılmış bölümler var\", \"romanımı içeri al\", \"taslağımı aktar\"."
+description: "Mevcut taslağı, Word (DOCX), LibreOffice (ODT), EPUB, TXT ya da Markdown dosyasını ya da Wattpad'de yayımlanmış bölümleri sistemin proje yapısına aktarır: bölümlere böler, plan ve kurgu dosyalarını tersine çıkarır, karakter durumlarını ve ipuçlarını takip kaydına işler, sonra /roman-yaz ile devam edilebilir hâle getirir. Tetikleyiciler: /hikaye-ice-aktar, \"elimde yazılmış bölümler var\", \"romanımı içeri al\", \"taslağımı aktar\"."
 license: MIT
-compatibility: "Python 3.11+. DOCX için pandoc ya da python-docx isteğe bağlıdır; yoksa yazardan Markdown/TXT istenir."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-import"}
+compatibility: "Python 3.11+ (yalnızca standart kitaplık). DOCX, ODT, EPUB, TXT ve Markdown doğrudan okunur; pandoc gerekmez."
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "oh-story-claudecode/story-import"}
 ---
 
 # hikaye-ice-aktar: Taslağı İçeri Aktarma
@@ -23,10 +23,23 @@ Kaynak dosyayı ölç (`python3 betikler/metin_olcum.py <dosya>`):
 
 ## 2. Biçim ve bölümleme (uzun roman)
 
-1. Dosya türü: `.md`/`.txt` doğrudan; `.docx` için `pandoc -t gfm` (yoksa yazardan Markdown/TXT dışa aktarmasını iste). Kodlama UTF-8 değilse (Windows-1254) dönüştür.
-2. Bölüm sınırlarını bul: "Bölüm 1", "BÖLÜM BİR", "1.", "#", "***" gibi desenler. Belirsizse ilk 3 sınırı yazara göster, onay al. Ayrıntı: `kaynaklar/bicim-ve-bolumleme.md`.
-3. Her bölümü `metin/bolum-NNN_kisa-baslik.md` olarak yaz; ilk satır `# Bölüm N: Başlık`. Metin gövdesi bayt olarak aynı kalır (yalnızca satır sonları `\n`).
-4. Doğrula: bölüm dosyalarının kelime toplamı kaynakla ±%1 içinde olmalı; değilse metin kaybı var, dur.
+1. **Önizle:** bölüm sınırlarını dosya yazmadan gör. Kodlama UTF-8 değilse Windows-1254 (Türkçe) olarak okunur ve uyarılır.
+
+```bash
+python3 betikler/belge_ice_aktar.py onizle --kaynak taslak.docx
+```
+
+Sınırlar: Word "Başlık 1", ODT ve EPUB başlıkları, Markdown `#`, ya da tek başına duran "Bölüm 3", "BÖLÜM ÜÇ", "Birinci Bölüm", "3." satırları. Kapak ve ithaf sayfası başlığı bölüm sayılmaz. Önizlemede ilk 3 sınırı yazara göster, onay al. Sınır yanlışsa kendi deseninle yeniden önizle (`--desen '^Kısım (\d+)'`); yazar ön metni (önsöz) 1. bölüm saymak isterse `--on-metin-bolum`. Ayrıntı: `kaynaklar/bicim-ve-bolumleme.md`. Eski `.doc` dosyası için yazardan Word'de `.docx` olarak kaydetmesini iste.
+
+2. **Aktar:**
+
+```bash
+python3 betikler/belge_ice_aktar.py aktar --kaynak taslak.docx --proje <kitap>
+```
+
+Her bölüm `metin/bolum-NNN_kisa-baslik.md` olarak yazılır; ilk satır `# Bölüm N: Başlık`. İtalik `*…*`, kalın `**…**` olarak korunur; yazarın cümlelerine dokunulmaz. Kelime toplamı kaynakla ±%1 içinde değilse hiçbir dosya yazılmaz; `metin/` içinde zaten bölüm varsa üzerine yazılmaz. Ön metin `.hikaye/ice-aktarma/on-metin.md`, rapor `.hikaye/ice-aktarma/rapor.json` dosyasına gider.
+
+3. Wattpad'den gelen bölümler ya da betiğin tanımadığı düzenler için elle böl: her bölümü aynı adlandırmayla yaz, metin gövdesini değiştirme, kelime toplamını `python3 betikler/metin_olcum.py` ile doğrula.
 
 ## 3. Tersine planlama
 

@@ -1,5 +1,5 @@
 ---
-description: "Mevcut taslağı, Word/TXT/Markdown dosyasını ya da Wattpad'de yayımlanmış bölümleri sistemin proje yapısına aktarır: bölümlere böler, plan ve kurgu dosyaların…"
+description: "Mevcut taslağı, Word (DOCX), LibreOffice (ODT), EPUB, TXT ya da Markdown dosyasını ya da Wattpad'de yayımlanmış bölümleri sistemin proje yapısına aktarır: bö…"
 skills: hikaye-ice-aktar
 ---
 

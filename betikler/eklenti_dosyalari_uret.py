@@ -30,7 +30,7 @@ except ImportError:  # pragma: no cover
 
 KOK = Path(__file__).resolve().parent.parent
 BECERI_SAYISI = len(list((KOK / "skills").glob("*/SKILL.md")))
-SURUM = "1.1.0"
+SURUM = "2.0.0"
 AD = "ai-hikaye-roman-olusturma"
 GORUNEN_AD = "AI Hikaye & Roman Oluşturma"
 DEPO = "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma"

@@ -9,7 +9,11 @@ kaynak dosyalarını yalnızca beceri söylediğinde yükle.
 | İstek | Beceri |
 |---|---|
 | Ne yapacağı belirsiz ("roman yazmak istiyorum") | `hikaye` |
+| Roman yapısı: üç perde, kar tanesi, sahne kartları, nerede kaldım | `roman-planla` |
 | Uzun roman planı / bölüm yazımı / devam | `roman-yaz` |
+| Kurgu ansiklopedisi, zaman çizelgesi, bilgi arama, ipucu defteri | `kurgu-ansiklopedisi` |
+| Bölümü puanlayarak iyileştirme, taslak turnuvası, ses izi | `bolum-dongusu` |
+| Yazım hedefi, istatistik, anlık görüntü ve geri yükleme | `yazim-panosu` |
 | Kısa öykü | `oyku-yaz` |
 | Roman ya da öykü çözümleme | `roman-cozumle` / `oyku-cozumle` |
 | Pazar ve liste taraması (Wattpad TR, Kitapyurdu, D&R…) | `roman-tara` / `oyku-tara` |
@@ -21,8 +25,8 @@ kaynak dosyalarını yalnızca beceri söylediğinde yükle.
 | Yayınevine dosya hazırlama | `yayinevi-dosyasi` |
 | Dizi/film uyarlama sinopsisi | `uyarlama-sinopsis` |
 | Sesli kitap metni | `sesli-kitap-hazirla` |
-| EPUB ya da HTML okuma kopyası | `e-kitap-derle` |
-| Var olan kitabı içe aktarma | `hikaye-ice-aktar` |
+| EPUB, DOCX, ODT, PDF ya da HTML kopyası | `e-kitap-derle` |
+| Var olan kitabı (DOCX, ODT, EPUB, TXT) içe aktarma | `hikaye-ice-aktar` |
 | Kapak | `kapak-tasarla` |
 | Kurulum / güncelleme | `hikaye-kurulum` |
 | Oturum açık tarayıcıyla veri toplama | `tarayici-cdp` |

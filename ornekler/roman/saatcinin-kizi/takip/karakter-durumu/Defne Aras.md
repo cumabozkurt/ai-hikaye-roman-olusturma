@@ -11,7 +11,7 @@
 ## Bildikleri
 - Dedesi her mart ortasında dükkânı bir gün kapatırdı
 - Saatte 14.03.1987 — N. yazıyor
-- Kerem, Tahsin'in ağabeyi
+- Kerem, Tahsin'in yeğeni
 
 ## Yetenek ve Kaynaklar
 - yok

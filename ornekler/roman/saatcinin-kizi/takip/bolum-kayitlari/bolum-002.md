@@ -1,11 +1,11 @@
 # 2. Bölüm Kaydı — Kapağın İçi
 
 - Kip: ekle
-- Sonuç: Defne gizli kapağı açtı ve '14.03.1987 — N.' yazısını buldu. Kerem, Tahsin'in ağabeyi olduğunu söyledi. Sabah çekmece kilidinde taze çizikler vardı.
+- Sonuç: Defne gizli kapağı açtı ve '14.03.1987 — N.' yazısını buldu. Kerem, Tahsin'in yeğeni olduğunu söyledi. Sabah çekmece kilidinde taze çizikler vardı.
 
 ## Karakter Değişimleri
 - Defne Aras: Kerem'e temkinli bir güven duymaya başladı
-- Kerem Yalın: Tahsin'in ağabeyi olduğunu açıkladı, gerisini sakladı
+- Kerem Yalın: Tahsin'in yeğeni olduğunu açıkladı, gerisini sakladı
 
 ## İpucu Değişimleri
 - F003 (ekle): Cep saatinin gizli kapağında '14.03.1987 — N.' yazıyor [ekili]

@@ -3,7 +3,7 @@ name: wattpad-bolum-planla
 description: "Wattpad ve benzeri bölümlü çevrim içi yayın için bölüm planlaması: bölüm uzunluklarını 1.500–3.000 kelime aralığına göre denetler, uzun bölümleri sahne sınırlarından böler, telefonda okunurluğu ve bölüm sonu kancalarını kontrol eder, düzenli yayın takvimi ve tampon önerisi üretir; etiket, tanıtım ve yazar notu hazırlar. Tetikleyiciler: /wattpad-bolum-planla, \"Wattpad'e yükleyeceğim\", \"yayın takvimi\", \"bölümü böl\", \"Wattpad etiketleri\"."
 license: MIT
 compatibility: "Python 3.11+."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "yeni"}
 ---
 
 # wattpad-bolum-planla: Wattpad Bölüm ve Yayın Planı

@@ -42,7 +42,7 @@ Defne omuzlarını kaldırdı. Tarihi bilmiyordu. Ama dedesinin, her yıl mart o
 
 Kerem uzun süre buhara baktı.
 
-— Fotoğraftaki öbür adam Tahsin Yalın. Ağabeyim. Gerisini sorarsanız yalan söylemek zorunda kalırım, ben de size yalan söylemek istemiyorum.
+— Fotoğraftaki öbür adam Tahsin Yalın. Amcam. Gerisini sorarsanız yalan söylemek zorunda kalırım, ben de size yalan söylemek istemiyorum.
 
 Gitmeden önce telefon numarasını fotoğrafın arkasına yazdı. Defne fotoğrafı kasaya, saati de keseye koydu. Keseyi eve götürdü, yastığının altına sakladı ve dedesinin ölümünden beri ilk kez sabaha kadar uyudu.
 

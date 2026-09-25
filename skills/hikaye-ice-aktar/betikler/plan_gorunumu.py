@@ -37,7 +37,7 @@ except ImportError:  # pragma: no cover
     pass
 
 BASLIK = re.compile(r"^(#{2,4})\s+(.*\S)\s*$")
-KAPSAM = re.compile(r"^>\s*Kapsam\s*:\s*(.+?)\s*$", re.I)
+KAPSAM = re.compile(r"^>\s*Kapsam[ \t]*:[ \t]*(.+?)\s*$", re.I)
 EMEKLI_SATIR = re.compile(r"^\s*(?:[-*]\s*)?⊘|^\s*\|\s*⊘")
 SIZINTI = re.compile(r"tüm cilt boyunca|cilt boyunca geçerli|bundan sonra hep|kitap sonuna kadar", re.I)
 _H = "A-Za-zÇĞİÖŞÜçğıöşüÂÎÛâîû"

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Markdown bölümlerinden EPUB 3 e-kitap ve tek dosyalık HTML okuma kopyası derler.
+"""Markdown bölümlerinden EPUB 3, HTML, DOCX, ODT, baskıya hazır HTML/PDF, TXT ve tek Markdown derler.
 
 Yalnızca Python standart kütüphanesiyle çalışır (pandoc gerekmez). Desteklenen
 Markdown alt kümesi: ``#``/``##`` başlıklar, paragraflar, ``**kalın**``,
@@ -11,6 +11,14 @@ Kullanım::
 
     python3 e_kitap_derle.py --proje kitaplar/saatcinin-kizi --yazar "Ad Soyad"
     python3 e_kitap_derle.py --dosya oyku/son-vapur/metin.md --baslik "Son Vapur" --bicim html
+    python3 e_kitap_derle.py --proje kitaplar/saatcinin-kizi --yazar "Ad Soyad" --bicim docx pdf
+
+Biçimler (``--bicim``, birden çok verilebilir): ``epub``, ``html`` (okuma kopyası), ``docx``
+ve ``odt`` (yayınevine gönderim biçimi: A4, Times New Roman 12 punto, 1,5 satır aralığı,
+2,5 cm kenar boşluğu, üst bilgide "Soyad / Kitap adı", altta sayfa numarası), ``yazdir``
+(A5 baskıya hazır HTML), ``pdf`` (``yazdir`` çıktısını yüklü Chrome/Chromium/Edge ile
+PDF'ye çevirir; tarayıcı yoksa açıklayıcı hata verir), ``txt``, ``md`` ve ``hepsi``
+(epub, html, docx, odt, yazdir; varsayılan).
 
 Bitmemiş metin işareti ([TK], [DOLDUR], ⟦…⟧, TODO) bulunan bölümler varsa derleme
 durur; taslak okuma kopyası için ``--taslak`` verin. Aynı girdi ve aynı
@@ -29,10 +37,11 @@ import re
 import sys
 import uuid
 import zipfile
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+import belge_yazicilar as by  # noqa: E402
 import dosya_oku  # noqa: E402
 import metin_analizi  # noqa: E402
 
@@ -46,6 +55,8 @@ ON_BILGI = re.compile(r"\A---\n.*?\n---\n", re.S)
 HTML_YORUM = re.compile(r"<!--.*?-->", re.S)
 SAHNE_AYRACI = re.compile(r"^\s*(?:\*\s*\*\s*\*|-{3,}|⁂|#\s*#\s*#)\s*$")
 BOLUM_DOSYASI = re.compile(r"^bolum-(\d{1,4})(?:[_-].*)?\.md$")
+BICIMLER = ("epub", "html", "docx", "odt", "yazdir", "pdf", "txt", "md")
+HEPSI = ("epub", "html", "docx", "odt", "yazdir")
 KAPAK_TURLERI = {".jpg": "image/jpeg", ".jpeg": "image/jpeg", ".png": "image/png"}
 
 CSS = """body { font-family: Georgia, "Times New Roman", serif; line-height: 1.55; margin: 0 5%; }
@@ -77,6 +88,8 @@ class Bolum:
     baslik: str
     govde_html: str
     kaynak: str
+    # Biçimden bağımsız blok listesi: (tür, satır içi Markdown). Türler: p, ilk, diyalog, h2, alinti, ayrac.
+    bloklar: list[tuple[str, str]] = field(default_factory=list)
 
 
 def satir_ici(metin: str) -> str:
@@ -96,15 +109,19 @@ def markdown_bolum(ham: str, varsayilan_baslik: str, kaynak: str) -> Bolum:
     parcalar: list[str] = []
     paragraf: list[str] = []
     alinti: list[str] = []
+    bloklar: list[tuple[str, str]] = []
 
     def paragraf_bitir() -> None:
         if paragraf:
             satir = " ".join(s.strip() for s in paragraf)
-            sinif = ' class="diyalog"' if satir.startswith(("—", "–")) else ""
+            diyalog = satir.startswith(("—", "–"))
+            sinif = ' class="diyalog"' if diyalog else ""
             parcalar.append(f"<p{sinif}>{satir_ici(satir)}</p>")
+            bloklar.append(("diyalog" if diyalog else "p", satir))
             paragraf.clear()
         if alinti:
             parcalar.append("<blockquote><p>" + satir_ici(" ".join(alinti)) + "</p></blockquote>")
+            bloklar.append(("alinti", " ".join(alinti)))
             alinti.clear()
 
     for satir in metin.split("\n"):
@@ -115,6 +132,7 @@ def markdown_bolum(ham: str, varsayilan_baslik: str, kaynak: str) -> Bolum:
         if SAHNE_AYRACI.match(sade):
             paragraf_bitir()
             parcalar.append('<hr class="sahne"/>')
+            bloklar.append(("ayrac", ""))
             continue
         m = re.match(r"^(#{1,6})\s+(.*?)\s*#*\s*$", sade)
         if m:
@@ -123,6 +141,7 @@ def markdown_bolum(ham: str, varsayilan_baslik: str, kaynak: str) -> Bolum:
                 baslik = m.group(2)
             else:
                 parcalar.append(f"<h2>{satir_ici(m.group(2))}</h2>")
+                bloklar.append(("h2", m.group(2)))
             continue
         if sade.startswith(">"):
             if paragraf:
@@ -137,7 +156,9 @@ def markdown_bolum(ham: str, varsayilan_baslik: str, kaynak: str) -> Bolum:
     paragraf_bitir()
     if parcalar and parcalar[0].startswith("<p>"):
         parcalar[0] = '<p class="ilk">' + parcalar[0][3:]
-    return Bolum(baslik or varsayilan_baslik, "\n".join(parcalar), kaynak)
+    if bloklar and bloklar[0][0] == "p":
+        bloklar[0] = ("ilk", bloklar[0][1])
+    return Bolum(baslik or varsayilan_baslik, "\n".join(parcalar), kaynak, bloklar)
 
 
 def proje_bolumleri(proje: Path) -> list[Path]:
@@ -278,7 +299,9 @@ def main(argv: list[str] | None = None) -> int:
     ayr.add_argument("--baslik", help="kitap adı (varsayılan: plan/genel-plan.md başlığı ya da klasör adı)")
     ayr.add_argument("--yazar", default="", help="yazar adı (künye ve e-kitap üst verisi)")
     ayr.add_argument("--kapak", type=Path, help="kapak görseli (.jpg ya da .png)")
-    ayr.add_argument("--bicim", choices=("epub", "html", "hepsi"), default="hepsi", help="üretilecek biçim (varsayılan: hepsi)")
+    ayr.add_argument("--bicim", nargs="+", choices=BICIMLER + ("hepsi",), default=["hepsi"],
+                     help="üretilecek biçimler: epub, html, docx, odt, yazdir (A5 baskıya hazır HTML), pdf, txt, md "
+                          "ya da hepsi (pdf hariç; varsayılan)")
     ayr.add_argument("--cikti", type=Path, help="çıktı klasörü (varsayılan: <proje>/yayin ya da ilk dosyanın klasörü)")
     ayr.add_argument("--taslak", action="store_true", help="bitmemiş metin işaretlerine rağmen derle")
     arg = ayr.parse_args(argv)
@@ -303,13 +326,38 @@ def main(argv: list[str] | None = None) -> int:
         yazar = arg.yazar.strip() or "Adı Belirtilmemiş Yazar"
         ad = dosya_adi(baslik)
         uretilen = []
-        if arg.bicim in ("epub", "hepsi"):
-            epub_yaz(cikti / f"{ad}.epub", baslik, yazar, bolumler, arg.kapak, yayin_zamani())
+        secilen = set(HEPSI if "hepsi" in arg.bicim else ()) | {b for b in arg.bicim if b != "hepsi"}
+        zaman = yayin_zamani()
+        if "epub" in secilen:
+            epub_yaz(cikti / f"{ad}.epub", baslik, yazar, bolumler, arg.kapak, zaman)
             uretilen.append(cikti / f"{ad}.epub")
-        if arg.bicim in ("html", "hepsi"):
+        if "html" in secilen:
             html_yaz(cikti / f"{ad}.html", baslik, yazar, bolumler)
             uretilen.append(cikti / f"{ad}.html")
-    except (DerlemeHatasi, dosya_oku.DosyaHatasi, OSError) as hata:
+        if "docx" in secilen:
+            by.docx_yaz(cikti / f"{ad}.docx", baslik, yazar, bolumler, zaman)
+            uretilen.append(cikti / f"{ad}.docx")
+        if "odt" in secilen:
+            by.odt_yaz(cikti / f"{ad}.odt", baslik, yazar, bolumler, zaman)
+            uretilen.append(cikti / f"{ad}.odt")
+        if "yazdir" in secilen or "pdf" in secilen:
+            baski = by.yazdir_html(baslik, yazar, bolumler, zaman.year)
+            if "yazdir" in secilen:
+                (cikti / f"{ad}-baski.html").parent.mkdir(parents=True, exist_ok=True)
+                (cikti / f"{ad}-baski.html").write_text(baski, encoding="utf-8")
+                uretilen.append(cikti / f"{ad}-baski.html")
+            if "pdf" in secilen:
+                by.pdf_yaz(cikti / f"{ad}.pdf", baski)
+                uretilen.append(cikti / f"{ad}.pdf")
+        if "txt" in secilen:
+            (cikti / f"{ad}.txt").parent.mkdir(parents=True, exist_ok=True)
+            (cikti / f"{ad}.txt").write_text(by.txt_metni(baslik, yazar, bolumler), encoding="utf-8")
+            uretilen.append(cikti / f"{ad}.txt")
+        if "md" in secilen:
+            (cikti / f"{ad}-tam.md").parent.mkdir(parents=True, exist_ok=True)
+            (cikti / f"{ad}-tam.md").write_text(by.md_metni(baslik, yazar, bolumler), encoding="utf-8")
+            uretilen.append(cikti / f"{ad}-tam.md")
+    except (DerlemeHatasi, by.BelgeHatasi, dosya_oku.DosyaHatasi, OSError) as hata:
         print(f"hata: {hata_iletisi(hata)}", file=sys.stderr)
         return 2
     print(f"“{baslik}” derlendi: {len(bolumler)} bölüm.")

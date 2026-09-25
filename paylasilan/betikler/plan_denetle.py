@@ -53,7 +53,7 @@ KOPYA_ESIGI = 3
 
 
 def alan_deseni(ad: str) -> re.Pattern[str]:
-    return re.compile(rf"^\s*[-*+]\s*\*{{0,2}}{re.escape(ad)}\*{{0,2}}\s*:\s*(.*)$", re.M | re.I)
+    return re.compile(rf"^\s*[-*+]\s*\*{{0,2}}{re.escape(ad)}\*{{0,2}}[ \t]*:[ \t]*(.*)$", re.M | re.I)
 
 
 def kontrol(kimlik: str, tamam: bool, dosya: str, kanit: str, onarim: str, onem: str = "engelleyici") -> dict[str, object]:
@@ -78,7 +78,7 @@ def sozlesme_denetle(yol: Path) -> list[dict[str, object]]:
         sonuc.append(kontrol("hedef-uzunluk-gecerli", True, dosya, "geçerli", ""))
     except metin_olcum.OlcumHatasi as hata:
         sonuc.append(kontrol("hedef-uzunluk-gecerli", False, dosya, str(hata), "'Hedef uzunluk: 2200 kelime' biçiminde yazın (100–50000)."))
-    if re.search(r"Uzunluk ölçütü\**\s*:\s*(?!.*gorunur_kelime_v1)", metin, re.I):
+    if re.search(r"Uzunluk ölçütü\**[ \t]*:[ \t]*(?!.*gorunur_kelime_v1)", metin, re.I):
         sonuc.append(kontrol("olcut", False, dosya, "ölçüt gorunur_kelime_v1 değil", "'Uzunluk ölçütü: gorunur_kelime_v1' yazın.", "uyari"))
     basliklar = {tk.tr_kucuk(b.strip()) for b in re.findall(r"^#{2,4}\s+(.+)$", metin, re.M)}
     for baslik in ALT_BASLIKLAR:

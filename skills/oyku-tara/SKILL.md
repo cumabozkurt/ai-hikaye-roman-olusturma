@@ -3,7 +3,7 @@ name: oyku-tara
 description: "Kısa öykü için yayın yeri ve eğilim taraması: Wattpad'deki kısa öyküler ve tek bölümlükler, edebiyat dergileri, öykü yarışmaları ve antolojiler; tür, uzunluk ve teslim koşullarına göre öneri. Tetikleyiciler: /oyku-tara, \"öykümü nereye göndereyim\", \"öykü yarışmaları\", \"kısa öykü eğilimleri\"."
 license: MIT
 compatibility: "Python 3.11+ ve internet erişimi (Wattpad herkese açık API)."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "1.1.0", "ust-kaynak": "oh-story-claudecode/story-short-scan"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.0.0", "ust-kaynak": "oh-story-claudecode/story-short-scan"}
 ---
 
 # oyku-tara: Kısa Öykü Taraması

@@ -3,7 +3,7 @@ name: kitaptik-yayimla
 description: "Romanı Kitaptik'e (kitaptik.com, Türkçe kitap yazma ve okuma platformu) hazırlar: kategori ve etiket önerisi, açıklama ve \"Neden okumalı?\" metni, bölüm ve başlık sınırları, kapak, 18+ ve tetikleyici uyarısı denetimi, toplu yüklemeye hazır DOCX, kitap bilgileri, karakter kartları ve yayın kontrol listesi. Siteye giriş ve yükleme yapmaz. Tetikleyiciler: /kitaptik-yayimla, \"Kitaptik'te yayımla\", \"kitabımı yayımlamak istiyorum\", \"romanımı internette paylaş\", \"okura ulaş\"."
 license: MIT
 compatibility: "Python 3.11+ (yalnızca standart kütüphane)."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.1", "ust-kaynak": "yeni"}
 ---
 
 # kitaptik-yayimla: Kitabını Kitaptik'te Yayımla

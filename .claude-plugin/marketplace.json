@@ -6,14 +6,14 @@
   },
   "metadata": {
     "description": "AI Hikaye & Roman Oluşturma: Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, e-kitap, yayınevi dosyası ve Kitaptik'te yayımlama.",
-    "version": "2.1.0"
+    "version": "2.1.1"
   },
   "plugins": [
     {
       "name": "ai-hikaye-roman-olusturma",
       "source": "./",
       "description": "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, e-kitap, yayınevi dosyası ve Kitaptik'te yayımlama.",
-      "version": "2.1.0",
+      "version": "2.1.1",
       "category": "writing",
       "keywords": [
         "turkce",

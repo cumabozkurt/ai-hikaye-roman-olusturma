@@ -2,6 +2,13 @@
 
 Biçim [Keep a Changelog](https://keepachangelog.com/tr-TR/1.1.0/) ilkelerine, sürümleme [Anlamsal Sürümleme](https://semver.org/lang/tr/) kurallarına uyar.
 
+## [2.1.1] - 2026-10-03
+
+Bakım sürümü: becerilerde, ajanlarda, betiklerde ve kancalarda 2.1.0'dan bu yana işlev değişikliği yok.
+
+### Değişti
+- Sürüm numarası 2.1.1'e yükseltildi: eklenti ve pazar yeri bildirimleri (Claude Code, Codex, ZCode, Reasonix), 25 becerinin `SKILL.md` üst bilgisi, `eklenti_dosyalari_uret.py` ve kurulum betiğindeki (`kur.py`) sürüm sabiti. Yazım projelerinde `/hikaye-kurulum` yeniden çalıştırıldığında kurulu sürüm 2.1.1 olarak kaydedilir.
+
 ## [2.1.0] - 2026-09-25
 
 Yazılan kitabın okura ulaşması için yeni son adım: **Kitaptik'te yayımla**. [Kitaptik](https://kitaptik.com), Türkiye'den erişilebilen, Türkçe kitap yazma ve okuma platformudur (web, iOS, Android). Yeni beceri kitabı Kitaptik'in yazar ekranına hazırlar; siteye giriş yapmaz, dosya yüklemez. Rehber: [docs/KITAPTIK-ILE-YAYIMLAMA.md](docs/KITAPTIK-ILE-YAYIMLAMA.md). İnceleme: [docs/INCELEME-RAPORU.md](docs/INCELEME-RAPORU.md) (Dördüncü Tur).

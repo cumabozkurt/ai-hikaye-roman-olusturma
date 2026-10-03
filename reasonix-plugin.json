@@ -1,6 +1,6 @@
 {
   "name": "ai-hikaye-roman-olusturma",
-  "version": "2.1.0",
+  "version": "2.1.1",
   "description": "Türkçe roman ve öykü yazımı için yapay zekâ becerileri: pazar taraması, çözümleme, yazım, süreklilik takibi, TDK denetimi, yapay zekâ tadı giderme, e-kitap, yayınevi dosyası ve Kitaptik'te yayımlama.",
   "skills": "skills"
 }

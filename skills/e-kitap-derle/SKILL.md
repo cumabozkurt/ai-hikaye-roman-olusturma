@@ -3,7 +3,7 @@ name: e-kitap-derle
 description: "Roman ya da öykü bölümlerini EPUB 3 e-kitaba, yayınevine gönderilecek DOCX ve ODT dosyasına (A4, TNR 12, 1,5 aralık, sayfa numarası), A5 baskıya hazır HTML ve PDF'ye, HTML okuma kopyasına, TXT ve tek Markdown'a derler; bitmemiş metin işaretlerini yakalar, teslim listesi verir. Pandoc gerekmez. Tetikleyiciler: /e-kitap-derle, \"EPUB yap\", \"Word dosyası\", \"PDF hazırla\", \"okuma kopyası\", \"beta okurlara gönder\"."
 license: MIT
 compatibility: "Python 3.11+ (yalnızca standart kütüphane)."
-metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.0", "ust-kaynak": "yeni"}
+metadata: {"kaynak": "https://github.com/cumabozkurt/ai-hikaye-roman-olusturma", "surum": "2.1.1", "ust-kaynak": "yeni"}
 ---
 
 # e-kitap-derle: EPUB, DOCX, ODT, PDF ve Okuma Kopyası
